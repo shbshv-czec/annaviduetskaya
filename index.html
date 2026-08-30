@@ -125,19 +125,13 @@ img{display:block}
 .book-visual{position:relative;display:flex;justify-content:center;align-items:center;min-height:560px}
 .book-figure{position:relative;display:inline-block}
 .book-cover{display:block;width:346px;max-width:100%;border-radius:2px;transform:rotate(-6deg);box-shadow:18px 22px 48px -18px rgba(31,28,27,.30)}
-.seal{position:absolute;top:-26px;right:-46px;width:154px;height:154px;border-radius:50%;background:radial-gradient(circle at 40% 30%,#fbeec2,#e7c977 40%,#c69a3e 70%,#a87d2c 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 14px 30px rgba(80,55,10,.4),inset 0 2px 6px rgba(255,255,255,.6),inset 0 -6px 14px rgba(120,85,20,.5);transform:rotate(8deg);z-index:3}
-.seal::before{content:'';position:absolute;inset:-13px;border-radius:50%;z-index:-1;background:repeating-conic-gradient(#d9b45a 0 7deg,#b98f35 7deg 14deg);-webkit-mask:radial-gradient(circle,transparent 62%,#000 63%);mask:radial-gradient(circle,transparent 62%,#000 63%);filter:drop-shadow(0 6px 10px rgba(80,55,10,.35))}
-.seal::after{content:'';position:absolute;inset:11px;border:2px solid rgba(120,80,20,.5);border-radius:50%}
-.seal-top{font-family:var(--text);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#6b4a12}
-.seal-big{font-family:var(--serif);font-weight:600;font-size:46px;line-height:.9;color:#4d3410;text-shadow:0 1px 0 rgba(255,255,255,.4)}
-.seal-ribbon{position:relative;margin-top:6px;font-family:var(--text);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:#7a5a18;padding:4px 14px;box-shadow:0 2px 5px rgba(0,0,0,.3)}
-.seal-ribbon::before,.seal-ribbon::after{content:'';position:absolute;top:0;bottom:0;width:9px;background:#7a5a18}
-.seal-ribbon::before{left:-9px;clip-path:polygon(0 0,100% 0,100% 100%,0 100%,45% 50%)}
-.seal-ribbon::after{right:-9px;clip-path:polygon(0 0,100% 0,55% 50%,100% 100%,0 100%)}
+/* Бейдж Amazon: плоский, печатный — обводка вместо глянца */
+.seal{position:absolute;top:-26px;right:-68px;width:92px;height:92px;border-radius:50%;background:var(--paper);border:1px solid var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:2px;z-index:3}
+.seal::before{content:'';position:absolute;inset:5px;border-radius:50%;border:1px solid rgba(198,162,78,.40)}
+.seal-top{font-family:var(--sans);font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-d);line-height:1}
+.seal-big{font-family:var(--serif);font-weight:400;font-size:30px;line-height:1;color:var(--ink)}
+.seal-ribbon{font-family:var(--sans);font-size:7.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--gold-d);line-height:1;background:none;padding:0}
 .book-eyebrow{color:var(--accent);margin:0 0 18px}
-.book-awards{list-style:none;padding:0;margin:0 0 26px;display:flex;flex-direction:column;gap:8px}
-.book-awards li{position:relative;padding-left:20px;font-family:var(--text);font-size:15.5px;line-height:1.5;color:var(--ink-2)}
-.book-awards li::before{content:'';position:absolute;left:0;top:8px;width:7px;height:7px;border-radius:50%;background:var(--accent)}
 .book-title{color:var(--ink);margin:0}
 .book-subtitle{font-family:var(--text);font-weight:400;font-size:19px;line-height:1.5;color:var(--ink-2);margin:12px 0 26px}
 .book-rule{display:none}
@@ -202,13 +196,12 @@ img{display:block}
 @media(max-width:960px){
   .book{padding:72px 0}
   .book-inner{grid-template-columns:1fr;gap:48px}
-  .seal{width:118px;height:118px;top:-14px;right:-14px}
-  .seal-big{font-size:36px}
-  .seal-top{font-size:9px}
-  .seal-ribbon{font-size:9px;padding:3px 11px}
+  .seal{width:76px;height:76px;top:-20px;right:-40px}
+  .seal-big{font-size:25px}
+  .seal-top{font-size:7px}
+  .seal-ribbon{font-size:6.5px}
   .book-visual{min-height:auto;padding:24px 0}
   .book-cover{width:260px}
-  .seal{width:92px;height:92px}
   .seal--tr{top:-10px;right:-18px}
   .seal--bl{bottom:34px;left:-18px}
 }
@@ -584,16 +577,11 @@ img{display:block}
       </div>
     </div>
     <div class="book-copy">
-      <p class="book-eyebrow t-eyebrow">Моя книга — номер один на Amazon</p>
-      <ul class="book-awards">
-        <li>Номер один в категории Self Esteem</li>
-        <li>Top New Release в нескольких категориях</li>
-        <li>Два месяца в топе Amazon</li>
-      </ul>
-      <h2 class="book-title t-h1">Легче воздуха</h2>
+      <p class="book-eyebrow t-eyebrow">Моя книга — №1 на Amazon в категории Self Esteem</p>
+      <h2 class="book-title t-h1">Книга «Легче&nbsp;воздуха»</h2>
       <p class="book-subtitle">Как начать жить прямо сейчас</p>
       <hr class="book-rule">
-      <p class="book-desc t-body">Чувствуете, что вечно чего-то не успеваете и живёте с тихим чувством вины? В книге я разбираю, откуда это берётся и что с этим делать. Без насилия над собой, без лозунгов «будь удобной», с реальными историями и практиками. Если хочешь начать с малого, в своём темпе, — начни отсюда.</p>
+      <p class="book-desc t-body">Для женщин, которые не хотят выбирать между семьёй, карьерой и своим «Я»,&nbsp;— а хотят успеха во всех сферах сразу. Сотни женщин уже добились его по авторским стратегиям из книги. Сможете и&nbsp;вы.</p>
       <a href="#" class="btn btn--primary">Купить книгу</a>
     </div>
   </div>
