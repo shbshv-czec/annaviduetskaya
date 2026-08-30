@@ -565,9 +565,8 @@ img{display:block}
 .in .sp-w{opacity:1;filter:blur(0)}
 
 /* ---- ПЕРВЫЙ ЭКРАН: затемнение по мере пролистывания ---- */
-.hero-dim{position:absolute;inset:0;z-index:6;pointer-events:none;background:#100E0D;opacity:calc(var(--hp,0)*.88)}
+.hero-dim{position:absolute;inset:0;z-index:2;pointer-events:none;background:#100E0D;opacity:calc(var(--hp,0)*.88)}
 .hero-bg{will-change:transform,filter}
-.hero-text{will-change:transform,opacity}
 
 /* ---- шёлковый блик на тёмных поверхностях и на бирюзовой кнопке ---- */
 @keyframes silk{0%{background-position:-130% 0}100%{background-position:230% 0}}
@@ -1028,7 +1027,7 @@ img{display:block}
 
 /* ===== ПЕРВЫЙ ЭКРАН: затемнение + лёгкий отъезд по прогрессу скролла ===== */
 (function(){
-  var hero=document.querySelector('.hero'), bg=document.querySelector('.hero-bg'), tx=document.querySelector('.hero-text');
+  var hero=document.querySelector('.hero'), bg=document.querySelector('.hero-bg');
   if(!hero||!bg)return;
   if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
   var tick=false;
@@ -1039,7 +1038,7 @@ img{display:block}
     hero.style.setProperty('--hp',p.toFixed(4));
     bg.style.transform='scale('+(1+p*0.08).toFixed(4)+')';
     bg.style.filter='blur('+(p*5).toFixed(2)+'px)';
-    if(tx){tx.style.opacity=(1-p*1.35).toFixed(3);tx.style.transform='translateY('+(p*-64).toFixed(1)+'px)';}
+    /* контент остаётся на месте — затемняется только фотография */
   }
   var last=0;
   addEventListener('scroll',function(){
