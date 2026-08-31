@@ -192,6 +192,21 @@ img{display:block}
 .book-subtitle{font-family:var(--text);font-weight:400;font-size:19px;line-height:1.5;color:var(--ink-2);margin:12px 0 26px}
 .book-rule{display:none}
 .book-desc{color:var(--ink-2);max-width:46ch;margin:0 0 36px}
+/* Магазины: волосяные плашки вместо чужих логотипов */
+.shops-label{font-family:var(--sans);font-weight:600;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 16px}
+.shops{display:flex;flex-wrap:wrap;gap:12px}
+.shop{display:inline-flex;align-items:center;gap:10px;padding:15px 22px;
+  border:1px solid rgba(31,28,27,.22);background:transparent;
+  transition:background var(--d-md) var(--ease-out),border-color var(--d-md) var(--ease-out),color var(--d-md) var(--ease-out)}
+.shop-n{font-family:var(--sans);font-weight:600;font-size:14.5px;letter-spacing:.02em;color:var(--ink);
+  transition:color var(--d-md) var(--ease-out)}
+.shop svg{width:15px;height:15px;color:var(--ink-3);transition:color var(--d-md) var(--ease-out),transform var(--d-md) var(--ease-out)}
+.shop:hover{background:var(--ink);border-color:var(--ink)}
+.shop:hover .shop-n{color:#fff}
+.shop:hover svg{color:#fff;transform:translate(2px,-2px)}
+@media(max-width:960px){.shop{padding:13px 18px}.shop-n{font-size:13.5px}}
+
 
 /* ---------- ABOUT ---------- */
 .about{background:transparent;padding:96px 0 104px}
@@ -558,16 +573,21 @@ img{display:block}
 .consult-turn p{color:var(--ink-2);font-size:19px;line-height:1.65;margin:0 0 20px}
 .consult-turn .pull{font-family:var(--serif);font-style:italic;font-weight:var(--w-head);font-size:clamp(26px,3.4vw,38px);line-height:1.3;color:var(--ink);margin:0 0 20px}
 /* CTA консультации: чистая белая плашка */
-.cta{background:transparent;padding:24px 0 8px;text-align:center;max-width:900px;margin:0 auto}
+.cta{background:transparent;padding:24px 0 8px;max-width:1120px;margin:0 auto;
+  display:grid;grid-template-columns:1.02fr .98fr;gap:56px;align-items:center;text-align:left}
+.cta-media{position:relative;aspect-ratio:16/9;overflow:hidden}
+.cta-media video{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;
+  mix-blend-mode:multiply}
 .cta-eyebrow{color:var(--accent);margin:0 0 22px}
-.cta-title{font-family:var(--display);font-weight:var(--w-display);font-size:clamp(34px,4.6vw,66px);line-height:1.1;
-  letter-spacing:-.02em;color:var(--ink);margin:0 auto;max-width:18ch}
-.cta-sub{font-family:var(--text);font-size:20px;line-height:1.6;color:var(--ink-2);margin:26px auto 40px;max-width:50ch}
-.cta-actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.cta-title{font-family:var(--display);font-weight:var(--w-display);font-size:clamp(32px,3.8vw,56px);line-height:1.1;
+  letter-spacing:-.02em;color:var(--ink);margin:0;max-width:15ch}
+.cta-sub{font-family:var(--text);font-size:19px;line-height:1.6;color:var(--ink-2);margin:24px 0 34px;max-width:44ch}
+.cta-actions{display:flex;flex-wrap:wrap;gap:14px}
 .cta-note{font-family:var(--sans);font-weight:500;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--ink-3);margin:34px 0 0}
+  color:var(--ink-3);margin:30px 0 0}
 @media(max-width:960px){
-  .cta{padding:16px 0 4px}
+  .cta{padding:16px 0 4px;grid-template-columns:1fr;gap:28px}
+  .cta-media{order:-1;aspect-ratio:16/10}
   .cta-actions{flex-direction:column;align-items:stretch}
   .req2-photo{margin:22px 0 24px}
   .consult{padding:76px 0}
@@ -723,7 +743,21 @@ img{display:block}
       <p class="book-subtitle">Как начать жить прямо сейчас</p>
       <hr class="book-rule">
       <p class="book-desc t-body">Для женщин, которые не хотят выбирать между семьёй, карьерой и своим «Я»,&nbsp;— а хотят успеха во всех сферах сразу. Сотни женщин уже добились его по авторским стратегиям из книги. Сможете и&nbsp;вы.</p>
-      <a href="#" class="btn btn--primary">Купить книгу</a>
+      <p class="shops-label">Купить книгу</p>
+      <div class="shops">
+        <a class="shop" href="https://www.litres.ru/book/anna-vidueckaya/legche-vozduha-kak-nachat-zhit-pryamo-seychas-67725804/" target="_blank" rel="noopener">
+          <span class="shop-n">ЛитРес</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </a>
+        <a class="shop" href="https://www.labirint.ru/books/858323/" target="_blank" rel="noopener">
+          <span class="shop-n">Лабиринт</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </a>
+        <a class="shop" href="https://www.ozon.ru/category/anna-viduetskaya-kniga/" target="_blank" rel="noopener">
+          <span class="shop-n">Ozon</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -851,12 +885,17 @@ img{display:block}
       </div>
     </div>
     <div class="cta">
-      <h3 class="cta-title">Чувствуете, что пришло время перемен? Жду&nbsp;вас.</h3>
-      <p class="cta-sub">Полтора-два часа один на один, конфиденциально. Вы&nbsp;уходите с&nbsp;честным разбором ситуации и&nbsp;конкретным планом действий.</p>
-      <div class="cta-actions">
-        <a href="https://wa.me/79851959505" class="btn btn--emerald" target="_blank" rel="noopener">Записаться на консультацию</a>
+      <div class="cta-copy">
+        <h3 class="cta-title">Чувствуете, что пришло время перемен? Жду&nbsp;вас.</h3>
+        <p class="cta-sub">Полтора-два часа один на один, конфиденциально. Вы&nbsp;уходите с&nbsp;честным разбором ситуации и&nbsp;конкретным планом действий.</p>
+        <div class="cta-actions">
+          <a href="https://wa.me/79851959505" class="btn btn--emerald" target="_blank" rel="noopener">Записаться на консультацию</a>
+        </div>
+        <p class="cta-note">Ответ в&nbsp;течение дня · Онлайн и&nbsp;очно в&nbsp;Москве</p>
       </div>
-      <p class="cta-note">Ответ в&nbsp;течение дня · Онлайн и&nbsp;очно в&nbsp;Москве</p>
+      <div class="cta-media" aria-hidden="true">
+        <video src="assets/door-anna.mp4" autoplay muted loop playsinline preload="auto" disablepictureinpicture tabindex="-1"></video>
+      </div>
     </div>
   </div>
 </section>
