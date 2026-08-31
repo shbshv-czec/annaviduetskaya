@@ -64,8 +64,37 @@ img{display:block}
 
 
 /* ---------- NAV (gradient only here; grotesque caps) ---------- */
+/* Верхняя строка с анонсом: тонкая, красная */
+:root{--bar-h:44px}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:70;height:var(--bar-h);
+  background:var(--spark);color:#fff;display:flex;align-items:center;justify-content:center;
+  padding:0 52px 0 20px}
+.topbar-in{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;justify-content:center}
+.topbar-t{font-family:var(--sans);font-weight:500;font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:rgba(255,255,255,.94);margin:0}
+.topbar-cta{display:inline-flex;align-items:center;gap:7px;font-family:var(--sans);font-weight:700;font-size:12.5px;
+  letter-spacing:.09em;text-transform:uppercase;color:#fff;white-space:nowrap;
+  border-bottom:1px solid rgba(255,255,255,.55);padding-bottom:2px;
+  transition:border-color var(--d-md) var(--ease-out)}
+.topbar-cta:hover{border-color:#fff}
+.topbar-cta svg{width:13px;height:13px;transition:transform var(--d-md) var(--ease-out)}
+.topbar-cta:hover svg{transform:translate(2px,-2px)}
+.topbar-x{position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  width:30px;height:30px;display:flex;align-items:center;justify-content:center;
+  background:none;border:none;color:rgba(255,255,255,.8);cursor:pointer;padding:0;
+  transition:color var(--d-md) var(--ease-out)}
+.topbar-x:hover{color:#fff}
+.topbar-x svg{width:15px;height:15px}
+body.bar-off{--bar-h:0px}
+body.bar-off .topbar{display:none}
+@media(max-width:960px){
+  :root{--bar-h:auto}
+  .topbar{position:static;height:auto;min-height:48px;padding:11px 44px 11px 16px}
+  .topbar-in{gap:6px 14px}
+  .topbar-t,.topbar-cta{font-size:11px;letter-spacing:.07em}
+}
 /* Навигация: полупрозрачная плашка поверх первого экрана */
-.nav-wrap{position:fixed;top:16px;left:24px;right:24px;z-index:60;
+.nav-wrap{position:fixed;top:calc(var(--bar-h) + 14px);left:24px;right:24px;z-index:60;
   background:rgba(255,255,255,.10);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);
   border:1px solid rgba(255,255,255,.20);border-radius:2px;
   transition:background var(--d-lg) var(--ease-out),border-color var(--d-lg) var(--ease-out),
@@ -140,6 +169,7 @@ img{display:block}
   .hero-inner{align-items:flex-end;min-height:100vh;padding:0 24px 48px}
   .hero-text{padding:0;max-width:100%}
   .nav-wrap{top:12px;left:14px;right:14px}
+  body:not(.bar-off) .nav-wrap{position:absolute}
   .nav{padding:9px 12px}
   .nav-links,.nav-phone,.nav .wa-btn{display:none}
   .burger{display:flex}
@@ -147,7 +177,7 @@ img{display:block}
   .brand-mark{font-size:15px}
   /* регалии — вверху под навигацией, лицо свободно */
   .hero-inner{position:relative}
-  .regalia{position:absolute;top:86px;left:24px;right:24px;margin:0;font-size:11px;letter-spacing:.12em}
+  .regalia{position:absolute;top:92px;left:24px;right:24px;margin:0;font-size:11px;letter-spacing:.12em}
   .hero-text{padding-bottom:8px}
   .about{padding:72px 0}
   .about-grid{grid-template-columns:1fr;gap:40px}
@@ -195,17 +225,14 @@ img{display:block}
 /* Магазины: волосяные плашки вместо чужих логотипов */
 .shops-label{font-family:var(--sans);font-weight:600;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
   color:var(--ink-3);margin:0 0 16px}
-.shops{display:flex;flex-wrap:wrap;gap:12px}
-.shop{display:inline-flex;align-items:center;gap:10px;padding:15px 22px;
-  border:1px solid rgba(31,28,27,.22);background:transparent;
-  transition:background var(--d-md) var(--ease-out),border-color var(--d-md) var(--ease-out),color var(--d-md) var(--ease-out)}
-.shop-n{font-family:var(--sans);font-weight:600;font-size:14.5px;letter-spacing:.02em;color:var(--ink);
-  transition:color var(--d-md) var(--ease-out)}
-.shop svg{width:15px;height:15px;color:var(--ink-3);transition:color var(--d-md) var(--ease-out),transform var(--d-md) var(--ease-out)}
-.shop:hover{background:var(--ink);border-color:var(--ink)}
-.shop:hover .shop-n{color:#fff}
-.shop:hover svg{color:#fff;transform:translate(2px,-2px)}
-@media(max-width:960px){.shop{padding:13px 18px}.shop-n{font-size:13.5px}}
+.shops{display:flex;flex-wrap:wrap;gap:14px;align-items:stretch}
+.shop{display:inline-flex;align-items:center;justify-content:center;height:62px;padding:0 26px;
+  background:var(--paper);border:1px solid rgba(31,28,27,.14);
+  transition:border-color var(--d-md) var(--ease-out),transform var(--d-md) var(--ease-out)}
+.shop img{height:22px;width:auto;display:block;opacity:.92;transition:opacity var(--d-md) var(--ease-out)}
+.shop:hover{border-color:rgba(31,28,27,.42);transform:translateY(-2px)}
+.shop:hover img{opacity:1}
+@media(max-width:960px){.shop{height:54px;padding:0 20px}.shop img{height:19px}}
 
 
 /* ---------- ABOUT ---------- */
@@ -573,11 +600,12 @@ img{display:block}
 .consult-turn p{color:var(--ink-2);font-size:19px;line-height:1.65;margin:0 0 20px}
 .consult-turn .pull{font-family:var(--serif);font-style:italic;font-weight:var(--w-head);font-size:clamp(26px,3.4vw,38px);line-height:1.3;color:var(--ink);margin:0 0 20px}
 /* CTA консультации: чистая белая плашка */
-.cta{background:transparent;padding:24px 0 8px;max-width:1120px;margin:0 auto;
-  display:grid;grid-template-columns:1.02fr .98fr;gap:56px;align-items:center;text-align:left}
-.cta-media{position:relative;aspect-ratio:16/9;overflow:hidden}
+.cta-band{background:var(--paper);padding:104px 0}
+.cta{max-width:1200px;margin:0 auto;padding:0 40px;
+  display:grid;grid-template-columns:.86fr 1.14fr;gap:60px;align-items:center;text-align:left}
+.cta-media{position:relative;aspect-ratio:1/1;overflow:hidden}
 .cta-media video{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;
-  mix-blend-mode:multiply}
+  transform:scale(1.18);transform-origin:50% 55%;filter:brightness(1.026)}
 .cta-eyebrow{color:var(--accent);margin:0 0 22px}
 .cta-title{font-family:var(--display);font-weight:var(--w-display);font-size:clamp(32px,3.8vw,56px);line-height:1.1;
   letter-spacing:-.02em;color:var(--ink);margin:0;max-width:15ch}
@@ -586,8 +614,9 @@ img{display:block}
 .cta-note{font-family:var(--sans);font-weight:500;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
   color:var(--ink-3);margin:30px 0 0}
 @media(max-width:960px){
-  .cta{padding:16px 0 4px;grid-template-columns:1fr;gap:28px}
-  .cta-media{order:-1;aspect-ratio:16/10}
+  .cta-band{padding:72px 0}
+  .cta{padding:0 24px;grid-template-columns:1fr;gap:28px}
+  .cta-media{order:-1;aspect-ratio:4/3.4}
   .cta-actions{flex-direction:column;align-items:stretch}
   .req2-photo{margin:22px 0 24px}
   .consult{padding:76px 0}
@@ -674,6 +703,17 @@ img{display:block}
 <body>
 
 <!-- NAV -->
+<div class="topbar" id="topbar">
+  <div class="topbar-in">
+    <p class="topbar-t">Открытый эфир из&nbsp;премиального мастермайнда&nbsp;— 23&nbsp;сентября в&nbsp;19:00</p>
+    <a class="topbar-cta" href="https://wa.me/79851959505" target="_blank" rel="noopener">Присоединиться
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+    </a>
+  </div>
+  <button class="topbar-x" type="button" aria-label="Закрыть объявление">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+</div>
 <div class="nav-wrap">
   <nav class="nav">
     <a href="#" class="brand" aria-label="Анна Видуецкая"><span class="brand-mark">АВ</span></a>
@@ -745,17 +785,14 @@ img{display:block}
       <p class="book-desc t-body">Для женщин, которые не хотят выбирать между семьёй, карьерой и своим «Я»,&nbsp;— а хотят успеха во всех сферах сразу. Сотни женщин уже добились его по авторским стратегиям из книги. Сможете и&nbsp;вы.</p>
       <p class="shops-label">Купить книгу</p>
       <div class="shops">
-        <a class="shop" href="https://www.litres.ru/book/anna-vidueckaya/legche-vozduha-kak-nachat-zhit-pryamo-seychas-67725804/" target="_blank" rel="noopener">
-          <span class="shop-n">ЛитРес</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        <a class="shop" href="https://www.litres.ru/book/anna-vidueckaya/legche-vozduha-kak-nachat-zhit-pryamo-seychas-67725804/" target="_blank" rel="noopener" aria-label="Купить на ЛитРес">
+          <img src="assets/logo-litres.png" alt="ЛитРес" loading="lazy">
         </a>
-        <a class="shop" href="https://www.labirint.ru/books/858323/" target="_blank" rel="noopener">
-          <span class="shop-n">Лабиринт</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        <a class="shop" href="https://www.labirint.ru/books/858323/" target="_blank" rel="noopener" aria-label="Купить в Лабиринте">
+          <img src="assets/logo-labirint.png" alt="Лабиринт" loading="lazy">
         </a>
-        <a class="shop" href="https://www.ozon.ru/category/anna-viduetskaya-kniga/" target="_blank" rel="noopener">
-          <span class="shop-n">Ozon</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        <a class="shop" href="https://www.ozon.ru/category/anna-viduetskaya-kniga/" target="_blank" rel="noopener" aria-label="Купить на Ozon">
+          <img src="assets/logo-ozon.svg" alt="Ozon" loading="lazy">
         </a>
       </div>
     </div>
@@ -884,19 +921,22 @@ img{display:block}
         </article>
       </div>
     </div>
-    <div class="cta">
-      <div class="cta-copy">
-        <h3 class="cta-title">Чувствуете, что пришло время перемен? Жду&nbsp;вас.</h3>
-        <p class="cta-sub">Полтора-два часа один на один, конфиденциально. Вы&nbsp;уходите с&nbsp;честным разбором ситуации и&nbsp;конкретным планом действий.</p>
-        <div class="cta-actions">
-          <a href="https://wa.me/79851959505" class="btn btn--emerald" target="_blank" rel="noopener">Записаться на консультацию</a>
-        </div>
-        <p class="cta-note">Ответ в&nbsp;течение дня · Онлайн и&nbsp;очно в&nbsp;Москве</p>
-      </div>
-      <div class="cta-media" aria-hidden="true">
-        <video src="assets/door-anna.mp4" autoplay muted loop playsinline preload="auto" disablepictureinpicture tabindex="-1"></video>
-      </div>
-    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="cta">
+  <div class="cta-copy">
+  <h3 class="cta-title">Чувствуете, что пришло время перемен? Жду&nbsp;вас.</h3>
+  <p class="cta-sub">Полтора-два часа один на один, конфиденциально. Вы&nbsp;уходите с&nbsp;честным разбором ситуации и&nbsp;конкретным планом действий.</p>
+  <div class="cta-actions">
+  <a href="https://wa.me/79851959505" class="btn btn--emerald" target="_blank" rel="noopener">Записаться на консультацию</a>
+  </div>
+  <p class="cta-note">Ответ в&nbsp;течение дня · Онлайн и&nbsp;очно в&nbsp;Москве</p>
+  </div>
+  <div class="cta-media" aria-hidden="true">
+  <video src="assets/door-anna.mp4" autoplay muted loop playsinline preload="auto" disablepictureinpicture tabindex="-1"></video>
+  </div>
   </div>
 </section>
 
@@ -1315,6 +1355,17 @@ img{display:block}
   },{passive:true});
   addEventListener('resize',upd,{passive:true});
   upd();
+})();
+
+/* ===== ВЕРХНЯЯ СТРОКА: закрытие с запоминанием ===== */
+(function(){
+  var bar=document.getElementById('topbar'); if(!bar)return;
+  var x=bar.querySelector('.topbar-x');
+  try{ if(localStorage.getItem('bar-off')==='1') document.body.classList.add('bar-off'); }catch(e){}
+  if(x) x.addEventListener('click',function(){
+    document.body.classList.add('bar-off');
+    try{ localStorage.setItem('bar-off','1'); }catch(e){}
+  });
 })();
 </script>
 </body>
