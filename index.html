@@ -194,41 +194,28 @@ img{display:block}
 .book-desc{color:var(--ink-2);max-width:46ch;margin:0 0 36px}
 
 /* ---------- ABOUT ---------- */
-.about{background:transparent;padding:96px 0 104px;border-top:1px solid var(--line)}
+.about{background:transparent;padding:96px 0 104px}
 .about-wrap{max-width:1200px;margin:0 auto;padding:0 40px}
 .about-eyebrow{color:var(--accent);margin:0 0 18px}
 .about-title{color:var(--ink);margin:0 0 22px;max-width:22ch}
 .about-lead{color:var(--ink-2);max-width:58ch;margin:0 0 26px}
 .proof{max-width:1200px;margin:88px auto 0;padding:56px 40px 0;border-top:1px solid var(--line)}
-/* Полоса цифр между первым экраном и книгой.
-   Тонкие линии сверху и снизу подсвечиваются рядом с курсором. */
-.figures{position:relative;background:transparent;padding:0}
-.figures-wrap{max-width:1200px;margin:0 auto;padding:0 40px}
-.figs{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:32px;padding:64px 0 62px}
-.figs::before,.figs::after{content:'';position:absolute;left:0;right:0;height:1px;background:var(--line)}
-.figs::before{top:0}
-.figs::after{bottom:0}
-.figs .glow{position:absolute;left:0;right:0;height:2px;pointer-events:none;opacity:var(--gon,0);
-  transition:opacity var(--d-lg) var(--ease-out);
-  background:radial-gradient(150px 2px at var(--gx,50%) 50%,rgba(23,138,138,.95),rgba(23,138,138,0) 72%)}
-.figs .glow--top{top:-1px}
-.figs .glow--bot{bottom:-1px}
-.fig{position:relative;text-align:center;transition:transform var(--d-lg) var(--ease-out)}
-.fig-n{display:block;font-family:var(--display);font-weight:var(--w-display);
-  font-size:clamp(56px,6vw,88px);line-height:1;letter-spacing:-.03em;
-  transition:color var(--d-lg) var(--ease-out)}
-.fig:nth-child(1) .fig-n{color:#A69B92}
-.fig:nth-child(2) .fig-n{color:#8B7F76}
-.fig:nth-child(3) .fig-n{color:#6B605A}
-.fig:nth-child(4) .fig-n{color:#4C423D}
-.figs:hover .fig-n{color:#B5ABA2}
-.figs .fig:hover .fig-n{color:var(--ink)}
-.fig-c{display:block;margin-top:16px;font-family:var(--text);font-size:17px;line-height:1.45;color:var(--ink-2)}
+/* Факты: список слева, фотография справа */
+.proof{max-width:1200px;margin:80px auto 0;padding:0 40px}
+.proof-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:66px;align-items:center}
+.figs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:36px}
+.fig{display:flex;align-items:baseline;gap:22px}
+.fig-n{flex:none;min-width:1.05ch;text-align:right;font-family:var(--display);font-weight:var(--w-display);
+  font-size:clamp(58px,5.8vw,86px);line-height:.9;letter-spacing:-.03em;color:var(--ink)}
+.fig-c{font-family:var(--text);font-size:21px;line-height:1.35;color:var(--ink-2)}
+.proof-photo{aspect-ratio:1280/1920;overflow:hidden;background:var(--line)}
+.proof-photo img{width:100%;height:100%;object-fit:cover;display:block}
 @media(max-width:960px){
-  .figures-wrap{padding:0 24px}
-  .figs{grid-template-columns:1fr 1fr;gap:34px 20px;padding:44px 0 42px}
-  .fig-n{font-size:60px}
-  .fig-c{font-size:15.5px;margin-top:12px}
+  .proof{margin-top:56px;padding:0 24px}
+  .proof-grid{grid-template-columns:1fr;gap:34px}
+  .figs{gap:28px}
+  .fig-n{font-size:64px}
+  .fig-c{font-size:18px}
 }
 .feature{margin-top:80px;background:var(--ink);color:#fff;display:grid;grid-template-columns:1fr 1fr;min-height:460px;border-radius:2px;overflow:hidden}
 .feature-img{position:relative;min-height:340px}
@@ -255,7 +242,7 @@ img{display:block}
 /* ---------- ОТЗЫВЫ: слайдер по одному ---------- */
 .reviews{position:relative;isolation:isolate;padding:112px 0;
   background:url('assets/reviews-bg.jpg') center/cover no-repeat;
-  border-top:1px solid rgba(255,255,255,.5);border-bottom:1px solid rgba(255,255,255,.5)}
+}
 .reviews-head{position:relative;z-index:1;max-width:1200px;margin:0 auto 56px;padding:0 40px;text-align:center}
 .rv-slider{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:0 40px}
 .rv-viewport{overflow:hidden}
@@ -286,11 +273,11 @@ img{display:block}
   .rv-bar{margin-top:34px;max-width:240px}
 }
 /* SPEAKING */
-.speaking{background:var(--paper);padding:104px 0;border-top:1px solid var(--line)}
+.speaking{background:var(--paper);padding:104px 0}
 .sp-wrap{max-width:1200px;margin:0 auto;padding:0 40px}
 .sp-head{margin:0 0 44px}
 .sp-showcase{margin:0 0 96px}
-.sp-showcase .sp-reel-main{aspect-ratio:16/9;margin:0;border:1px solid var(--line)}
+.sp-showcase .sp-reel-main{aspect-ratio:16/9;margin:0}
 @media(max-width:960px){.sp-showcase{grid-template-columns:1fr;gap:26px;margin-bottom:56px}}
 
 .sp-title{font-family:var(--serif);font-weight:var(--w-display);font-size:clamp(36px,5.6vw,72px);line-height:1.1;letter-spacing:-.01em;color:var(--ink);margin:16px 0 0;max-width:16ch}
@@ -351,8 +338,7 @@ img{display:block}
 .story-more{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--d-xxl) var(--ease-out)}
 .about.story-open .story-more{grid-template-rows:1fr}
 .story-more>div{overflow:hidden}
-.story-letter{display:grid;grid-template-columns:1.4fr .6fr;margin-top:40px;
-  border:1px solid var(--line);background:var(--linen)}
+.story-letter{display:grid;grid-template-columns:1.4fr .6fr;margin-top:40px;background:var(--linen)}
 /* линии прокручиваются вместе с текстом */
 .story-sheet{max-height:min(62vh,600px);overflow-y:auto;padding:52px 56px 54px;
   background-image:repeating-linear-gradient(to bottom,transparent 0 31px,rgba(70,64,52,.14) 31px 32px);
@@ -371,7 +357,7 @@ img{display:block}
   .story-sheet p{font-size:16px;line-height:30px;margin-bottom:28px}
 }
 /* ---------- ПРЕСС-ЦЕНТР ---------- */
-.press{background:transparent;padding:104px 0;border-top:1px solid var(--line)}
+.press{background:transparent;padding:104px 0}
 .press-wrap{max-width:1200px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:.78fr 1.22fr;gap:72px;align-items:start}
 .press-portrait{position:relative;aspect-ratio:976/1611;overflow:hidden;background:var(--line)}
 .press-portrait img{width:100%;height:100%;object-fit:cover;display:block}
@@ -417,7 +403,7 @@ img{display:block}
 .pc-actions{display:flex;flex-wrap:wrap;gap:16px;margin-top:44px}
 .btn--pill{border-radius:2px;padding:18px 36px}
 /* TELEGRAM */
-.tg{position:relative;background:radial-gradient(90% 80% at 88% 4%,rgba(23,138,138,.10),transparent 58%),var(--linen);color:var(--ink);padding:104px 0;border-top:1px solid var(--line)}
+.tg{position:relative;background:radial-gradient(90% 80% at 88% 4%,rgba(23,138,138,.10),transparent 58%),var(--linen);color:var(--ink);padding:104px 0}
 .tg-wrap{max-width:1200px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
 .tg-eyebrow{font-family:var(--sans);font-weight:600;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:12px;margin:0 0 26px}
 .tg-eyebrow::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--accent)}
@@ -547,7 +533,7 @@ img{display:block}
   .sp-service-actions{justify-content:center}
 }
 /* CONSULT */
-.consult{background:transparent;padding:104px 0;border-top:1px solid var(--line)}
+.consult{background:transparent;padding:104px 0}
 .consult-wrap{max-width:1120px;margin:0 auto;padding:0 40px}
 .consult-eyebrow{color:var(--accent);margin:0 0 30px}
 .consult-hook{font-family:var(--serif);font-weight:var(--w-display);font-size:clamp(34px,4.6vw,66px);line-height:1.12;letter-spacing:-.015em;color:var(--ink);margin:0 auto 76px;max-width:24ch;text-align:center}
@@ -559,8 +545,8 @@ img{display:block}
 .req2-h em{font-style:italic;color:var(--accent)}
 .req2-rule{display:none}
 .req2-p{color:var(--ink-2);font-size:18px;line-height:1.6;margin:0;max-width:42ch}
-.req2-photo{margin:0 0 34px;aspect-ratio:996/1578;max-width:320px;overflow:hidden;background:var(--line)}
-.req2-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.req2-photo{margin:30px 0 32px;aspect-ratio:5/6;overflow:hidden;background:var(--line)}
+.req2-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 32%;display:block}
 .req2-r{display:flex;flex-direction:column;gap:20px}
 .req{position:relative;background:#fff;border-radius:2px;padding:34px 34px 32px;opacity:0;transform:translateY(24px);filter:blur(8px);will-change:opacity,filter,transform}
 .req.in{opacity:1;transform:none;filter:none}
@@ -572,18 +558,18 @@ img{display:block}
 .consult-turn p{color:var(--ink-2);font-size:19px;line-height:1.65;margin:0 0 20px}
 .consult-turn .pull{font-family:var(--serif);font-style:italic;font-weight:var(--w-head);font-size:clamp(26px,3.4vw,38px);line-height:1.3;color:var(--ink);margin:0 0 20px}
 /* CTA консультации: чистая белая плашка */
-.cta{background:var(--paper);border:1px solid var(--line);padding:70px 60px 60px;text-align:center;
-  max-width:880px;margin:0 auto}
+.cta{background:transparent;padding:24px 0 8px;text-align:center;max-width:900px;margin:0 auto}
 .cta-eyebrow{color:var(--accent);margin:0 0 22px}
-.cta-title{font-family:var(--serif);font-weight:var(--w-head);font-size:clamp(26px,3vw,40px);line-height:1.22;
-  color:var(--ink);margin:0 auto;max-width:20ch}
-.cta-sub{font-family:var(--text);font-size:21px;line-height:1.6;color:var(--ink-2);margin:22px auto 36px;max-width:48ch}
+.cta-title{font-family:var(--display);font-weight:var(--w-display);font-size:clamp(34px,4.6vw,66px);line-height:1.1;
+  letter-spacing:-.02em;color:var(--ink);margin:0 auto;max-width:18ch}
+.cta-sub{font-family:var(--text);font-size:20px;line-height:1.6;color:var(--ink-2);margin:26px auto 40px;max-width:50ch}
 .cta-actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
-.cta-note{font-family:var(--sans);font-size:13px;letter-spacing:.06em;color:var(--ink-3);margin:28px 0 0}
+.cta-note{font-family:var(--sans);font-weight:500;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink-3);margin:34px 0 0}
 @media(max-width:960px){
-  .cta{padding:38px 24px 34px}
+  .cta{padding:16px 0 4px}
   .cta-actions{flex-direction:column;align-items:stretch}
-  .req2-photo{max-width:none;margin-top:26px}
+  .req2-photo{margin:22px 0 24px}
   .consult{padding:76px 0}
   .consult-wrap{padding:0 24px}
   .req2{grid-template-columns:1fr;gap:32px;margin-bottom:56px}
@@ -721,17 +707,6 @@ img{display:block}
   </div>
 </header>
 
-<section class="figures" aria-label="Коротко о фактах">
-  <div class="figures-wrap">
-    <div class="figs">
-      <i class="glow glow--top"></i><i class="glow glow--bot"></i>
-      <div class="fig"><span class="fig-n">3</span><span class="fig-c">бизнеса<br>в&nbsp;разных сферах</span></div>
-      <div class="fig"><span class="fig-n">4</span><span class="fig-c">детей<br>&nbsp;</span></div>
-      <div class="fig"><span class="fig-n">6</span><span class="fig-c">лет<br>без няни</span></div>
-      <div class="fig"><span class="fig-n">2</span><span class="fig-c">премии<br>«Бизнес-мама&nbsp;года»</span></div>
-    </div>
-  </div>
-</section>
 
 <!-- BOOK -->
 <section class="book" id="book">
@@ -786,6 +761,17 @@ img{display:block}
         </div>
       </div>
     </div>
+    <div class="proof">
+      <div class="proof-grid">
+        <ul class="figs">
+          <li class="fig"><span class="fig-n">3</span><span class="fig-c">бизнеса<br>в&nbsp;разных сферах</span></li>
+          <li class="fig"><span class="fig-n">4</span><span class="fig-c">детей</span></li>
+          <li class="fig"><span class="fig-n">6</span><span class="fig-c">лет без няни</span></li>
+          <li class="fig"><span class="fig-n">2</span><span class="fig-c">премии<br>«Бизнес-мама&nbsp;года»</span></li>
+        </ul>
+        <div class="proof-photo"><img src="assets/press.jpg" alt="Анна Видуецкая"></div>
+      </div>
+    </div>
 </section>
 
 
@@ -837,8 +823,8 @@ img{display:block}
     <h2 class="consult-hook t-h1"><em>«Я так больше не хочу»</em> — фраза, с которой начинаются перемены</h2>
     <div class="req2">
       <div class="req2-l">
-        <div class="req2-photo"><img src="assets/consult-anna.jpg" alt="Анна Видуецкая"></div>
         <h3 class="req2-h">С чем вы можете прийти</h3>
+        <div class="req2-photo"><img src="assets/consult-anna.jpg" alt="Анна Видуецкая"></div>
         <p class="req2-p">За каждым запросом стоит одно желание&nbsp;— изменить то, что перестало устраивать. Чаще всего мы&nbsp;работаем по&nbsp;трём направлениям.</p>
       </div>
       <div class="req2-r">
@@ -866,11 +852,10 @@ img{display:block}
       </div>
     </div>
     <div class="cta">
-      <h3 class="cta-title">Если вы чувствуете, что пришло время перемен&nbsp;— жду вас.</h3>
+      <h3 class="cta-title">Чувствуете, что пришло время перемен? Жду&nbsp;вас.</h3>
       <p class="cta-sub">Полтора-два часа один на один, конфиденциально. Вы&nbsp;уходите с&nbsp;честным разбором ситуации и&nbsp;конкретным планом действий.</p>
       <div class="cta-actions">
         <a href="https://wa.me/79851959505" class="btn btn--emerald" target="_blank" rel="noopener">Записаться на консультацию</a>
-        <a href="https://wa.me/79851959505" class="btn btn--line" target="_blank" rel="noopener">Написать в WhatsApp</a>
       </div>
       <p class="cta-note">Ответ в&nbsp;течение дня · Онлайн и&nbsp;очно в&nbsp;Москве</p>
     </div>
@@ -1261,19 +1246,6 @@ img{display:block}
 })();
 
 
-/* ===== ПОЛОСА ЦИФР: линии светятся рядом с курсором ===== */
-(function(){
-  var band=document.querySelector('.figs'); if(!band)return;
-  function at(e){
-    var r=band.getBoundingClientRect();
-    var x=Math.max(0,Math.min(r.width,e.clientX-r.left));
-    band.style.setProperty('--gx',x+'px');
-    band.style.setProperty('--gon','1');
-  }
-  band.addEventListener('pointermove',at);
-  band.addEventListener('pointerdown',at);
-  band.addEventListener('pointerleave',function(){band.style.setProperty('--gon','0');});
-})();
 
 /* ===== ТЕМЫ: аккордеон ===== */
 (function(){
