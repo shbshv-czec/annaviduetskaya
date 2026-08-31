@@ -64,18 +64,41 @@ img{display:block}
 
 
 /* ---------- NAV (gradient only here; grotesque caps) ---------- */
-.nav-wrap{position:absolute;top:0;left:0;right:0;z-index:30;background:linear-gradient(180deg,rgba(18,15,13,.72) 0%,rgba(18,15,13,.4) 45%,rgba(18,15,13,0) 100%)}
-.nav{max-width:1440px;margin:0 auto;padding:24px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+/* Навигация: полупрозрачная плашка поверх первого экрана */
+.nav-wrap{position:fixed;top:16px;left:24px;right:24px;z-index:60;
+  background:rgba(255,255,255,.10);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);
+  border:1px solid rgba(255,255,255,.20);border-radius:2px;
+  transition:background var(--d-lg) var(--ease-out),border-color var(--d-lg) var(--ease-out),
+             box-shadow var(--d-lg) var(--ease-out)}
+.nav{max-width:1400px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:24px}
 .nav a{color:#fff}
-.brand{font-family:var(--sans);font-weight:600;text-transform:uppercase;letter-spacing:.16em;font-size:13px;color:#fff;white-space:nowrap}
-.nav-links{display:flex;gap:32px;align-items:center}
-.nav-links a{font-family:var(--sans);text-transform:uppercase;letter-spacing:.1em;font-size:12.5px;font-weight:500;color:rgba(255,255,255,.9);padding-bottom:2px;border-bottom:1px solid transparent;transition:border-color .2s}
-.nav-links a:hover{border-color:rgba(255,255,255,.7)}
-.nav-right{display:flex;align-items:center;gap:20px}
-.nav-phone{font-family:var(--sans);font-size:14px;font-weight:500;letter-spacing:.01em;color:#fff;white-space:nowrap}
-.wa-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-size:12.5px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:#fff;border:1px solid rgba(255,255,255,.55);padding:10px 16px;border-radius:2px;transition:background .2s,color .2s}
-.wa-btn:hover{background:#fff;color:var(--ink)}
-.wa-btn svg{width:16px;height:16px}
+.brand{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;
+  border:1px solid rgba(255,255,255,.55);transition:border-color var(--d-lg) var(--ease-out),background var(--d-lg) var(--ease-out)}
+.brand-mark{font-family:var(--display);font-weight:var(--w-display);font-size:17px;letter-spacing:.06em;
+  line-height:1;color:#fff;transition:color var(--d-lg) var(--ease-out)}
+.brand:hover{background:rgba(255,255,255,.16)}
+.nav-links{display:flex;gap:6px;align-items:center}
+.nav-links a{font-family:var(--sans);text-transform:uppercase;letter-spacing:.1em;font-size:12px;font-weight:600;
+  color:rgba(255,255,255,.92);padding:9px 14px;border-radius:2px;
+  transition:background var(--d-md) var(--ease-out),color var(--d-md) var(--ease-out)}
+.nav-links a:hover{background:rgba(255,255,255,.16);color:#fff}
+.nav-right{display:flex;align-items:center;gap:14px}
+.nav-phone{font-family:var(--sans);font-size:13.5px;font-weight:500;letter-spacing:.01em;color:rgba(255,255,255,.9);white-space:nowrap}
+.nav .wa-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-size:12px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.08em;color:var(--ink);background:#fff;border:1px solid #fff;
+  padding:11px 16px;border-radius:2px;transition:background var(--d-md) var(--ease-out),color var(--d-md) var(--ease-out)}
+.nav .wa-btn:hover{background:transparent;color:#fff}
+.wa-btn svg{width:15px;height:15px}
+/* когда первый экран пролистан — светлая плашка */
+.nav-wrap.solid{background:rgba(247,244,238,.86);border-color:var(--line);box-shadow:0 10px 30px -22px rgba(31,28,27,.5)}
+.nav-wrap.solid .nav a,.nav-wrap.solid .nav-phone{color:var(--ink)}
+.nav-wrap.solid .brand{border-color:rgba(31,28,27,.28)}
+.nav-wrap.solid .brand-mark{color:var(--ink)}
+.nav-wrap.solid .brand:hover{background:rgba(31,28,27,.06)}
+.nav-wrap.solid .nav-links a:hover{background:rgba(31,28,27,.07)}
+.nav-wrap.solid .wa-btn{background:var(--ink);border-color:var(--ink);color:#fff!important}
+.nav-wrap.solid .wa-btn:hover{background:transparent;color:var(--ink)!important}
+.nav-wrap.solid .burger span{background:var(--ink)}
 .burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;background:none;border:none;cursor:pointer;padding:8px}
 .burger span{display:block;width:100%;height:2px;background:#fff}
 .mobile-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--cream);padding:8px 24px 30px;box-shadow:none;border-top:1px solid var(--line)}
@@ -116,9 +139,16 @@ img{display:block}
   .hero-veil{background:linear-gradient(0deg,rgba(18,15,13,.94) 0%,rgba(18,15,13,.58) 40%,rgba(18,15,13,.12) 72%,rgba(18,15,13,0) 100%)}
   .hero-inner{align-items:flex-end;min-height:100vh;padding:0 24px 48px}
   .hero-text{padding:0;max-width:100%}
-  .nav{padding:22px 24px}
-  .nav-links,.nav-phone,.wa-btn{display:none}
+  .nav-wrap{top:12px;left:14px;right:14px}
+  .nav{padding:9px 12px}
+  .nav-links,.nav-phone,.nav .wa-btn{display:none}
   .burger{display:flex}
+  .brand{width:38px;height:38px}
+  .brand-mark{font-size:15px}
+  /* регалии — вверху под навигацией, лицо свободно */
+  .hero-inner{position:relative}
+  .regalia{position:absolute;top:86px;left:24px;right:24px;margin:0;font-size:11px;letter-spacing:.12em}
+  .hero-text{padding-bottom:8px}
   .about{padding:72px 0}
   .about-grid{grid-template-columns:1fr;gap:40px}
   .about-photo{aspect-ratio:4/5;max-width:440px;margin:0 auto;width:100%}
@@ -169,10 +199,6 @@ img{display:block}
 .about-eyebrow{color:var(--accent);margin:0 0 18px}
 .about-title{color:var(--ink);margin:0 0 22px;max-width:22ch}
 .about-lead{color:var(--ink-2);max-width:58ch;margin:0 0 26px}
-.story-toggle{display:inline-flex;align-items:center;gap:9px;background:none;border:none;cursor:pointer;padding:0;font-family:var(--text);font-weight:600;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
-.story-toggle span{border-bottom:1px solid var(--accent);padding-bottom:2px}
-.story-toggle svg{width:16px;height:16px;transition:transform .45s cubic-bezier(.4,0,.2,1)}
-.story-sheet{display:none}
 .proof{max-width:1200px;margin:88px auto 0;padding:56px 40px 0;border-top:1px solid var(--line)}
 /* Полоса цифр между первым экраном и книгой.
    Тонкие линии сверху и снизу подсвечиваются рядом с курсором. */
@@ -263,18 +289,11 @@ img{display:block}
 .speaking{background:var(--paper);padding:104px 0;border-top:1px solid var(--line)}
 .sp-wrap{max-width:1200px;margin:0 auto;padding:0 40px}
 .sp-head{margin:0 0 44px}
-.sp-showcase{display:grid;grid-template-columns:1.66fr .34fr;gap:44px;align-items:start;margin:0 0 92px}
-.sp-showcase .sp-reel-main{aspect-ratio:16/9;margin:0}
-.sp-aside{display:flex;flex-direction:column;gap:20px}
-.sp-aside .sp-nums{margin:0;padding-bottom:18px;border-bottom:1px solid var(--line);font-family:var(--sans);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
-.sp-aside .sp-intro{margin:0;font-size:17px;line-height:1.6;color:var(--ink-2)}
+.sp-showcase{margin:0 0 96px}
+.sp-showcase .sp-reel-main{aspect-ratio:16/9;margin:0;border:1px solid var(--line)}
 @media(max-width:960px){.sp-showcase{grid-template-columns:1fr;gap:26px;margin-bottom:56px}}
 
 .sp-title{font-family:var(--serif);font-weight:var(--w-display);font-size:clamp(36px,5.6vw,72px);line-height:1.1;letter-spacing:-.01em;color:var(--ink);margin:16px 0 0;max-width:16ch}
-.sp-intro-wrap{padding-top:12px}
-.sp-intro-wrap .sp-reel-main{margin:0 0 26px}
-.sp-rule{display:none}
-.sp-intro{color:var(--ink-2);font-size:18px;line-height:1.4;margin:0}
 .sp-sub{font-family:var(--text);font-style:normal;font-weight:400;font-size:18px;line-height:1.4;color:var(--ink-2);margin:20px 0 0}
 .sp-main{padding:4px 0 36px;margin:0 0 4px}
 .sp-main-tag{display:inline-block;font-family:var(--text);font-weight:600;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 16px}
@@ -294,7 +313,8 @@ img{display:block}
 .sp-more:hover{background:#000}
 .sp-more svg{width:15px;height:15px}
 .sp-cols{display:grid;grid-template-columns:1.12fr .88fr;gap:64px;border-top:1px solid rgba(44,42,37,.2);padding-top:46px}
-.sp-colhead{font-family:var(--text);font-weight:600;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 22px}
+.sp-topics-h{font-family:var(--serif);font-weight:var(--w-display);font-size:clamp(30px,3.6vw,48px);line-height:1.12;
+  letter-spacing:-.01em;color:var(--ink);margin:0 0 8px}
 .sp-venue{font-family:var(--serif);font-weight:var(--w-head);font-size:21px;line-height:1.3;color:var(--ink);padding:14px 0;border-bottom:1px solid rgba(44,42,37,.12)}
 .sp-venue:first-of-type{border-top:1px solid rgba(44,42,37,.12)}
 .sp-stage{margin-top:30px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -320,108 +340,35 @@ img{display:block}
 .btn--sm{font-size:13px;padding:12px 24px}
 .sp-photolink{font-family:var(--text);font-weight:600;font-size:13.5px;color:var(--ink);text-decoration:underline;text-underline-offset:4px}
 .sp-photolink:hover{color:var(--accent)}
-/* ---------- МОЯ ИСТОРИЯ ---------- */
-.story{background:transparent;padding:88px 0 96px}
-.story-wrap{max-width:1200px;margin:0 auto;padding:0 40px}
-.story-panel{display:grid;grid-template-columns:1.06fr .94fr;gap:0;align-items:stretch;
-  background:var(--accent-soft);border:1px solid var(--line)}
-.story-copy{padding:66px 60px 62px;display:flex;flex-direction:column;justify-content:center}
-.story-eyebrow{color:var(--accent-d);margin:0 0 26px}
-.story-quote{font-family:var(--display);font-weight:var(--w-display);font-size:clamp(34px,4.4vw,60px);
-  line-height:1.06;letter-spacing:-.02em;color:var(--ink);margin:0}
-.story-quote::before{content:'«'}
-.story-quote::after{content:'»'}
-.story-lead{font-family:var(--text);font-size:18px;line-height:1.6;color:var(--ink-2);margin:26px 0 38px;max-width:44ch}
-.story-btn{align-self:flex-start;gap:12px}
-.story-btn svg{width:19px;height:19px;transition:transform var(--d-lg) var(--ease-out)}
-.story.open .story-btn svg{transform:rotate(90deg)}
-.story-visual{position:relative;min-height:420px;overflow:hidden;background:var(--ink)}
-.story-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%;
-  transition:opacity var(--d-xxl) var(--ease-out)}
-.story-img--color{opacity:0}
-.story.open .story-img--bw{opacity:0}
-.story.open .story-img--color{opacity:1}
-
-/* раскрытие: плавная авто-высота через grid */
+/* ---------- МОЯ ИСТОРИЯ: ссылка и раскрывающееся письмо ---------- */
+.story-link{display:inline-flex;align-items:center;gap:10px;margin:8px 0 0;padding:0 0 4px;
+  background:none;border:none;border-bottom:1px solid var(--accent);cursor:pointer;
+  font-family:var(--sans);font-weight:600;font-size:13px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent-d);transition:color var(--d-md) var(--ease-out),border-color var(--d-md) var(--ease-out)}
+.story-link:hover{color:var(--spark);border-color:var(--spark)}
+.story-link svg{width:15px;height:15px;transition:transform var(--d-lg) var(--ease-out)}
+.about.story-open .story-link svg{transform:rotate(180deg)}
 .story-more{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--d-xxl) var(--ease-out)}
-.story.open .story-more{grid-template-rows:1fr}
+.about.story-open .story-more{grid-template-rows:1fr}
 .story-more>div{overflow:hidden}
-/* лист в линейку: линии прокручиваются ВМЕСТЕ с текстом (background-attachment:local) */
-.story-sheet{margin-top:-1px;max-height:min(66vh,640px);overflow-y:auto;padding:52px 60px 56px;
-  background-color:var(--linen);border:1px solid var(--line);
-  background-image:repeating-linear-gradient(to bottom,transparent 0 31px,rgba(70,64,52,.15) 31px 32px);
-  background-position:0 40px;background-attachment:local}
-.story-sheet p{font-family:var(--text);font-size:17px;line-height:32px;color:#3A362E;margin:0 0 32px;max-width:70ch}
+.story-letter{display:grid;grid-template-columns:1.4fr .6fr;margin-top:40px;
+  border:1px solid var(--line);background:var(--linen)}
+/* линии прокручиваются вместе с текстом */
+.story-sheet{max-height:min(62vh,600px);overflow-y:auto;padding:52px 56px 54px;
+  background-image:repeating-linear-gradient(to bottom,transparent 0 31px,rgba(70,64,52,.14) 31px 32px);
+  background-position:0 46px;background-attachment:local}
+.story-sheet p{font-family:var(--text);font-size:17px;line-height:32px;color:#3A362E;margin:0 0 32px;max-width:62ch}
 .story-sheet p:last-child{margin-bottom:0}
+.story-sheet .story-open{font-family:var(--display);font-weight:var(--w-display);
+  font-size:clamp(28px,3vw,44px);line-height:1.1;color:var(--ink);margin:0 0 36px;max-width:none}
 .story-sheet .story-bold{font-weight:700;color:var(--ink)}
+.story-photo{position:relative;overflow:hidden;background:var(--line)}
+.story-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 14%}
 @media(max-width:960px){
-  .story{padding:66px 0 76px}
-  .story-wrap{padding:0 24px}
-  .story-panel{grid-template-columns:1fr}
-  .story-copy{padding:38px 26px 40px;order:2}
-  .story-visual{order:1;min-height:0;aspect-ratio:1/1}
-  .story-sheet{padding:34px 24px 40px;max-height:70vh}
-  .story-sheet p{font-size:16px;line-height:30px;margin-bottom:30px}
-}
-/* ---------- ТРИ ЛУЧА БАЛАНСА ----------
-   Три луча из одной точки. Подсветка активного НЕ укорачивает остальные:
-   они лишь мягко притухают в цвете. В покое — синхронное «дыхание». */
-.rays{background:transparent;padding:96px 0 72px;border-top:1px solid var(--line)}
-.rays-wrap{max-width:1200px;margin:0 auto;padding:0 40px;text-align:center}
-.rays-eyebrow{color:var(--accent);margin:0 0 18px}
-.rays-title{color:var(--ink);margin:0 auto}
-.rays-lead{font-family:var(--text);font-size:19px;line-height:1.6;color:var(--ink-2);max-width:54ch;margin:22px auto 0}
-
-.rays-stage{position:relative;margin:88px auto 0;height:clamp(300px,30vw,400px);max-width:900px;--len:clamp(230px,25vw,330px)}
-.ray{position:absolute;left:50%;bottom:0;width:2px;height:var(--len);
-  transform-origin:50% 100%;transform:translateX(-50%) rotate(var(--rot));cursor:default}
-.ray::before{content:'';position:absolute;left:-26px;right:-26px;top:-14px;bottom:0}  /* зона наведения */
-.ray-line{position:absolute;inset:0;display:block;background:var(--accent);border-radius:2px;
-  transform-origin:50% 100%;opacity:.78;
-  animation:ray-breathe 5.4s var(--ease-in-out) infinite, ray-sway var(--sway,7s) var(--ease-in-out) infinite alternate;
-  transition:opacity var(--d-lg) var(--ease-out),background var(--d-lg) var(--ease-out)}
-.ray[data-i="0"] .ray-line{--sway:6.6s}
-.ray[data-i="1"] .ray-line{--sway:7.8s}
-.ray[data-i="2"] .ray-line{--sway:8.6s}
-.ray-dot{position:absolute;top:-5px;left:50%;width:10px;height:10px;margin-left:-5px;border-radius:50%;
-  background:var(--accent);opacity:.82;transition:transform var(--d-lg) var(--ease-out),opacity var(--d-lg) var(--ease-out)}
-.ray-label{position:absolute;top:-22px;left:50%;width:max-content;max-width:230px;
-  transform:translate(-50%,-100%) rotate(calc(-1 * var(--rot)));
-  display:flex;flex-direction:column;align-items:center;gap:0;
-  background:rgba(247,244,238,.92);border:1px solid var(--line);padding:9px 14px;
-  transition:border-color var(--d-lg) var(--ease-out),background var(--d-lg) var(--ease-out)}
-.ray-label b{font-family:var(--sans);font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
-.ray-label em{font-family:var(--text);font-style:normal;font-size:13.5px;line-height:1.45;color:var(--ink-2);
-  max-height:0;opacity:0;overflow:hidden;transition:max-height var(--d-lg) var(--ease-out),opacity var(--d-lg) var(--ease-out),margin var(--d-lg) var(--ease-out)}
-
-/* активный луч: ярче и чуть толще. Длина не меняется */
-.ray.on{width:3px}
-.ray.on .ray-line{opacity:1;background:var(--accent-d);animation-play-state:paused}
-.ray.on .ray-dot{background:var(--accent-d);opacity:1;transform:scale(1.35)}
-.ray.on .ray-label{border-color:var(--accent);background:var(--paper)}
-.ray.on .ray-label em{max-height:120px;opacity:1;margin-top:7px}
-/* остальные два — только притухают в цвете */
-.rays-stage.is-active .ray:not(.on) .ray-line{opacity:.34;animation-play-state:paused}
-.rays-stage.is-active .ray:not(.on) .ray-dot{opacity:.34}
-.rays-stage.is-active .ray:not(.on) .ray-label{opacity:.42}
-
-.ray-core{position:absolute;left:50%;bottom:0;transform:translate(-50%,50%);display:flex;flex-direction:column;align-items:center}
-.ray-core-dot{width:15px;height:15px;border-radius:50%;background:var(--paper);border:2px solid var(--accent-d);
-  box-shadow:0 0 0 6px rgba(23,138,138,.10)}
-.ray-core-label{margin-top:10px;font-family:var(--serif);font-weight:var(--w-head);font-size:22px;line-height:1;color:var(--ink)}
-
-@keyframes ray-breathe{0%,100%{opacity:.62}50%{opacity:1}}
-@keyframes ray-sway{0%{transform:scaleY(.985)}100%{transform:scaleY(1.015)}}
-@media(prefers-reduced-motion:reduce){.ray-line{animation:none;opacity:.85}}
-
-@media(max-width:960px){
-  .rays{padding:72px 0 56px}
-  .rays-wrap{padding:0 24px}
-  .rays-stage{margin-top:66px;height:280px;--len:190px}
-  .ray-label{max-width:170px;padding:7px 11px;top:-16px}
-  .ray-label b{font-size:11px;letter-spacing:.1em}
-  .ray-label em{font-size:12.5px}
-  .ray-core-label{font-size:19px}
+  .story-letter{grid-template-columns:1fr;margin-top:28px}
+  .story-photo{order:-1;aspect-ratio:4/3}
+  .story-sheet{padding:32px 22px 36px;max-height:70vh}
+  .story-sheet p{font-size:16px;line-height:30px;margin-bottom:28px}
 }
 /* ---------- ПРЕСС-ЦЕНТР ---------- */
 .press{background:transparent;padding:104px 0;border-top:1px solid var(--line)}
@@ -498,7 +445,6 @@ img{display:block}
   .pc-rail{padding:6px 24px 22px;margin:0 -24px}
   .pc-intro{margin-bottom:34px}
 }
-.sp-nums{font-family:var(--text);font-size:14.5px;letter-spacing:.04em;color:var(--ink);margin:22px 0 0;font-weight:500}
 .sp-reel{margin:8px 0 4px}
 .sp-reel-main{position:relative;aspect-ratio:16/9;overflow:hidden;border-radius:2px;background:#1a1613;cursor:pointer}
 .sp-reel-main img{width:100%;height:100%;object-fit:cover;opacity:.72}
@@ -542,8 +488,9 @@ img{display:block}
   transition:color var(--d-md) var(--ease-out)}
 .topic-t{font-family:var(--serif);font-weight:var(--w-head);font-size:clamp(22px,2.3vw,30px);line-height:1.24;
   color:var(--ink);display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
-.topic-tag{font-family:var(--sans);font-weight:600;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--accent);border:1px solid var(--accent);padding:4px 9px;white-space:nowrap}
+.topic-tag{font-family:var(--sans);font-weight:700;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:#fff;background:var(--accent-d);border:none;padding:6px 12px;white-space:nowrap;
+  box-shadow:0 6px 16px -8px rgba(15,110,110,.7)}
 .topic-ind{position:relative;width:18px;height:18px;flex:none}
 .topic-ind::before,.topic-ind::after{content:'';position:absolute;background:var(--ink);
   transition:transform var(--d-lg) var(--ease-out),background var(--d-lg) var(--ease-out)}
@@ -555,12 +502,15 @@ img{display:block}
 .topic-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--d-xl) var(--ease-out)}
 .topic.open .topic-body{grid-template-rows:1fr}
 .topic-body>div{overflow:hidden}
-.topic-body p{font-family:var(--text);font-size:18px;line-height:1.62;color:var(--ink-2);
-  margin:0;padding:0 60px 32px 68px;max-width:76ch}
+.topic-in{display:grid;grid-template-columns:1fr .46fr;gap:40px;align-items:start;padding:4px 6px 36px 68px}
+.topic-body p{font-family:var(--text);font-size:18px;line-height:1.62;color:var(--ink-2);margin:0;max-width:62ch}
+.topic-ph{aspect-ratio:4/3;overflow:hidden;background:var(--line)}
+.topic-ph img{width:100%;height:100%;object-fit:cover;display:block}
 @media(max-width:960px){
   .topic-head{gap:16px;padding:22px 2px}
   .topic-t{font-size:20px;gap:10px}
-  .topic-body p{font-size:16.5px;padding:0 0 26px 0}
+  .topic-in{grid-template-columns:1fr;gap:20px;padding:0 0 26px 0}
+  .topic-body p{font-size:16.5px}
 }
 .sp-venues-line{border-top:1px solid rgba(44,42,37,.2);padding-top:32px;margin-top:56px}
 .sp-topics-block{padding-top:8px;margin-top:56px}
@@ -572,8 +522,6 @@ img{display:block}
   .speaking{padding:76px 0}
   .sp-wrap{padding:0 24px}
   .sp-head{grid-template-columns:1fr;gap:28px;margin-bottom:44px}
-  .sp-intro-wrap{padding-top:0}
-  .sp-rule{max-width:200px}
   .sp-grid{grid-template-columns:1fr;gap:44px}
   .sp-card{grid-template-columns:1fr;gap:22px}
   .sp-media{aspect-ratio:16/10;max-width:100%}
@@ -604,29 +552,29 @@ img{display:block}
 .consult-intro{color:var(--ink-2);max-width:60ch;margin:0 auto 64px;text-align:center;font-size:19px;line-height:1.6}
 .req2{display:grid;grid-template-columns:1fr 1.15fr;gap:64px;align-items:start;margin:0 0 88px;text-align:left}
 .req2-l{position:sticky;top:120px}
-.req2-h{font-family:var(--serif);font-weight:var(--w-head);font-size:clamp(25px,2.4vw,32px);line-height:1.2;letter-spacing:0;color:var(--ink);margin:0 0 26px}
+.req2-h{font-family:var(--serif);font-weight:var(--w-head);font-size:clamp(28px,3vw,40px);line-height:1.16;letter-spacing:0;color:var(--ink);margin:0 0 26px}
 .req2-h em{font-style:italic;color:var(--accent)}
 .req2-rule{display:none}
 .req2-p{color:var(--ink-2);font-size:18px;line-height:1.6;margin:0;max-width:42ch}
-.req2-photo{margin-top:34px;aspect-ratio:996/1578;max-width:320px;overflow:hidden;background:var(--line)}
+.req2-photo{margin:0 0 34px;aspect-ratio:996/1578;max-width:320px;overflow:hidden;background:var(--line)}
 .req2-photo img{width:100%;height:100%;object-fit:cover;display:block}
 .req2-r{display:flex;flex-direction:column;gap:20px}
 .req{position:relative;background:#fff;border-radius:2px;padding:34px 34px 32px;opacity:0;transform:translateY(24px);filter:blur(8px);will-change:opacity,filter,transform}
 .req.in{opacity:1;transform:none;filter:none}
 .req::before{content:"";position:absolute;top:0;left:0;width:8px;height:8px;background:var(--ink)}
 .req-k{font-family:var(--sans);font-weight:600;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
-.req-t{font-family:var(--serif);font-weight:var(--w-head);font-size:27px;line-height:1.28;color:var(--ink);margin:0 0 11px}
+.req-t{font-family:var(--serif);font-weight:var(--w-head);font-size:clamp(26px,2.5vw,34px);line-height:1.24;color:var(--ink);margin:0 0 13px}
 .req-d{color:var(--ink-2);font-size:17.5px;line-height:1.6;margin:0}
 .consult-turn{max-width:760px;margin:0 auto 84px;text-align:center}
 .consult-turn p{color:var(--ink-2);font-size:19px;line-height:1.65;margin:0 0 20px}
 .consult-turn .pull{font-family:var(--serif);font-style:italic;font-weight:var(--w-head);font-size:clamp(26px,3.4vw,38px);line-height:1.3;color:var(--ink);margin:0 0 20px}
 /* CTA консультации: чистая белая плашка */
-.cta{background:var(--paper);border:1px solid var(--line);padding:64px 60px 58px;text-align:center;
+.cta{background:var(--paper);border:1px solid var(--line);padding:70px 60px 60px;text-align:center;
   max-width:880px;margin:0 auto}
 .cta-eyebrow{color:var(--accent);margin:0 0 22px}
 .cta-title{font-family:var(--serif);font-weight:var(--w-head);font-size:clamp(26px,3vw,40px);line-height:1.22;
   color:var(--ink);margin:0 auto;max-width:20ch}
-.cta-sub{font-family:var(--text);font-size:18px;line-height:1.6;color:var(--ink-2);margin:20px auto 34px;max-width:52ch}
+.cta-sub{font-family:var(--text);font-size:21px;line-height:1.6;color:var(--ink-2);margin:22px auto 36px;max-width:48ch}
 .cta-actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
 .cta-note{font-family:var(--sans);font-size:13px;letter-spacing:.06em;color:var(--ink-3);margin:28px 0 0}
 @media(max-width:960px){
@@ -707,7 +655,7 @@ img{display:block}
    строки апроша/интерлиньяжа ниже: прописным нужен положительный апрош,
    иначе стойки слипаются, а интерлиньяж можно сжать (нет выносных элементов). */
 .t-display,.t-h1,.book-title,.about-title,.reviews-title,.consult-hook,
-.sp-title,.pc-title,.tg-title,.press-name,.ftr-name,.story-quote,.feature-title,.fig-n{
+.sp-title,.pc-title,.tg-title,.press-name,.ftr-name,.feature-title,.fig-n{
   font-family:var(--display);
   text-transform:var(--head-case);
   /* letter-spacing:var(--head-track); */
@@ -719,7 +667,7 @@ img{display:block}
 <!-- NAV -->
 <div class="nav-wrap">
   <nav class="nav">
-    <a href="#" class="brand">Анна Видуецкая</a>
+    <a href="#" class="brand" aria-label="Анна Видуецкая"><span class="brand-mark">АВ</span></a>
     <div class="nav-links">
       <a href="#book">Книга</a>
       <a href="#about">Обо мне</a>
@@ -808,70 +756,37 @@ img{display:block}
       <p class="about-eyebrow t-eyebrow">Обо мне</p>
       <h2 class="about-title t-h1">Коуч ICF и психолог, автор метода «3 луча баланса»</h2>
       <p class="about-lead t-body">В прошлом — топ-менеджер международной компании, сегодня — основатель Агентства интеллектуальных событий.</p>
-    </div>
-</section>
-
-<section class="rays" id="method">
-  <div class="rays-wrap">
-    <p class="rays-eyebrow t-eyebrow">Метод</p>
-    <h2 class="rays-title t-h1">Три луча баланса</h2>
-    <p class="rays-lead">Красота, семья и&nbsp;карьера растут из&nbsp;одного корня&nbsp;— из&nbsp;вас самой. Выбрать одно не&nbsp;значит отказаться от&nbsp;остального: свет идёт во&nbsp;все три стороны сразу.</p>
-    <div class="rays-stage">
-      <div class="ray" data-i="1" style="--rot:-58deg">
-        <i class="ray-line"></i><span class="ray-dot"></span>
-        <span class="ray-label"><b>Семья</b><em>Любовь, отношения, дети, партнёрство.</em></span>
-      </div>
-      <div class="ray" data-i="0" style="--rot:0deg">
-        <i class="ray-line"></i><span class="ray-dot"></span>
-        <span class="ray-label"><b>Красота</b><em>Внутреннее ощущение и&nbsp;отношение к&nbsp;себе, а&nbsp;не&nbsp;причёска и&nbsp;одежда.</em></span>
-      </div>
-      <div class="ray" data-i="2" style="--rot:58deg">
-        <i class="ray-line"></i><span class="ray-dot"></span>
-        <span class="ray-label"><b>Карьера</b><em>Дело, в&nbsp;котором горят глаза, а&nbsp;не&nbsp;жертва ради него.</em></span>
-      </div>
-      <div class="ray-core"><span class="ray-core-dot"></span><span class="ray-core-label">Я</span></div>
-    </div>
-  </div>
-</section>
-
-
-<section class="story" id="story">
-  <div class="story-wrap">
-    <div class="story-panel">
-      <div class="story-copy">
-        <p class="story-eyebrow t-eyebrow">Моя история</p>
-        <blockquote class="story-quote">Боже… это моя жизнь?</blockquote>
-        <p class="story-lead">2015&nbsp;год: большой дом, известный муж, четверо детей, няня, помощники, водитель. Жизнь-мечта&nbsp;— и&nbsp;полное ощущение, что живёшь не&nbsp;свою.</p>
-        <button class="btn btn--primary story-btn" type="button" aria-expanded="false" aria-controls="storyFull">
-          <span class="story-btn-t">Читать историю</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
-        </button>
-      </div>
-      <div class="story-visual">
-        <img class="story-img story-img--bw" src="assets/story-bw.jpg" alt="Анна Видуецкая">
-        <img class="story-img story-img--color" src="assets/about-main.png" alt="Анна Видуецкая">
-      </div>
-    </div>
-    <div class="story-more" id="storyFull">
-      <div>
-        <div class="story-sheet">
-            <p>2015 год: у меня большой дом, известный, успешный муж, четверо детей, няня, помощники, водитель. Жизнь-мечта. А я смотрю на все это и думаю: это игра какая-то. Мне было так странно, не комфортно и забавно одновременно.</p>
-            <p>Почему они меня спрашивают и что-то мне говорят? Вот странные, они и вправду думают что я хозяйка? Ну нееет! А вдруг они меня разоблачат? Ну я же не могу быть хозяйкой всего этого. Я не соответствую. Хозяйки они другие, более взрослые, или какие-то там еще более. Достойные что ли? Точно не такие как я. И я старалась всему этому соответствовать.</p>
-            <p>Работала как не в себя, доказывая себе же что могу соответствовать мужу прекрасному. Дом становился все краше, кошки, собаки, ну чтобы все соответствовало представлению о доме. Планировала поездки всей семьей, с детьми на море — ведь так же отдыхают семьи большие.</p>
-            <p>Результат был: идеальная картинка, у мужа взлет, он — мега крут и гордится мной, дом, дети прекрасные, все вокруг восхищаются: боже, как вам это удается? Кто же у Радислава жена?</p>
-            <p>В какой-то момент у меня начались серьезные проблемы со здоровьем, я ездила по врачам, тихонечко, чтобы никого не побеспокоить. Врачи разводили руками, а мне становилось все хуже.</p>
-            <p>Я так старалась соответствовать ожиданиям всех от себя и своей собственной идеальной картинке, что оказалась в глубокой клинической депрессии.</p>
-            <p>Но я по-прежнему старалась. Ведь никто об этом ничего не узнал.</p>
-            <p>Жила ли я для себя? Нет! Наслаждалась ли я своей жизнью, любовью мужа, работой? Нет! Я соответствовала ожиданиям других, а сама пыталась дотянуться до них.</p>
-            <p>Я получала премии и награды «Мама года», «Бизнес-мама», меня стали приглашать выступать на российских и зарубежных форумах, а я не понимала, что они все во мне нашли. В чем моя заслуга? В чем ценность?</p>
-            <p>Перемены в моей жизни начались тогда, когда потихоньку, очень медленно, я начала понимать что это моя семья, мой дом, мои достижения. И тогда, в какой-то момент все изменилось — это стала моя жизнь.</p>
-            <p>И я живу ее, каждый день, живу свою жизнь. Разную, но свою. Я перестала стараться и соответствовать, перестала стесняться говорить нет. Я перестала нравиться всем людям, зато стала нравиться себе.</p>
-            <p class="story-bold">А теперь я помогаю женщинам пройти этот путь бережнее и быстрее, чем прошла его сама.</p>
+      <button class="story-link" type="button" aria-expanded="false" aria-controls="storyFull">
+        <span>Моя история</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="story-more" id="storyFull">
+        <div>
+          <div class="story-letter">
+            <div class="story-sheet">
+              <p class="story-open">«Боже… это моя жизнь?»</p>
+              <p>2015 год: у меня большой дом, известный, успешный муж, четверо детей, няня, помощники, водитель. Жизнь-мечта. А я смотрю на все это и думаю: это игра какая-то. Мне было так странно, не комфортно и забавно одновременно.</p>
+              <p>Почему они меня спрашивают и что-то мне говорят? Вот странные, они и вправду думают что я хозяйка? Ну нееет! А вдруг они меня разоблачат? Ну я же не могу быть хозяйкой всего этого. Я не соответствую. Хозяйки они другие, более взрослые, или какие-то там еще более. Достойные что ли? Точно не такие как я. И я старалась всему этому соответствовать.</p>
+              <p>Работала как не в себя, доказывая себе же что могу соответствовать мужу прекрасному. Дом становился все краше, кошки, собаки, ну чтобы все соответствовало представлению о доме. Планировала поездки всей семьей, с детьми на море — ведь так же отдыхают семьи большие.</p>
+              <p>Результат был: идеальная картинка, у мужа взлет, он — мега крут и гордится мной, дом, дети прекрасные, все вокруг восхищаются: боже, как вам это удается? Кто же у Радислава жена?</p>
+              <p>В какой-то момент у меня начались серьезные проблемы со здоровьем, я ездила по врачам, тихонечко, чтобы никого не побеспокоить. Врачи разводили руками, а мне становилось все хуже.</p>
+              <p>Я так старалась соответствовать ожиданиям всех от себя и своей собственной идеальной картинке, что оказалась в глубокой клинической депрессии.</p>
+              <p>Но я по-прежнему старалась. Ведь никто об этом ничего не узнал.</p>
+              <p>Жила ли я для себя? Нет! Наслаждалась ли я своей жизнью, любовью мужа, работой? Нет! Я соответствовала ожиданиям других, а сама пыталась дотянуться до них.</p>
+              <p>Я получала премии и награды «Мама года», «Бизнес-мама», меня стали приглашать выступать на российских и зарубежных форумах, а я не понимала, что они все во мне нашли. В чем моя заслуга? В чем ценность?</p>
+              <p>Перемены в моей жизни начались тогда, когда потихоньку, очень медленно, я начала понимать что это моя семья, мой дом, мои достижения. И тогда, в какой-то момент все изменилось — это стала моя жизнь.</p>
+              <p>И я живу ее, каждый день, живу свою жизнь. Разную, но свою. Я перестала стараться и соответствовать, перестала стесняться говорить нет. Я перестала нравиться всем людям, зато стала нравиться себе.</p>
+              <p class="story-bold">А теперь я помогаю женщинам пройти этот путь бережнее и быстрее, чем прошла его сама.</p>
+            </div>
+            <div class="story-photo"><img src="assets/about-main.png" alt="Анна Видуецкая"></div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 </section>
+
+
+
 
 
 <!-- REVIEWS -->
@@ -919,10 +834,9 @@ img{display:block}
     <h2 class="consult-hook t-h1"><em>«Я так больше не хочу»</em> — фраза, с которой начинаются перемены</h2>
     <div class="req2">
       <div class="req2-l">
-        <h3 class="req2-h">С чем вы можете прийти</h3>
-        <div class="req2-rule"></div>
-        <p class="req2-p">За каждым запросом стоит одно желание&nbsp;— изменить то, что перестало устраивать. Чаще всего мы&nbsp;работаем по&nbsp;трём направлениям.</p>
         <div class="req2-photo"><img src="assets/consult-anna.jpg" alt="Анна Видуецкая"></div>
+        <h3 class="req2-h">С чем вы можете прийти</h3>
+        <p class="req2-p">За каждым запросом стоит одно желание&nbsp;— изменить то, что перестало устраивать. Чаще всего мы&nbsp;работаем по&nbsp;трём направлениям.</p>
       </div>
       <div class="req2-r">
         <article class="req">
@@ -949,7 +863,6 @@ img{display:block}
       </div>
     </div>
     <div class="cta">
-      <p class="cta-eyebrow t-eyebrow">Консультация</p>
       <h3 class="cta-title">Если вы чувствуете, что пришло время перемен&nbsp;— жду вас.</h3>
       <p class="cta-sub">Полтора-два часа один на один, конфиденциально. Вы&nbsp;уходите с&nbsp;честным разбором ситуации и&nbsp;конкретным планом действий.</p>
       <div class="cta-actions">
@@ -965,20 +878,16 @@ img{display:block}
   <div class="sp-wrap">
     <div class="sp-head">
         <p class="t-eyebrow" style="color:var(--accent)">Выступления</p>
-        <h2 class="sp-title">Со&nbsp;сцены рассказываю про партнёрство и&nbsp;возвращение к&nbsp;себе</h2>
-        <p class="sp-sub">Выступаю на&nbsp;форумах, конференциях и&nbsp;в&nbsp;компаниях.</p>
+        <h2 class="sp-title">Выступаю на&nbsp;форумах, конференциях и&nbsp;в&nbsp;компаниях.</h2>
+        <p class="sp-sub">Говорю о&nbsp;партнёрстве, женской самореализации и&nbsp;о&nbsp;том, как оставаться собой, когда на&nbsp;тебе семья, дело и&nbsp;ответственность. Аудитория, с&nbsp;которой я&nbsp;работаю лучше всего,&nbsp;— взрослые люди 35+, предприниматели и&nbsp;руководители.</p>
     </div>
     <div class="sp-showcase">
       <div class="sp-reel-main" id="showreel">
-          <video src="assets/showreel.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <video src="assets/showreel.mp4" autoplay muted loop playsinline preload="auto"></video>
       </div>
-      <aside class="sp-aside">
-        <p class="sp-nums">Залы до&nbsp;450 человек · аудитория 35+</p>
-        <p class="sp-intro">Говорю о&nbsp;партнёрстве, женской самореализации и&nbsp;о&nbsp;том, как оставаться собой, когда на&nbsp;тебе семья, дело и&nbsp;ответственность. Аудитория, с&nbsp;которой я&nbsp;работаю лучше всего, — взрослые люди 35+, предприниматели и&nbsp;руководители.</p>
-      </aside>
     </div>
     <div class="sp-topics-block">
-      <p class="sp-colhead">Темы, на которые можно пригласить</p>
+      <h3 class="sp-topics-h">Темы, на которые можно пригласить</h3>
       <div class="topics">
         <div class="topic">
           <button class="topic-head" type="button" aria-expanded="false" aria-controls="topic0">
@@ -986,7 +895,7 @@ img{display:block}
             <span class="topic-t">«Тандем сильных: партнёрство вместо борьбы»<span class="topic-tag">Главная тема</span></span>
             <span class="topic-ind" aria-hidden="true"></span>
           </button>
-          <div class="topic-body" id="topic0"><div><p>Почему сильные люди начинают бороться друг с другом и как построить союз, который выдерживает деньги, детей и кризисы. Про партнёрство и в паре, и в бизнесе — по моему опыту, здесь они почти неотличимы.</p></div></div>
+          <div class="topic-body" id="topic0"><div><div class="topic-in"><p>Почему сильные люди начинают бороться друг с другом и как построить союз, который выдерживает деньги, детей и кризисы. Про партнёрство и в паре, и в бизнесе — по моему опыту, здесь они почти неотличимы.</p><div class="topic-ph"><img src="assets/stage-3.jpg" alt="Анна Видуецкая выступает"></div></div></div></div>
         </div>
         <div class="topic">
           <button class="topic-head" type="button" aria-expanded="false" aria-controls="topic1">
@@ -994,7 +903,7 @@ img{display:block}
             <span class="topic-t">«3 луча баланса»</span>
             <span class="topic-ind" aria-hidden="true"></span>
           </button>
-          <div class="topic-body" id="topic1"><div><p>Как совмещать себя, семью и дело и перестать выбирать что-то одно. Женская самореализация без жертв и угрызений совести.</p></div></div>
+          <div class="topic-body" id="topic1"><div><div class="topic-in"><p>Как совмещать себя, семью и дело и перестать выбирать что-то одно. Женская самореализация без жертв и угрызений совести.</p><div class="topic-ph"><img src="assets/stage-2.webp" alt="Анна Видуецкая на конференции"></div></div></div></div>
         </div>
         <div class="topic">
           <button class="topic-head" type="button" aria-expanded="false" aria-controls="topic2">
@@ -1002,7 +911,7 @@ img{display:block}
             <span class="topic-t">«Как поддерживать мужчину в ресурсном состоянии»</span>
             <span class="topic-ind" aria-hidden="true"></span>
           </button>
-          <div class="topic-body" id="topic2"><div><p>Про опору, тепло и силу рядом — так, чтобы поддержка не превращалась в обслуживание.</p></div></div>
+          <div class="topic-body" id="topic2"><div><div class="topic-in"><p>Про опору, тепло и силу рядом — так, чтобы поддержка не превращалась в обслуживание.</p><div class="topic-ph"><img src="assets/stage-1.jpg" alt="Анна Видуецкая и Радислав Гандапас на сцене"></div></div></div></div>
         </div>
       </div>
     </div>
@@ -1174,20 +1083,12 @@ img{display:block}
   upd();
 })();
 (function(){
-  var sec=document.querySelector('.story'); if(!sec)return;
-  var btn=sec.querySelector('.story-btn'), lab=sec.querySelector('.story-btn-t');
-  var sheet=sec.querySelector('.story-sheet');
-  if(!btn)return;
+  var sec=document.querySelector('.about'); if(!sec)return;
+  var btn=sec.querySelector('.story-link'); if(!btn)return;
   btn.addEventListener('click',function(){
-    var open=sec.classList.toggle('open');
+    var open=sec.classList.toggle('story-open');
     btn.setAttribute('aria-expanded',open?'true':'false');
-    if(lab) lab.textContent = open ? 'Свернуть историю' : 'Читать историю';
-    if(open && sheet){
-      setTimeout(function(){
-        var r=sec.getBoundingClientRect();
-        if(r.top<0) sec.scrollIntoView({behavior:'smooth',block:'start'});
-      },420);
-    }
+    btn.querySelector('span').textContent = open ? 'Свернуть' : 'Моя история';
   });
 })();
 
@@ -1246,7 +1147,7 @@ img{display:block}
   var sel=[
     'section .t-eyebrow','section h2','section h3','.book-subtitle','.book-desc',
     '.about-lead','.fig','.feature','.rv-slider','.consult-intro','.consult-turn p',
-    '.req2-p','.req2-fact','.sp-sub','.sp-showcase','.sp-aside','.topic','.sp-colhead',
+    '.req2-p','.req2-fact','.sp-sub','.sp-showcase','.topic','.sp-topics-h',
     '.press-portrait','.press-role','.press-short','.press-long','.press-file',
     '.pc-intro','.pc-card','.tg-text','.tg-cta','.tg-phone','.cta',
     '.ftr-col','.ftr-tag','.book-figure','.about-photo','.has-split'
@@ -1356,26 +1257,6 @@ img{display:block}
   requestAnimationFrame(function(){place(false);});
 })();
 
-/* ===== ТРИ ЛУЧА: подсветка активного, остальные лишь притухают ===== */
-(function(){
-  var stage=document.querySelector('.rays-stage'); if(!stage)return;
-  var rays=[].slice.call(stage.querySelectorAll('.ray')); if(!rays.length)return;
-  function setActive(el){
-    rays.forEach(function(r){ r.classList.toggle('on', r===el); });
-    stage.classList.toggle('is-active', !!el);
-  }
-  rays.forEach(function(r){
-    r.addEventListener('pointerenter',function(){ setActive(r); });
-    r.addEventListener('pointerdown',function(e){
-      if(e.pointerType==='touch'){ e.preventDefault(); setActive(r.classList.contains('on')?null:r); }
-    });
-  });
-  stage.addEventListener('pointerleave',function(){ setActive(null); });
-  /* на тач-устройствах снимаем подсветку по тапу вне лучей */
-  document.addEventListener('pointerdown',function(e){
-    if(!stage.contains(e.target)) setActive(null);
-  });
-})();
 
 /* ===== ПОЛОСА ЦИФР: линии светятся рядом с курсором ===== */
 (function(){
@@ -1405,6 +1286,22 @@ img{display:block}
       }
     });
   });
+})();
+
+/* ===== НАВИГАЦИЯ: светлеет после первого экрана ===== */
+(function(){
+  var nav=document.querySelector('.nav-wrap'), hero=document.querySelector('.hero');
+  if(!nav||!hero)return;
+  var last=0;
+  function upd(){
+    var h=hero.offsetHeight||1;
+    nav.classList.toggle('solid',(window.pageYOffset||document.documentElement.scrollTop) > h-90);
+  }
+  addEventListener('scroll',function(){
+    var now=Date.now(); if(now-last>90){last=now;upd();}
+  },{passive:true});
+  addEventListener('resize',upd,{passive:true});
+  upd();
 })();
 </script>
 </body>
