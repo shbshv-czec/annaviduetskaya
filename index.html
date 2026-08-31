@@ -209,23 +209,20 @@ img{display:block}
   .sm-title{margin-bottom:26px}
 }
 .proof{max-width:1200px;margin:88px auto 0;padding:56px 40px 0;border-top:1px solid var(--line)}
-/* Плитки-факты по схеме Parloa: изображение ведёт, поверх него —
-   волосяная линия, мелкая подпись и огромная цифра. Композиция асимметричная:
-   одна крупная плитка и две малые. */
-.stat-tiles{display:grid;grid-template-columns:1.5fr 1fr;grid-template-rows:1fr 1fr;gap:18px}
-.stile{position:relative;overflow:hidden;color:#fff;background:var(--ink)}
-.stile--big{grid-row:1 / span 2;aspect-ratio:1/1.36}
-.stile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease-out)}
-.stile:hover img{transform:scale(1.045)}
-.stile::after{content:'';position:absolute;inset:0;z-index:1;
-  background:linear-gradient(0deg,rgba(10,9,8,.78) 0%,rgba(10,9,8,.40) 24%,rgba(10,9,8,.08) 50%,transparent 68%)}
-.stile--big::after{background:linear-gradient(0deg,rgba(10,9,8,.86) 0%,rgba(10,9,8,.50) 28%,rgba(10,9,8,.10) 54%,transparent 72%)}
-.stile-body{position:absolute;left:30px;right:30px;bottom:26px;z-index:2;border-top:1px solid rgba(255,255,255,.62);padding-top:16px}
-.stile-label{display:block;font-family:var(--sans);font-weight:500;font-size:14.5px;line-height:1.35;letter-spacing:.01em;color:rgba(255,255,255,.96);margin:0 0 6px;max-width:22ch}
-.stile-num{display:block;font-family:var(--display);font-weight:var(--w-display);font-size:96px;line-height:.88;letter-spacing:-.03em;color:#fff}
-.stile--big .stile-body{left:38px;right:38px;bottom:34px}
-.stile--big .stile-num{font-size:clamp(120px,13vw,196px)}
-.stile--big .stile-label{font-size:17px;margin-bottom:8px}
+/* Манифест: числа набраны дисплейным шрифтом прямо внутри фразы */
+.manifest{display:grid;grid-template-columns:1.12fr .88fr;gap:66px;align-items:center}
+.manifest-text{font-family:var(--serif);font-weight:400;font-size:clamp(28px,3.4vw,46px);line-height:1.34;
+  color:var(--ink);max-width:20ch;margin:0}
+.manifest-text b{font-family:var(--display);font-weight:var(--w-display);font-size:1.75em;line-height:.7;
+  letter-spacing:-.03em;display:inline-block;vertical-align:-.12em;margin:0 .04em}
+.manifest-media{aspect-ratio:1/1.06;overflow:hidden;background:var(--line)}
+.manifest-media img{width:100%;height:100%;object-fit:cover;display:block;object-position:52% 26%;
+  transition:transform 1.4s var(--ease-out)}
+.manifest-media:hover img{transform:scale(1.035)}
+@media(max-width:960px){
+  .manifest{grid-template-columns:1fr;gap:32px}
+  .manifest-text{max-width:none;font-size:26px}
+}
 .feature{margin-top:80px;background:var(--ink);color:#fff;display:grid;grid-template-columns:1fr 1fr;min-height:460px;border-radius:2px;overflow:hidden}
 .feature-img{position:relative;min-height:340px}
 .feature-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 24%}
@@ -347,6 +344,25 @@ img{display:block}
 .btn--sm{font-size:13px;padding:12px 24px}
 .sp-photolink{font-family:var(--text);font-weight:600;font-size:13.5px;color:var(--ink);text-decoration:underline;text-underline-offset:4px}
 .sp-photolink:hover{color:var(--accent)}
+/* ---------- ТРИ ЛУЧА: интерактивный веер ---------- */
+.rays{background:transparent;padding:96px 0 40px;border-top:1px solid var(--line);overflow:hidden}
+.rays-wrap{max-width:1200px;margin:0 auto;padding:0 40px;text-align:center}
+.rays-eyebrow{color:var(--accent);margin:0 0 18px}
+.rays-title{color:var(--ink);margin:0 auto}
+.rays-lead{font-family:var(--text);font-size:19px;line-height:1.6;color:var(--ink-2);max-width:52ch;margin:22px auto 0}
+.rays-stage{position:relative;margin-top:76px;height:clamp(360px,38vw,540px)}
+.rays-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.ray-label{position:absolute;transform:translate(-50%,-50%);white-space:nowrap;
+  font-family:var(--sans);font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink);background:rgba(247,244,238,.86);padding:7px 13px;border:1px solid var(--line);
+  pointer-events:none;opacity:0;transition:opacity var(--d-lg) var(--ease-out)}
+.ray-label.on{opacity:1}
+@media(max-width:960px){
+  .rays{padding:72px 0 64px}
+  .rays-wrap{padding:0 24px}
+  .rays-stage{height:300px;margin-top:34px}
+  .ray-label{font-size:11px;letter-spacing:.1em;padding:6px 10px}
+}
 /* ---------- ПРЕСС-ЦЕНТР ---------- */
 .press{background:transparent;padding:104px 0;border-top:1px solid var(--line)}
 .press-wrap{max-width:1200px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:.78fr 1.22fr;gap:72px;align-items:start}
@@ -544,14 +560,6 @@ img{display:block}
   .panel-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%}
   .panel-cta{border-left:none;border-top:1px solid var(--line);padding:36px 30px 40px}
 }
-@media(max-width:960px){
-.stat-tiles{grid-template-columns:1fr;grid-template-rows:none;gap:12px}
-.stile--big{grid-row:auto;aspect-ratio:4/3.4}
-.stile:not(.stile--big){aspect-ratio:16/10}
-.stile-body{left:22px;right:22px;bottom:20px}
-.stile--big .stile-num{font-size:118px}
-.stile-num{font-size:84px}
-}
 /* FOOTER */
 .ftr{position:relative;isolation:isolate;overflow:hidden;background:#16130F;color:#fff;padding:104px 0 40px}
 .ftr-wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 40px}
@@ -594,7 +602,6 @@ img{display:block}
 
 /* ---- ПЕРВЫЙ ЭКРАН: затемнение по мере пролистывания ---- */
 .hero-dim{position:absolute;inset:0;z-index:2;pointer-events:none;background:#100E0D;opacity:calc(var(--hp,0)*.88)}
-.hero-bg{will-change:transform,filter}
 
 /* ---- шёлковый блик на тёмных поверхностях и на бирюзовой кнопке ---- */
 @keyframes silk{0%{background-position:-130% 0}100%{background-position:230% 0}}
@@ -619,7 +626,7 @@ img{display:block}
    строки апроша/интерлиньяжа ниже: прописным нужен положительный апрош,
    иначе стойки слипаются, а интерлиньяж можно сжать (нет выносных элементов). */
 .t-display,.t-h1,.book-title,.about-title,.reviews-title,.consult-hook,
-.sp-title,.pc-title,.tg-title,.press-name,.ftr-name,.sm-title,.feature-title,.stile-num{
+.sp-title,.pc-title,.tg-title,.press-name,.ftr-name,.sm-title,.feature-title,.manifest-text b{
   font-family:var(--display);
   text-transform:var(--head-case);
   /* letter-spacing:var(--head-track); */
@@ -711,31 +718,29 @@ img{display:block}
       <button class="story-toggle" id="storyToggle" aria-haspopup="dialog" aria-controls="storyModal"><span>Моя история</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
     </div>
     <div class="proof">
-      <div class="stat-tiles">
-        <article class="stile stile--big">
-          <img src="assets/biz2.jpg" alt="Анна Видуецкая" style="object-position:62% 28%">
-          <div class="stile-body">
-            <span class="stile-label">бизнеса в&nbsp;разных сферах</span>
-            <span class="stile-num">3</span>
-          </div>
-        </article>
-        <article class="stile">
-          <img src="assets/deti.jpg" alt="Семья Анны Видуецкой" style="object-position:50% 12%">
-          <div class="stile-body">
-            <span class="stile-label">детей и&nbsp;шесть лет без няни</span>
-            <span class="stile-num">4</span>
-          </div>
-        </article>
-        <article class="stile">
-          <img src="assets/award-portrait.jpg" alt="Премия «Бизнес-мама года»" style="object-position:46% 34%">
-          <div class="stile-body">
-            <span class="stile-label">премии «Бизнес-мама&nbsp;года»</span>
-            <span class="stile-num">2</span>
-          </div>
+      <div class="manifest">
+        <p class="manifest-text"><b>3</b>&nbsp;бизнеса, <b>4</b>&nbsp;детей и&nbsp;шесть лет без няни, <b>2</b>&nbsp;премии «Бизнес-мама&nbsp;года».</p>
+        <div class="manifest-media"><img src="assets/anna-leather.jpg" alt="Анна Видуецкая"></div>
+      </div>
         </article>
       </div>
     </div>
 </section>
+
+<section class="rays" id="method">
+  <div class="rays-wrap">
+    <p class="rays-eyebrow t-eyebrow">Метод</p>
+    <h2 class="rays-title t-h1">Три луча баланса</h2>
+    <p class="rays-lead">Красота, семья и&nbsp;карьера растут из&nbsp;одной точки. Стоит вытянуть один луч за&nbsp;счёт остальных&nbsp;— и&nbsp;свет гаснет во&nbsp;всех трёх.</p>
+    <div class="rays-stage">
+      <canvas class="rays-canvas" aria-hidden="true"></canvas>
+      <span class="ray-label" data-ray="0">Красота</span>
+      <span class="ray-label" data-ray="1">Семья</span>
+      <span class="ray-label" data-ray="2">Карьера</span>
+    </div>
+  </div>
+</section>
+
 
 <!-- REVIEWS -->
 <section class="reviews" id="reviews">
@@ -1092,8 +1097,7 @@ img{display:block}
     var h=hero.offsetHeight||1, y=window.pageYOffset||document.documentElement.scrollTop;
     var p=y/h; if(p<0)p=0; if(p>1)p=1;
     hero.style.setProperty('--hp',p.toFixed(4));
-    bg.style.transform='scale('+(1+p*0.08).toFixed(4)+')';
-    bg.style.filter='blur('+(p*5).toFixed(2)+'px)';
+    /* фотография только затемняется: ни масштаба, ни размытия */
     /* контент остаётся на месте — затемняется только фотография */
   }
   var last=0;
@@ -1136,7 +1140,7 @@ img{display:block}
   /* что вообще проявляется */
   var sel=[
     'section .t-eyebrow','section h2','section h3','.book-subtitle','.book-desc',
-    '.about-lead','.story-toggle','.stile','.feature','.rv-slider','.consult-intro','.consult-turn p',
+    '.about-lead','.story-toggle','.manifest-text','.feature','.rv-slider','.consult-intro','.consult-turn p',
     '.req2-p','.req2-fact','.sp-sub','.sp-showcase','.sp-aside','.sp-cardp','.sp-colhead',
     '.press-portrait','.press-role','.press-short','.press-long','.press-file',
     '.pc-intro','.pc-card','.tg-text','.tg-cta','.tg-phone','.panel-cta','.panel-photo',
@@ -1145,7 +1149,7 @@ img{display:block}
   var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.hero');});
   if(reduce||!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in');});return;}
 
-  els.forEach(function(e){ if(!e.classList.contains('has-split')) e.classList.add(e.matches('.stile,.rv-slider,.sp-cardp,.pc-card,.feature,.sp-showcase,.tg-phone,.book-figure,.about-photo,.press-portrait')?'rv':'rv-up'); });
+  els.forEach(function(e){ if(!e.classList.contains('has-split')) e.classList.add(e.matches('.manifest-media,.rv-slider,.sp-cardp,.pc-card,.feature,.sp-showcase,.tg-phone,.book-figure,.about-photo,.press-portrait')?'rv':'rv-up'); });
 
   /* каскад внутри одной группы: соседи вступают с шагом 90мс */
   /* СТРАХОВКА. Если IntersectionObserver почему-либо не сработает,
@@ -1254,6 +1258,118 @@ img{display:block}
 
   place(false);
   requestAnimationFrame(function(){place(false);});
+})();
+
+/* ===== ТРИ ЛУЧА: веер, реагирующий на курсор ===== */
+(function(){
+  var stage=document.querySelector('.rays-stage'); if(!stage)return;
+  var cv=stage.querySelector('.rays-canvas'); if(!cv||!cv.getContext)return;
+  var ctx=cv.getContext('2d');
+  var labels=[].slice.call(stage.querySelectorAll('.ray-label'));
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  var N=210, rays=[], W=0,H=0,ox=0,oy=0,R=0, dpr=1;
+  /* три главных луча: слева семья, сверху красота, справа карьера */
+  var MAIN=[{a:Math.PI*0.5,label:0},{a:Math.PI*0.83,label:1},{a:Math.PI*0.17,label:2}];
+
+  function rnd(s){var x=Math.sin(s*127.1)*43758.5453;return x-Math.floor(x);}
+
+  function build(){
+    rays.length=0;
+    for(var i=0;i<N;i++){
+      var t=i/(N-1);
+      var a=Math.PI*(1-t)+(rnd(i)-0.5)*0.02;
+      /* длина: в середине веера длиннее, плюс разброс */
+      var bell=Math.pow(Math.sin(Math.PI*t),0.55);
+      var len=(0.44+0.52*bell)*(0.62+0.5*rnd(i+7));
+      rays.push({a0:a,a:a,len0:len,len:len,
+        w:0.5+1.1*rnd(i+31),
+        dot:rnd(i+53)>0.42,
+        dotR:0.9+1.9*rnd(i+71),
+        alpha:0.09+0.30*rnd(i+97),
+        teal:rnd(i+113)>0.80,
+        ph:rnd(i+131)*Math.PI*2, main:false});
+    }
+    MAIN.forEach(function(m,k){
+      rays.push({a0:m.a,a:m.a,len0:0.9,len:0.9,w:1.5,dot:true,dotR:4.5,
+        alpha:1,teal:true,ph:0,main:true,label:m.label});
+    });
+  }
+
+  function size(){
+    var r=stage.getBoundingClientRect();
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    W=Math.max(1,Math.round(r.width)); H=Math.max(1,Math.round(r.height));
+    cv.width=W*dpr; cv.height=H*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ox=W/2; oy=H-4; R=Math.min(H*1.04,W*0.47);
+  }
+
+  var mx=null,my=null,mAng=null,mOn=0,tm=0;
+  stage.addEventListener('pointermove',function(e){
+    var r=stage.getBoundingClientRect();
+    mx=e.clientX-r.left; my=e.clientY-r.top;
+    mAng=Math.atan2(oy-my, mx-ox);
+    if(mAng<0)mAng+=Math.PI*2;
+  });
+  stage.addEventListener('pointerleave',function(){mAng=null;});
+
+  function draw(){
+    tm+=0.006;
+    mOn+= ((mAng===null?0:1)-mOn)*0.06;
+    ctx.clearRect(0,0,W,H);
+    for(var i=0;i<rays.length;i++){
+      var r=rays[i], infl=0;
+      if(mAng!==null){
+        var d=Math.abs(r.a0-mAng);
+        if(d>Math.PI)d=Math.PI*2-d;
+        infl=Math.exp(-(d*d)/0.075);           /* колокол по угловому расстоянию */
+      }
+      var sway=reduce?0:Math.sin(tm*1.6+r.ph)*0.012;
+      var aT=r.a0 + (mAng!==null?(((mAng-r.a0+Math.PI*3)%(Math.PI*2))-Math.PI)*infl*0.30:0) + sway;
+      var lT=r.len0*(1+infl*0.34);
+      r.a += (aT-r.a)*0.09;                    /* пружина */
+      r.len += (lT-r.len)*0.09;
+
+      var L=r.len*R, x=ox+Math.cos(r.a)*L, y=oy-Math.sin(r.a)*L;
+      var glow=infl*mOn;
+      ctx.beginPath(); ctx.moveTo(ox,oy); ctx.lineTo(x,y);
+      ctx.lineWidth=r.w*(1+glow*0.7);
+      if(r.main){ ctx.strokeStyle='rgba(23,138,138,'+(0.85+0.15*glow)+')'; }
+      else if(r.teal){ ctx.strokeStyle='rgba(23,138,138,'+(r.alpha*(1+glow*1.9))+')'; }
+      else { ctx.strokeStyle='rgba(31,28,27,'+(r.alpha*(1+glow*1.7))+')'; }
+      ctx.stroke();
+      if(r.dot){
+        ctx.beginPath(); ctx.arc(x,y,r.dotR*(1+glow*0.5),0,Math.PI*2);
+        ctx.fillStyle=r.main?'#0F6E6E':(r.teal?'rgba(23,138,138,'+Math.min(1,r.alpha*2.4)+')'
+                                              :'rgba(31,28,27,'+Math.min(1,r.alpha*2.2)+')');
+        ctx.fill();
+      }
+      if(r.main && labels[r.label]){
+        var lx=ox+Math.cos(r.a)*(L+30), ly=oy-Math.sin(r.a)*(L+30);
+        var el=labels[r.label];
+        el.style.left=lx+'px'; el.style.top=ly+'px';
+        el.classList.add('on');
+      }
+    }
+    raf=requestAnimationFrame(draw);
+  }
+
+  var raf=null, live=false;
+  function start(){ if(live)return; live=true; draw(); }
+  function stop(){ live=false; if(raf)cancelAnimationFrame(raf); raf=null; }
+
+  size(); build();
+  addEventListener('resize',function(){size();},{passive:true});
+
+  /* рисуем только когда блок на экране */
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){
+      es.forEach(function(e){ e.isIntersecting?start():stop(); });
+    },{rootMargin:'120px'}).observe(stage);
+  } else start();
+  /* страховка: если наблюдатель не сработал — один статичный кадр */
+  setTimeout(function(){ if(!live){ for(var k=0;k<40;k++){} draw(); stop(); draw(); stop(); } },1500);
 })();
 </script>
 </body>
