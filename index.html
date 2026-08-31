@@ -94,12 +94,11 @@ body.bar-off .topbar{display:none}
   .topbar-t,.topbar-cta{font-size:11px;letter-spacing:.07em}
 }
 /* Навигация: полупрозрачная плашка поверх первого экрана */
-.nav-wrap{position:fixed;top:calc(var(--bar-h) + 14px);left:24px;right:24px;z-index:60;
-  background:rgba(255,255,255,.10);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);
-  border:1px solid rgba(255,255,255,.20);border-radius:2px;
-  transition:background var(--d-lg) var(--ease-out),border-color var(--d-lg) var(--ease-out),
-             box-shadow var(--d-lg) var(--ease-out)}
-.nav{max-width:1400px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav-wrap{position:fixed;top:var(--bar-h);left:0;right:0;z-index:60;
+  background:linear-gradient(180deg,rgba(16,13,11,.80) 0%,rgba(16,13,11,.46) 52%,rgba(16,13,11,0) 100%);
+  transition:background var(--d-lg) var(--ease-out),box-shadow var(--d-lg) var(--ease-out)}
+.nav{max-width:1400px;margin:0 auto;padding:18px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;
+  transition:padding var(--d-lg) var(--ease-out)}
 .nav a{color:#fff}
 .brand{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;
   border:1px solid rgba(255,255,255,.55);transition:border-color var(--d-lg) var(--ease-out),background var(--d-lg) var(--ease-out)}
@@ -119,26 +118,25 @@ body.bar-off .topbar{display:none}
 .nav .wa-btn:hover{background:transparent;color:#fff}
 .wa-btn svg{width:15px;height:15px}
 /* когда первый экран пролистан — светлая плашка */
-.nav-wrap.solid{background:rgba(247,244,238,.86);border-color:var(--line);box-shadow:0 10px 30px -22px rgba(31,28,27,.5)}
-.nav-wrap.solid .nav a,.nav-wrap.solid .nav-phone{color:var(--ink)}
-.nav-wrap.solid .brand{border-color:rgba(31,28,27,.28)}
-.nav-wrap.solid .brand-mark{color:var(--ink)}
-.nav-wrap.solid .brand:hover{background:rgba(31,28,27,.06)}
-.nav-wrap.solid .nav-links a:hover{background:rgba(31,28,27,.07)}
-.nav-wrap.solid .wa-btn{background:var(--ink);border-color:var(--ink);color:#fff!important}
-.nav-wrap.solid .wa-btn:hover{background:transparent;color:var(--ink)!important}
-.nav-wrap.solid .burger span{background:var(--ink)}
+/* после первого экрана — тонкая чёрная полоска */
+.nav-wrap.solid{background:#100D0B;box-shadow:0 12px 34px -26px rgba(0,0,0,.9)}
+.nav-wrap.solid .nav{padding:8px 40px}
+.nav-wrap.solid .brand{width:34px;height:34px}
+.nav-wrap.solid .brand-mark{font-size:14px}
+.nav-wrap.solid .nav-links a{padding:7px 12px;font-size:11.5px}
+.nav-wrap.solid .nav .wa-btn{padding:8px 14px;font-size:11.5px}
 .burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;background:none;border:none;cursor:pointer;padding:8px}
 .burger span{display:block;width:100%;height:2px;background:#fff}
-.mobile-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--cream);padding:8px 24px 30px;box-shadow:none;border-top:1px solid var(--line)}
+.mobile-menu{display:none;position:absolute;top:100%;left:0;right:0;overflow:hidden;
+  background:radial-gradient(120% 90% at 88% -10%,rgba(86,176,255,.16),transparent 58%),
+             radial-gradient(90% 80% at 6% 108%,rgba(255,146,116,.14),transparent 56%),#14110F;
+  padding:10px 24px 32px;box-shadow:0 26px 60px -30px rgba(0,0,0,.85)}
 .mobile-menu.open{display:flex;flex-direction:column}
-.mobile-menu a{font-family:var(--sans);color:var(--ink);text-transform:uppercase;letter-spacing:.08em;font-size:15px;font-weight:500;padding:20px 0;border-bottom:1px solid var(--line);transition:color .2s}
+.mobile-menu a{font-family:var(--sans);color:rgba(255,255,255,.92);text-transform:uppercase;letter-spacing:.1em;font-size:14px;font-weight:600;padding:19px 0;border-bottom:1px solid rgba(255,255,255,.13);transition:color var(--d-md) var(--ease-out)}
 .mobile-menu a:hover{color:var(--accent)}
 .mobile-menu .mm-contact{display:flex;gap:22px;align-items:center;padding-top:22px}
-.mobile-menu .mm-contact a{border:none;padding:0;letter-spacing:.04em;color:var(--ink)}
-.nav-wrap:has(.mobile-menu.open){background:var(--cream)}
-.nav-wrap:has(.mobile-menu.open) .brand{color:var(--ink)}
-.nav-wrap:has(.mobile-menu.open) .burger span{background:var(--ink)}
+.mobile-menu .mm-contact a{border:none;padding:0;letter-spacing:.04em;color:rgba(255,255,255,.82)}
+.nav-wrap:has(.mobile-menu.open){background:#14110F}
 
 /* ---------- HERO (full-bleed portrait, dark gradient, white type) ---------- */
 .hero{position:relative;min-height:100vh;background:#2a2724;overflow:hidden}
@@ -194,29 +192,13 @@ body.bar-off .topbar{display:none}
 .book-figure{position:relative;display:inline-block}
 .book-cover{display:block;width:346px;max-width:100%;border-radius:2px;transform:rotate(-6deg);box-shadow:18px 22px 48px -18px rgba(31,28,27,.30)}
 /* Бейдж Amazon: плоский, печатный — обводка вместо глянца */
-/* Наградной знак Amazon: тёплое золото, двойное кольцо,
-   медленный металлический отблеск по окружности */
-.seal{position:absolute;top:-30px;right:-72px;width:104px;height:104px;border-radius:50%;z-index:3;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:3px;
-  background:radial-gradient(122% 122% at 30% 20%,#FFFEF7 0%,#FCF5E1 24%,#F4E6BE 50%,#E9D296 74%,#D9BC6E 100%);
-  box-shadow:0 0 0 1px rgba(168,131,52,.55),
-             inset 0 1px 0 rgba(255,255,255,.9),
-             inset 0 -8px 16px -8px rgba(150,112,30,.35),
-             0 12px 26px -14px rgba(140,104,32,.55)}
-.seal::before{content:'';position:absolute;inset:7px;border-radius:50%;
-  border:1px solid rgba(168,131,52,.42);
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.55)}
-.seal::after{content:'';position:absolute;inset:0;border-radius:50%;pointer-events:none;
-  background:conic-gradient(from 200deg,
-    rgba(255,255,255,0) 0deg,rgba(255,255,255,.85) 38deg,rgba(255,255,255,0) 92deg,
-    rgba(168,131,52,.22) 176deg,rgba(255,255,255,.7) 252deg,rgba(255,255,255,0) 318deg,rgba(255,255,255,0) 360deg);
-  mix-blend-mode:soft-light;
-  animation:seal-shine 22s linear infinite}
-@keyframes seal-shine{to{transform:rotate(360deg)}}
-@media(prefers-reduced-motion:reduce){.seal::after{animation:none}}
-.seal-top{position:relative;z-index:2;font-family:var(--sans);font-size:8.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#8A6A22;line-height:1}
-.seal-big{position:relative;z-index:2;font-family:var(--serif);font-weight:600;font-size:34px;line-height:1;color:#6B4E12;text-shadow:0 1px 0 rgba(255,255,255,.6)}
-.seal-ribbon{position:relative;z-index:2;font-family:var(--sans);font-size:7.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8A6A22;line-height:1;background:none;padding:0}
+/* Наградной знак Amazon: золото, лучистый кант, текст по дуге */
+.seal{position:absolute;top:-34px;right:-74px;width:132px;height:132px;z-index:3;overflow:visible;
+  filter:drop-shadow(0 14px 26px rgba(120,88,20,.42));animation:seal-turn 26s linear infinite}
+@keyframes seal-turn{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.seal{animation:none}}
+.seal-arc{font-family:var(--sans);font-weight:700;font-size:15.5px;letter-spacing:.24em;fill:#7A5712}
+.seal-num{font-family:var(--display);font-weight:700;font-size:52px;fill:#6B4A12}
 .book-eyebrow{color:var(--accent);margin:0 0 18px}
 .book-title{color:var(--ink);margin:0}
 .book-subtitle{font-family:var(--text);font-weight:400;font-size:19px;line-height:1.5;color:var(--ink-2);margin:12px 0 26px}
@@ -225,14 +207,16 @@ body.bar-off .topbar{display:none}
 /* Магазины: волосяные плашки вместо чужих логотипов */
 .shops-label{font-family:var(--sans);font-weight:600;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
   color:var(--ink-3);margin:0 0 16px}
-.shops{display:flex;flex-wrap:wrap;gap:14px;align-items:stretch}
-.shop{display:inline-flex;align-items:center;justify-content:center;height:62px;padding:0 26px;
-  background:var(--paper);border:1px solid rgba(31,28,27,.14);
-  transition:border-color var(--d-md) var(--ease-out),transform var(--d-md) var(--ease-out)}
-.shop img{height:22px;width:auto;display:block;opacity:.92;transition:opacity var(--d-md) var(--ease-out)}
-.shop:hover{border-color:rgba(31,28,27,.42);transform:translateY(-2px)}
-.shop:hover img{opacity:1}
-@media(max-width:960px){.shop{height:54px;padding:0 20px}.shop img{height:19px}}
+.shops{display:flex;flex-wrap:wrap;gap:30px;align-items:center}
+.shop{display:inline-flex;align-items:center;justify-content:center;height:auto;padding:0;
+  background:transparent;
+  transition:opacity var(--d-md) var(--ease-out),transform var(--d-md) var(--ease-out)}
+.shop img{height:17px;width:auto;display:block;opacity:.72;
+  filter:grayscale(1) brightness(.35) contrast(1.5);
+  transition:opacity var(--d-md) var(--ease-out),filter var(--d-md) var(--ease-out)}
+.shop:hover{transform:translateY(-1px)}
+.shop:hover img{opacity:1;filter:grayscale(1) brightness(.15) contrast(1.6)}
+@media(max-width:960px){.shops{gap:24px}.shop img{height:15px}}
 
 
 /* ---------- ABOUT ---------- */
@@ -243,9 +227,7 @@ body.bar-off .topbar{display:none}
 .about-lead{color:var(--ink-2);max-width:58ch;margin:0 0 26px}
 .proof{max-width:1200px;margin:88px auto 0;padding:56px 40px 0;border-top:1px solid var(--line)}
 /* Факты: список слева, фотография справа */
-.proof{max-width:1200px;margin:80px auto 0;padding:0 40px}
-.proof-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:66px;align-items:center}
-.figs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:36px}
+.figs{list-style:none;margin:44px 0 0;padding:0;display:flex;flex-direction:column;gap:30px}
 .fig{display:flex;align-items:baseline;gap:22px}
 .fig-n{flex:none;min-width:1.05ch;text-align:right;font-family:var(--display);font-weight:var(--w-display);
   font-size:clamp(58px,5.8vw,86px);line-height:.9;letter-spacing:-.03em;color:var(--ink)}
@@ -253,9 +235,7 @@ body.bar-off .topbar{display:none}
 .proof-photo{aspect-ratio:1280/1920;overflow:hidden;background:var(--line)}
 .proof-photo img{width:100%;height:100%;object-fit:cover;display:block}
 @media(max-width:960px){
-  .proof{margin-top:56px;padding:0 24px}
-  .proof-grid{grid-template-columns:1fr;gap:34px}
-  .figs{gap:28px}
+  .figs{gap:24px;margin-top:34px}
   .fig-n{font-size:64px}
   .fig-c{font-size:18px}
 }
@@ -271,10 +251,7 @@ body.bar-off .topbar{display:none}
 @media(max-width:960px){
   .book{padding:72px 0}
   .book-inner{grid-template-columns:1fr;gap:48px}
-  .seal{width:82px;height:82px;top:-22px;right:-40px}
-  .seal-big{font-size:27px}
-  .seal-top{font-size:7px}
-  .seal-ribbon{font-size:6.5px}
+  .seal{width:96px;height:96px;top:-24px;right:-42px}
   .book-visual{min-height:auto;padding:24px 0}
   .book-cover{width:260px}
   .seal--tr{top:-10px;right:-18px}
@@ -357,46 +334,54 @@ body.bar-off .topbar{display:none}
 .sp-topic-d{font-family:var(--text);font-size:14.5px;line-height:1.5;color:var(--ink-2);margin:0}
 .sp-foot{margin-top:56px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:0}
 .sp-foot .btn--emerald{font-size:16px;padding:19px 40px}
-.sp-service{margin-top:44px;width:100%;max-width:660px;background:var(--paper);border:1px solid var(--line);border-radius:2px;padding:24px 30px;display:flex;align-items:center;gap:26px;text-align:left}
-.sp-service-photo{flex:0 0 96px;width:96px;height:120px;border-radius:2px;overflow:hidden;background:var(--line)}
-.sp-service-photo img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block}
-.sp-service-body{display:flex;flex-direction:column;gap:12px}
-.sp-service-eyebrow{font-family:var(--text);font-weight:600;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0}
-.sp-service-name{font-family:var(--serif);font-weight:var(--w-head);font-size:28px;line-height:1.1;color:var(--ink);margin:2px 0 0}
-.sp-service-role{font-family:var(--text);font-style:italic;font-size:16px;line-height:1.4;color:var(--accent);margin:6px 0 0}
-.sp-service-txt{font-family:var(--text);font-size:14.5px;line-height:1.55;color:var(--ink-2);margin:0}
-.sp-service-actions{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:2px}
 .btn--sm{font-size:13px;padding:12px 24px}
-.sp-photolink{font-family:var(--text);font-weight:600;font-size:13.5px;color:var(--ink);text-decoration:underline;text-underline-offset:4px}
-.sp-photolink:hover{color:var(--accent)}
-/* ---------- МОЯ ИСТОРИЯ: ссылка и раскрывающееся письмо ---------- */
-.story-link{display:inline-flex;align-items:center;gap:10px;margin:8px 0 0;padding:0 0 4px;
+/* ---------- «Обо мне»: текст слева, портрет справа ---------- */
+.about-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:70px;align-items:center}
+.about-copy{max-width:56ch}
+.about-lead+.about-lead{margin-top:20px}
+.about-photo{aspect-ratio:1280/1920;overflow:hidden;background:var(--line)}
+.about-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.story-link{display:inline-flex;align-items:center;gap:9px;margin:32px 0 0;padding:0 0 5px;
   background:none;border:none;border-bottom:1px solid var(--accent);cursor:pointer;
   font-family:var(--sans);font-weight:600;font-size:13px;letter-spacing:.16em;text-transform:uppercase;
   color:var(--accent-d);transition:color var(--d-md) var(--ease-out),border-color var(--d-md) var(--ease-out)}
 .story-link:hover{color:var(--spark);border-color:var(--spark)}
-.story-link svg{width:15px;height:15px;transition:transform var(--d-lg) var(--ease-out)}
-.about.story-open .story-link svg{transform:rotate(180deg)}
-.story-more{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--d-xxl) var(--ease-out)}
-.about.story-open .story-more{grid-template-rows:1fr}
-.story-more>div{overflow:hidden}
-.story-letter{display:grid;grid-template-columns:1.4fr .6fr;margin-top:40px;background:var(--linen)}
-/* линии прокручиваются вместе с текстом */
-.story-sheet{max-height:min(62vh,600px);overflow-y:auto;padding:52px 56px 54px;
-  background-image:repeating-linear-gradient(to bottom,transparent 0 31px,rgba(70,64,52,.14) 31px 32px);
-  background-position:0 46px;background-attachment:local}
-.story-sheet p{font-family:var(--text);font-size:17px;line-height:32px;color:#3A362E;margin:0 0 32px;max-width:62ch}
-.story-sheet p:last-child{margin-bottom:0}
-.story-sheet .story-open{font-family:var(--display);font-weight:var(--w-display);
-  font-size:clamp(28px,3vw,44px);line-height:1.1;color:var(--ink);margin:0 0 36px;max-width:none}
-.story-sheet .story-bold{font-weight:700;color:var(--ink)}
-.story-photo{position:relative;overflow:hidden;background:var(--line)}
-.story-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 14%}
+.story-link svg{width:14px;height:14px;transition:transform var(--d-md) var(--ease-out)}
+.story-link:hover svg{transform:translate(2px,-2px)}
+
+/* ---------- ПИСЬМО: всплывающее окно ---------- */
+.letter{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
+  padding:48px 24px;visibility:hidden;opacity:0;transition:opacity var(--d-lg) var(--ease-out),visibility var(--d-lg)}
+.letter.open{visibility:visible;opacity:1}
+.letter-bg{position:absolute;inset:0;background:rgba(18,15,12,.62);backdrop-filter:blur(4px)}
+.letter-box{position:relative;width:min(820px,100%);max-height:86vh;display:flex;flex-direction:column;
+  background:var(--linen);box-shadow:0 50px 120px -40px rgba(20,16,12,.7);
+  transform:translateY(20px) scale(.985);transition:transform var(--d-xl) var(--ease-out)}
+.letter.open .letter-box{transform:none}
+.letter-x{position:absolute;top:16px;right:16px;z-index:3;width:42px;height:42px;
+  display:flex;align-items:center;justify-content:center;background:rgba(247,244,238,.9);border:none;
+  color:var(--ink);cursor:pointer;padding:0;transition:background var(--d-md) var(--ease-out)}
+.letter-x:hover{background:var(--ink);color:#fff}
+.letter-x svg{width:18px;height:18px}
+/* лист в линейку; полосу прокрутки прячем */
+.letter-sheet{overflow-y:auto;padding:64px 68px 64px;scrollbar-width:none;-ms-overflow-style:none;
+  background-image:repeating-linear-gradient(to bottom,transparent 0 31px,rgba(70,64,52,.15) 31px 32px);
+  background-position:0 58px;background-attachment:local}
+.letter-sheet::-webkit-scrollbar{display:none}
+.letter-sheet p{font-family:var(--text);font-size:17px;line-height:32px;color:#3A362E;margin:0 0 32px;max-width:60ch}
+.letter-sheet p:last-child{margin-bottom:0}
+.letter-sheet .letter-open{font-family:var(--display);font-weight:var(--w-display);
+  font-size:clamp(28px,3.2vw,46px);line-height:1.1;letter-spacing:-.01em;
+  color:var(--ink);margin:0 0 40px;max-width:none}
+.letter-sheet .story-bold{font-weight:700;color:var(--ink)}
 @media(max-width:960px){
-  .story-letter{grid-template-columns:1fr;margin-top:28px}
-  .story-photo{order:-1;aspect-ratio:4/3}
-  .story-sheet{padding:32px 22px 36px;max-height:70vh}
-  .story-sheet p{font-size:16px;line-height:30px;margin-bottom:28px}
+  .about-grid{grid-template-columns:1fr;gap:34px}
+  .about-photo{order:-1}
+  .letter{padding:16px 12px}
+  .letter-box{max-height:92vh}
+  .letter-x{top:10px;right:10px;width:38px;height:38px}
+  .letter-sheet{padding:52px 22px 40px;background-position:0 46px}
+  .letter-sheet p{font-size:16px;line-height:30px;margin-bottom:28px}
 }
 /* ---------- ПРЕСС-ЦЕНТР ---------- */
 .press{background:transparent;padding:104px 0}
@@ -438,7 +423,7 @@ body.bar-off .topbar{display:none}
 .pc-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:rgba(20,16,13,.5);backdrop-filter:blur(4px);border:1.5px solid rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;transition:background .3s ease,transform .3s ease}
 .pc-card:hover .pc-play{background:rgba(20,16,13,.7);transform:translate(-50%,-50%) scale(1.07)}
 .pc-play svg{width:22px;height:22px;fill:#fff;margin-left:3px}
-.pc-tag{position:absolute;top:14px;left:14px;font-family:var(--text);font-weight:600;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);background:var(--paper);border:1px solid var(--accent);padding:5px 11px;border-radius:2px}
+.pc-tag{position:absolute;top:14px;left:14px;font-family:var(--text);font-weight:600;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--accent-d);padding:6px 12px;border-radius:2px}
 .pc-name{font-family:var(--serif);font-weight:var(--w-head);font-size:24px;line-height:1.3;color:var(--ink);margin:20px 0 6px}
 .pc-role{font-family:var(--text);font-size:15px;line-height:1.55;color:var(--ink-2);margin:0}
 .pc-views{font-family:var(--text);font-weight:600;font-size:12.5px;letter-spacing:.04em;color:var(--accent);margin:10px 0 0}
@@ -569,10 +554,6 @@ body.bar-off .topbar{display:none}
   .sp-cards{grid-template-columns:1fr;gap:16px;margin-top:26px}
   .sp-topics2{grid-template-columns:1fr;gap:28px;padding-top:26px}
   .sp-foot{margin-top:40px}
-  .sp-service{padding:20px 20px;flex-direction:column;text-align:center;gap:18px}
-  .sp-service-photo{width:110px;height:132px;flex:none}
-  .sp-service-body{align-items:center;text-align:center}
-  .sp-service-actions{justify-content:center}
 }
 /* CONSULT */
 .consult{background:transparent;padding:104px 0}
@@ -600,12 +581,12 @@ body.bar-off .topbar{display:none}
 .consult-turn p{color:var(--ink-2);font-size:19px;line-height:1.65;margin:0 0 20px}
 .consult-turn .pull{font-family:var(--serif);font-style:italic;font-weight:var(--w-head);font-size:clamp(26px,3.4vw,38px);line-height:1.3;color:var(--ink);margin:0 0 20px}
 /* CTA консультации: чистая белая плашка */
-.cta-band{background:var(--paper);padding:104px 0}
-.cta{max-width:1200px;margin:0 auto;padding:0 40px;
-  display:grid;grid-template-columns:.86fr 1.14fr;gap:60px;align-items:center;text-align:left}
-.cta-media{position:relative;aspect-ratio:1/1;overflow:hidden}
-.cta-media video{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;
-  transform:scale(1.18);transform-origin:50% 55%;filter:brightness(1.026)}
+.cta-band{background:var(--paper);padding:132px 0}
+.cta{max-width:1240px;margin:0 auto;padding:0 60px;
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;text-align:left}
+.cta-media{position:relative;aspect-ratio:1/1;overflow:hidden;max-width:460px;margin:0 auto}
+.cta-media video{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;
+  filter:brightness(1.026)}
 .cta-eyebrow{color:var(--accent);margin:0 0 22px}
 .cta-title{font-family:var(--display);font-weight:var(--w-display);font-size:clamp(32px,3.8vw,56px);line-height:1.1;
   letter-spacing:-.02em;color:var(--ink);margin:0;max-width:15ch}
@@ -678,9 +659,8 @@ body.bar-off .topbar{display:none}
 /* красный — только вспышка на касании */
 .btn--line{background:transparent;color:var(--ink);border-color:rgba(31,28,27,.32)}
 .btn--line:hover{background:var(--spark);border-color:var(--spark);color:#fff}
-.sp-photolink:hover{color:var(--spark)}
 .nav-links a:hover{border-color:var(--spark)}
-.mobile-menu a:hover{color:var(--spark)}
+.mobile-menu a:hover{color:var(--accent-l)}
 
 @media(prefers-reduced-motion:reduce){
   .rv,.rv-up,.sp-w{opacity:1!important;transition:none!important;filter:none!important;transform:none!important}
@@ -774,7 +754,39 @@ body.bar-off .topbar{display:none}
     <div class="book-visual">
       <div class="book-figure">
         <img class="book-cover" src="assets/book-cover.jpg" alt="Книга «Легче воздуха» — Анна Видуецкая">
-        <div class="seal"><span class="seal-top">Amazon</span><span class="seal-big">№1</span><span class="seal-ribbon">Self Esteem</span></div>
+        <svg class="seal" viewBox="0 0 200 200" role="img" aria-label="Amazon №1 в категории Self Esteem">
+          <defs>
+            <linearGradient id="g-sun" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#F6D77A"/><stop offset=".5" stop-color="#D9A93B"/><stop offset="1" stop-color="#B07F1E"/>
+            </linearGradient>
+            <linearGradient id="g-ring" x1=".15" y1="0" x2=".85" y2="1">
+              <stop offset="0" stop-color="#FFF3C4"/><stop offset=".28" stop-color="#E9C766"/>
+              <stop offset=".55" stop-color="#C79A34"/><stop offset=".78" stop-color="#EBCB74"/><stop offset="1" stop-color="#A87C1F"/>
+            </linearGradient>
+            <radialGradient id="g-core" cx=".36" cy=".28" r=".8">
+              <stop offset="0" stop-color="#FFF7DA"/><stop offset=".42" stop-color="#F0D284"/>
+              <stop offset=".75" stop-color="#D2A544"/><stop offset="1" stop-color="#A97C21"/>
+            </radialGradient>
+            <path id="arc-top" d="M100,100 m-68,0 a68,68 0 0,1 136,0" fill="none"/>
+            <path id="arc-bot" d="M32,100 A68,68 0 0 0 168,100" fill="none"/>
+          </defs>
+          <polygon points="100.00,0.00 106.21,13.22 114.23,1.02 118.49,14.99 128.17,4.05 130.40,18.49 141.54,9.04 141.69,23.64 154.06,15.87 152.14,30.35 165.49,24.43 161.52,38.48 175.57,34.51 169.65,47.86 184.13,45.94 176.36,58.31 190.96,58.46 181.51,69.60 195.95,71.83 185.01,81.51 198.98,85.77 186.78,93.79 200.00,100.00 186.78,106.21 198.98,114.23 185.01,118.49 195.95,128.17 181.51,130.40 190.96,141.54 176.36,141.69 184.13,154.06 169.65,152.14 175.57,165.49 161.52,161.52 165.49,175.57 152.14,169.65 154.06,184.13 141.69,176.36 141.54,190.96 130.40,181.51 128.17,195.95 118.49,185.01 114.23,198.98 106.21,186.78 100.00,200.00 93.79,186.78 85.77,198.98 81.51,185.01 71.83,195.95 69.60,181.51 58.46,190.96 58.31,176.36 45.94,184.13 47.86,169.65 34.51,175.57 38.48,161.52 24.43,165.49 30.35,152.14 15.87,154.06 23.64,141.69 9.04,141.54 18.49,130.40 4.05,128.17 14.99,118.49 1.02,114.23 13.22,106.21 0.00,100.00 13.22,93.79 1.02,85.77 14.99,81.51 4.05,71.83 18.49,69.60 9.04,58.46 23.64,58.31 15.87,45.94 30.35,47.86 24.43,34.51 38.48,38.48 34.51,24.43 47.86,30.35 45.94,15.87 58.31,23.64 58.46,9.04 69.60,18.49 71.83,4.05 81.51,14.99 85.77,1.02 93.79,13.22" fill="url(#g-sun)"/>
+          <circle cx="100" cy="100" r="86" fill="url(#g-ring)"/>
+          <circle cx="100" cy="100" r="79" fill="none" stroke="#8E6716" stroke-opacity=".45" stroke-width="1"/>
+          <circle cx="100" cy="100" r="57" fill="url(#g-core)"/>
+          <circle cx="100" cy="100" r="57" fill="none" stroke="#8E6716" stroke-opacity=".5" stroke-width="1.2"/>
+          <text class="seal-arc" dy="2">
+            <textPath href="#arc-top" startOffset="50%" text-anchor="middle">AMAZON</textPath>
+          </text>
+          <text class="seal-arc" dy="-6">
+            <textPath href="#arc-bot" startOffset="50%" text-anchor="middle">SELF ESTEEM</textPath>
+          </text>
+          <text class="seal-num" x="100" y="100" text-anchor="middle" dominant-baseline="central">№1</text>
+          <g fill="#FBEEC0" stroke="#8E6716" stroke-width=".6" stroke-opacity=".5">
+            <path d="M28.5 100l2.1 4.3 4.7.7-3.4 3.3.8 4.7-4.2-2.2-4.2 2.2.8-4.7-3.4-3.3 4.7-.7z"/>
+            <path d="M171.5 100l2.1 4.3 4.7.7-3.4 3.3.8 4.7-4.2-2.2-4.2 2.2.8-4.7-3.4-3.3 4.7-.7z"/>
+          </g>
+        </svg>
       </div>
     </div>
     <div class="book-copy">
@@ -802,46 +814,25 @@ body.bar-off .topbar{display:none}
 <!-- ABOUT -->
 <section class="about" id="about">
   <div class="about-wrap">
-      <p class="about-eyebrow t-eyebrow">Обо мне</p>
-      <h2 class="about-title t-h1">Коуч ICF и психолог, автор метода «3 луча баланса»</h2>
-      <p class="about-lead t-body">В прошлом — топ-менеджер международной компании, сегодня — основатель Агентства интеллектуальных событий.</p>
-      <button class="story-link" type="button" aria-expanded="false" aria-controls="storyFull">
-        <span>Моя история</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-      <div class="story-more" id="storyFull">
-        <div>
-          <div class="story-letter">
-            <div class="story-sheet">
-              <p class="story-open">«Боже… это моя жизнь?»</p>
-              <p>2015 год: у меня большой дом, известный, успешный муж, четверо детей, няня, помощники, водитель. Жизнь-мечта. А я смотрю на все это и думаю: это игра какая-то. Мне было так странно, не комфортно и забавно одновременно.</p>
-              <p>Почему они меня спрашивают и что-то мне говорят? Вот странные, они и вправду думают что я хозяйка? Ну нееет! А вдруг они меня разоблачат? Ну я же не могу быть хозяйкой всего этого. Я не соответствую. Хозяйки они другие, более взрослые, или какие-то там еще более. Достойные что ли? Точно не такие как я. И я старалась всему этому соответствовать.</p>
-              <p>Работала как не в себя, доказывая себе же что могу соответствовать мужу прекрасному. Дом становился все краше, кошки, собаки, ну чтобы все соответствовало представлению о доме. Планировала поездки всей семьей, с детьми на море — ведь так же отдыхают семьи большие.</p>
-              <p>Результат был: идеальная картинка, у мужа взлет, он — мега крут и гордится мной, дом, дети прекрасные, все вокруг восхищаются: боже, как вам это удается? Кто же у Радислава жена?</p>
-              <p>В какой-то момент у меня начались серьезные проблемы со здоровьем, я ездила по врачам, тихонечко, чтобы никого не побеспокоить. Врачи разводили руками, а мне становилось все хуже.</p>
-              <p>Я так старалась соответствовать ожиданиям всех от себя и своей собственной идеальной картинке, что оказалась в глубокой клинической депрессии.</p>
-              <p>Но я по-прежнему старалась. Ведь никто об этом ничего не узнал.</p>
-              <p>Жила ли я для себя? Нет! Наслаждалась ли я своей жизнью, любовью мужа, работой? Нет! Я соответствовала ожиданиям других, а сама пыталась дотянуться до них.</p>
-              <p>Я получала премии и награды «Мама года», «Бизнес-мама», меня стали приглашать выступать на российских и зарубежных форумах, а я не понимала, что они все во мне нашли. В чем моя заслуга? В чем ценность?</p>
-              <p>Перемены в моей жизни начались тогда, когда потихоньку, очень медленно, я начала понимать что это моя семья, мой дом, мои достижения. И тогда, в какой-то момент все изменилось — это стала моя жизнь.</p>
-              <p>И я живу ее, каждый день, живу свою жизнь. Разную, но свою. Я перестала стараться и соответствовать, перестала стесняться говорить нет. Я перестала нравиться всем людям, зато стала нравиться себе.</p>
-              <p class="story-bold">А теперь я помогаю женщинам пройти этот путь бережнее и быстрее, чем прошла его сама.</p>
-            </div>
-            <div class="story-photo"><img src="assets/about-main.png" alt="Анна Видуецкая"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="proof">
-      <div class="proof-grid">
+    <div class="about-grid">
+      <div class="about-copy">
+        <p class="about-eyebrow t-eyebrow">Обо мне</p>
+        <h2 class="about-title t-h1">Помогаю вернуться к&nbsp;себе</h2>
+        <p class="about-lead t-body">Помогаю женщинам, которые всё тянут на&nbsp;себе, перестать жить в&nbsp;режиме «я&nbsp;сама». Вы&nbsp;найдёте опору в&nbsp;себе, выстроите отношения и&nbsp;баланс между собой, семьёй и&nbsp;делом&nbsp;— без жертв и&nbsp;угрызений совести.</p>
+        <p class="about-lead t-body">Почти десять лет я&nbsp;работаю с&nbsp;женщинами на&nbsp;консультациях и&nbsp;мастермайндах, выступаю на&nbsp;форумах и&nbsp;написала книгу «Легче воздуха».</p>
+        <button class="story-link" type="button" aria-haspopup="dialog">
+          <span>Моя история</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </button>
         <ul class="figs">
           <li class="fig"><span class="fig-n">3</span><span class="fig-c">бизнеса<br>в&nbsp;разных сферах</span></li>
           <li class="fig"><span class="fig-n">4</span><span class="fig-c">детей,<br>6&nbsp;лет без няни</span></li>
           <li class="fig"><span class="fig-n">2</span><span class="fig-c">премии<br>«Бизнес-мама&nbsp;года»</span></li>
         </ul>
-        <div class="proof-photo"><img src="assets/press.jpg" alt="Анна Видуецкая"></div>
       </div>
+      <div class="about-photo"><img src="assets/press.jpg" alt="Анна Видуецкая"></div>
     </div>
+  </div>
 </section>
 
 
@@ -935,7 +926,7 @@ body.bar-off .topbar{display:none}
   <p class="cta-note">Ответ в&nbsp;течение дня · Онлайн и&nbsp;очно в&nbsp;Москве</p>
   </div>
   <div class="cta-media" aria-hidden="true">
-  <video src="assets/door-anna.mp4" autoplay muted loop playsinline preload="auto" disablepictureinpicture tabindex="-1"></video>
+  <video src="assets/door.mp4" autoplay muted loop playsinline preload="auto" disablepictureinpicture tabindex="-1"></video>
   </div>
   </div>
 </section>
@@ -1121,6 +1112,31 @@ body.bar-off .topbar{display:none}
 </footer>
 
 
+<div class="letter" id="letter" aria-hidden="true">
+  <div class="letter-bg" data-close></div>
+  <div class="letter-box" role="dialog" aria-modal="true" aria-label="Моя история">
+    <button class="letter-x" type="button" data-close aria-label="Закрыть">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="letter-sheet">
+      <p class="letter-open">«Боже… это моя жизнь?»</p>
+      <p>2015 год: у меня большой дом, известный, успешный муж, четверо детей, няня, помощники, водитель. Жизнь-мечта. А я смотрю на все это и думаю: это игра какая-то. Мне было так странно, не комфортно и забавно одновременно.</p>
+      <p>Почему они меня спрашивают и что-то мне говорят? Вот странные, они и вправду думают что я хозяйка? Ну нееет! А вдруг они меня разоблачат? Ну я же не могу быть хозяйкой всего этого. Я не соответствую. Хозяйки они другие, более взрослые, или какие-то там еще более. Достойные что ли? Точно не такие как я. И я старалась всему этому соответствовать.</p>
+      <p>Работала как не в себя, доказывая себе же что могу соответствовать мужу прекрасному. Дом становился все краше, кошки, собаки, ну чтобы все соответствовало представлению о доме. Планировала поездки всей семьей, с детьми на море — ведь так же отдыхают семьи большие.</p>
+      <p>Результат был: идеальная картинка, у мужа взлет, он — мега крут и гордится мной, дом, дети прекрасные, все вокруг восхищаются: боже, как вам это удается? Кто же у Радислава жена?</p>
+      <p>В какой-то момент у меня начались серьезные проблемы со здоровьем, я ездила по врачам, тихонечко, чтобы никого не побеспокоить. Врачи разводили руками, а мне становилось все хуже.</p>
+      <p>Я так старалась соответствовать ожиданиям всех от себя и своей собственной идеальной картинке, что оказалась в глубокой клинической депрессии.</p>
+      <p>Но я по-прежнему старалась. Ведь никто об этом ничего не узнал.</p>
+      <p>Жила ли я для себя? Нет! Наслаждалась ли я своей жизнью, любовью мужа, работой? Нет! Я соответствовала ожиданиям других, а сама пыталась дотянуться до них.</p>
+      <p>Я получала премии и награды «Мама года», «Бизнес-мама», меня стали приглашать выступать на российских и зарубежных форумах, а я не понимала, что они все во мне нашли. В чем моя заслуга? В чем ценность?</p>
+      <p>Перемены в моей жизни начались тогда, когда потихоньку, очень медленно, я начала понимать что это моя семья, мой дом, мои достижения. И тогда, в какой-то момент все изменилось — это стала моя жизнь.</p>
+      <p>И я живу ее, каждый день, живу свою жизнь. Разную, но свою. Я перестала стараться и соответствовать, перестала стесняться говорить нет. Я перестала нравиться всем людям, зато стала нравиться себе.</p>
+      <p class="story-bold">А теперь я помогаю женщинам пройти этот путь бережнее и быстрее, чем прошла его сама.</p>
+
+    </div>
+  </div>
+</div>
+
 <script>
 (function(){
   var b=document.querySelector('.burger'),m=document.getElementById('mmenu');
@@ -1149,13 +1165,21 @@ body.bar-off .topbar{display:none}
   upd();
 })();
 (function(){
-  var sec=document.querySelector('.about'); if(!sec)return;
-  var btn=sec.querySelector('.story-link'); if(!btn)return;
-  btn.addEventListener('click',function(){
-    var open=sec.classList.toggle('story-open');
-    btn.setAttribute('aria-expanded',open?'true':'false');
-    btn.querySelector('span').textContent = open ? 'Свернуть' : 'Моя история';
-  });
+  var btn=document.querySelector('.story-link'), box=document.getElementById('letter');
+  if(!btn||!box)return;
+  var sheet=box.querySelector('.letter-sheet');
+  function open(){
+    box.classList.add('open'); box.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+    if(sheet) sheet.scrollTop=0;
+  }
+  function close(){
+    box.classList.remove('open'); box.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+  }
+  btn.addEventListener('click',open);
+  box.querySelectorAll('[data-close]').forEach(function(el){el.addEventListener('click',close);});
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&box.classList.contains('open')) close(); });
 })();
 
 /* ===== ПЕРВЫЙ ЭКРАН: затемнение + лёгкий отъезд по прогрессу скролла ===== */
