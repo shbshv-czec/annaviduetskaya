@@ -129,8 +129,7 @@ img{display:block}
   .sm-photo{order:2;aspect-ratio:4/5}
   .sm-photo::before{display:none}
   .sm-spine{display:none}
-  .proof{margin-top:52px}
-  .stat-tiles{grid-template-columns:1fr;gap:16px}
+  .proof{margin-top:56px;padding:44px 24px 0}
   .feature{grid-template-columns:1fr;margin-top:56px}
   .feature-body{padding:40px 26px}
 }
@@ -209,18 +208,18 @@ img{display:block}
   .sm-text{padding:34px 26px 40px;max-height:none}
   .sm-title{margin-bottom:26px}
 }
-.proof{margin-top:88px;padding-top:56px;border-top:1px solid var(--line)}
-.stat-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-@media(max-width:960px){.stat-tiles{grid-template-columns:1fr;gap:14px}}
-/* Плитки: волосяная линия, мелкая подпись, под ней гигантская тонкая цифра */
-.stile{position:relative;overflow:hidden}
+.proof{max-width:1200px;margin:88px auto 0;padding:56px 40px 0;border-top:1px solid var(--line)}
+/* Плитки-факты: цифра и подпись набраны на бумаге, фотография остаётся
+   фотографией. Тип не конкурирует с лицами и наградными баннерами. */
+.stat-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:0 48px}
+.stile{display:flex;flex-direction:column}
+.stile-body{border-top:1px solid var(--ink);padding-top:22px;margin-bottom:34px}
+.stile-kicker{display:block;font-family:var(--sans);font-weight:600;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
+.stile-num{display:block;font-family:var(--display);font-weight:var(--w-display);font-size:clamp(92px,10vw,152px);line-height:.82;letter-spacing:-.03em;color:var(--ink)}
+.stile-label{display:block;font-family:var(--text);font-size:18px;line-height:1.45;color:var(--ink-2);margin:20px 0 0;max-width:19ch;min-height:2.9em}
 .stile-media{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--line)}
 .stile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform var(--d-xxl) var(--ease-out)}
-.stile:hover img{transform:scale(1.04)}
-.stile-media::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(14,12,10,.88) 0%,rgba(14,12,10,.46) 34%,rgba(14,12,10,.06) 64%,transparent 100%)}
-.stile-body{position:absolute;left:30px;right:30px;bottom:28px;z-index:2;border-top:1px solid rgba(255,255,255,.55);padding-top:16px}
-.stile-label{display:block;font-family:var(--sans);font-weight:500;font-size:15px;line-height:1.35;letter-spacing:.01em;color:rgba(255,255,255,.94);margin:0 0 4px;max-width:16ch}
-.stile-num{display:block;font-family:var(--serif);font-weight:var(--w-display);font-size:clamp(66px,7.4vw,116px);line-height:.94;letter-spacing:-.02em;color:#fff}
+.stile:hover img{transform:scale(1.045)}
 .feature{margin-top:80px;background:var(--ink);color:#fff;display:grid;grid-template-columns:1fr 1fr;min-height:460px;border-radius:2px;overflow:hidden}
 .feature-img{position:relative;min-height:340px}
 .feature-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 24%}
@@ -552,8 +551,9 @@ img{display:block}
   .panel-cta{border-left:none;border-top:1px solid var(--line);padding:36px 30px 40px}
 }
 @media(max-width:960px){
-.stile-body{left:22px;right:22px;bottom:22px}
-.stile-num{font-size:78px}
+.stat-tiles{grid-template-columns:1fr;gap:56px 0}
+.stile-num{font-size:104px}
+.stile-label{min-height:0}
 }
 /* FOOTER */
 .ftr{position:relative;isolation:isolate;overflow:hidden;background:#16130F;color:#fff;padding:104px 0 40px}
@@ -716,16 +716,28 @@ img{display:block}
     <div class="proof">
       <div class="stat-tiles">
         <article class="stile">
+          <div class="stile-body">
+            <span class="stile-kicker">Дело</span>
+            <span class="stile-num">3</span>
+            <span class="stile-label">бизнеса в&nbsp;разных сферах</span>
+          </div>
           <div class="stile-media"><img src="assets/biz2.jpg" alt="Анна Видуецкая" style="object-position:55% 26%"></div>
-          <div class="stile-body"><span class="stile-label">бизнеса в разных сферах</span><span class="stile-num">3</span></div>
         </article>
         <article class="stile">
+          <div class="stile-body">
+            <span class="stile-kicker">Семья</span>
+            <span class="stile-num">4</span>
+            <span class="stile-label">детей и&nbsp;шесть лет без няни</span>
+          </div>
           <div class="stile-media"><img src="assets/deti.jpg" alt="Семья Анны" style="object-position:52% 20%"></div>
-          <div class="stile-body"><span class="stile-label">детей, 6 лет без няни</span><span class="stile-num">4</span></div>
         </article>
         <article class="stile">
+          <div class="stile-body">
+            <span class="stile-kicker">Признание</span>
+            <span class="stile-num">2</span>
+            <span class="stile-label">премии «Бизнес-мама года»</span>
+          </div>
           <div class="stile-media"><img src="assets/biz-mama-x2.png" alt="Премия «Бизнес-мама года»" style="object-position:22% 16%"></div>
-          <div class="stile-body"><span class="stile-label">премии «Бизнес-мама года»</span><span class="stile-num">2</span></div>
         </article>
       </div>
     </div>
