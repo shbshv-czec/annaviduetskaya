@@ -65,16 +65,16 @@ img{display:block}
 
 /* ---------- NAV (gradient only here; grotesque caps) ---------- */
 /* Верхняя строка с анонсом: тонкая, красная */
-:root{--bar-h:44px}
+:root{--bar-h:36px}
 .topbar{position:fixed;top:0;left:0;right:0;z-index:70;height:var(--bar-h);
   background:var(--spark);color:#fff;display:flex;align-items:center;justify-content:center;
   padding:0 52px 0 20px}
 .topbar-in{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;justify-content:center}
-.topbar-t{font-family:var(--sans);font-weight:500;font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;
-  color:rgba(255,255,255,.94);margin:0}
-.topbar-cta{display:inline-flex;align-items:center;gap:7px;font-family:var(--sans);font-weight:700;font-size:12.5px;
-  letter-spacing:.09em;text-transform:uppercase;color:#fff;white-space:nowrap;
-  border-bottom:1px solid rgba(255,255,255,.55);padding-bottom:2px;
+.topbar-t{font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.11em;text-transform:uppercase;
+  color:rgba(255,255,255,.93);margin:0}
+.topbar-cta{display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);font-weight:700;font-size:11px;
+  letter-spacing:.11em;text-transform:uppercase;color:#fff;white-space:nowrap;
+  border-bottom:1px solid rgba(255,255,255,.5);padding-bottom:2px;
   transition:border-color var(--d-md) var(--ease-out)}
 .topbar-cta:hover{border-color:#fff}
 .topbar-cta svg{width:13px;height:13px;transition:transform var(--d-md) var(--ease-out)}
@@ -85,13 +85,17 @@ img{display:block}
   transition:color var(--d-md) var(--ease-out)}
 .topbar-x:hover{color:#fff}
 .topbar-x svg{width:15px;height:15px}
+.tb-short{display:none}
 body.bar-off{--bar-h:0px}
 body.bar-off .topbar{display:none}
 @media(max-width:960px){
-  :root{--bar-h:auto}
-  .topbar{position:static;height:auto;min-height:48px;padding:11px 44px 11px 16px}
-  .topbar-in{gap:6px 14px}
-  .topbar-t,.topbar-cta{font-size:11px;letter-spacing:.07em}
+  .topbar{height:auto;min-height:40px;padding:9px 40px 9px 14px}
+  .topbar-in{gap:4px 12px}
+  .topbar-t,.topbar-cta{font-size:10.5px;letter-spacing:.08em}
+  .tb-full{display:none}
+  .tb-short{display:inline}
+  .topbar-x{right:8px;width:26px;height:26px}
+  .topbar-x svg{width:13px;height:13px}
 }
 /* Навигация: полупрозрачная плашка поверх первого экрана */
 /* Навигация ужимается непрерывно по прогрессу прокрутки --navp (0…1),
@@ -99,29 +103,33 @@ body.bar-off .topbar{display:none}
 .nav-wrap{--navp:0;position:fixed;top:var(--bar-h);left:0;right:0;z-index:60;isolation:isolate;
   background:linear-gradient(180deg,rgba(16,13,11,.80) 0%,rgba(16,13,11,.46) 52%,rgba(16,13,11,0) 100%);
   box-shadow:0 12px 34px -26px rgba(0,0,0,calc(.9 * var(--navp)))}
-.nav-wrap::before{content:"";position:absolute;inset:0;z-index:0;background:#100D0B;opacity:var(--navp)}
+/* при прокрутке — матовое стекло, а не глухой чёрный */
+.nav-wrap::before{content:"";position:absolute;inset:0;z-index:0;opacity:var(--navp);
+  background:rgba(18,15,12,.70);backdrop-filter:blur(20px) saturate(1.2);
+  -webkit-backdrop-filter:blur(18px) saturate(1.25);
+  border-bottom:1px solid rgba(255,255,255,.10)}
 .nav{position:relative;z-index:1;max-width:1400px;margin:0 auto;
-  padding:calc(18px - 10px * var(--navp)) 40px;
+  padding:calc(15px - 6px * var(--navp)) 40px;
   display:flex;align-items:center;justify-content:space-between;gap:24px}
 .nav a{color:#fff}
-.brand{display:inline-flex;align-items:center;justify-content:center;
-  width:calc(42px - 8px * var(--navp));height:calc(42px - 8px * var(--navp));
-  border:1px solid rgba(255,255,255,.55);transition:background var(--d-lg) var(--ease-out)}
-.brand-mark{font-family:var(--display);font-weight:var(--w-display);
-  font-size:calc(17px - 3px * var(--navp));letter-spacing:.06em;line-height:1;color:#fff}
-.brand:hover{background:rgba(255,255,255,.16)}
+.brand{display:inline-flex;align-items:baseline;gap:.34em;white-space:nowrap;
+  font-family:var(--sans);font-size:calc(16px - 1px * var(--navp));letter-spacing:.005em;line-height:1}
+.brand-a{font-weight:300;color:rgba(255,255,255,.86)}
+.brand-b{font-weight:700;color:#fff}
+
+.brand:hover .brand-a{color:#fff}
 .nav-links{display:flex;gap:6px;align-items:center}
-.nav-links a{font-family:var(--sans);text-transform:uppercase;letter-spacing:.1em;font-weight:600;
-  font-size:calc(12px - .5px * var(--navp));color:rgba(255,255,255,.92);
-  padding:calc(9px - 2px * var(--navp)) calc(14px - 2px * var(--navp));border-radius:2px;
+.nav-links a{font-family:var(--sans);text-transform:uppercase;letter-spacing:.12em;font-weight:500;
+  font-size:calc(11px - .3px * var(--navp));color:rgba(255,255,255,.88);
+  padding:calc(8px - 1px * var(--navp)) calc(13px - 2px * var(--navp));border-radius:2px;
   transition:background var(--d-md) var(--ease-out),color var(--d-md) var(--ease-out)}
 .nav-links a:hover{background:rgba(255,255,255,.16);color:#fff}
 .nav-right{display:flex;align-items:center;gap:14px}
-.nav-phone{font-family:var(--sans);font-size:13.5px;font-weight:500;letter-spacing:.01em;color:rgba(255,255,255,.9);white-space:nowrap}
-.nav .wa-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-weight:600;
-  font-size:calc(12px - .5px * var(--navp));text-transform:uppercase;letter-spacing:.08em;
+.nav-phone{font-family:var(--sans);font-size:12.5px;font-weight:500;letter-spacing:.01em;color:rgba(255,255,255,.86);white-space:nowrap}
+.nav .wa-btn{display:inline-flex;align-items:center;gap:7px;font-family:var(--sans);font-weight:600;
+  font-size:calc(11px - .3px * var(--navp));text-transform:uppercase;letter-spacing:.1em;
   color:var(--ink);background:#fff;border:1px solid #fff;
-  padding:calc(11px - 3px * var(--navp)) calc(16px - 2px * var(--navp));border-radius:2px;
+  padding:calc(9px - 2px * var(--navp)) calc(14px - 2px * var(--navp));border-radius:2px;
   transition:background var(--d-md) var(--ease-out),color var(--d-md) var(--ease-out)}
 .nav .wa-btn:hover{background:transparent;color:#fff}
 .wa-btn svg{width:15px;height:15px}
@@ -146,11 +154,14 @@ body.bar-off .topbar{display:none}
 .hero-veil{position:absolute;inset:0;background:linear-gradient(100deg,rgba(20,17,15,.66) 0%,rgba(20,17,15,.38) 32%,rgba(20,17,15,.1) 52%,rgba(20,17,15,0) 66%)}
 .hero-inner{position:relative;z-index:5;max-width:1440px;margin:0 auto;min-height:100vh;display:flex;align-items:center;padding:0 40px}
 .hero-text{max-width:660px;padding:150px 0 72px}
-.regalia{color:rgba(255,255,255,.82);margin:0 0 46px;max-width:640px}
-.name{color:#fff;margin:0}
+/* Первый экран: надзаголовок — имя — подзаголовок, пропорции 1 : 6 : 2 */
+.regalia{color:rgba(255,255,255,.72);margin:0 0 30px;max-width:640px;font-size:12px;letter-spacing:.18em}
+.hero-text .name{font-family:var(--serif);font-size:clamp(46px,6.6vw,96px);line-height:1.02;
+  letter-spacing:-.015em;color:#fff;margin:0}
 .role{color:#fff;margin:20px 0 0}
-.subtitle{color:rgba(255,255,255,.9);margin:40px 0 0;max-width:24ch}
-.cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:52px}
+.subtitle{font-family:var(--text);font-weight:400;font-size:clamp(19px,2vw,26px);line-height:1.45;
+  color:rgba(255,255,255,.94);margin:26px 0 0;max-width:26ch}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:42px}
 .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--sans);font-size:15px;font-weight:600;letter-spacing:.01em;padding:17px 32px;cursor:pointer;border:1px solid transparent;border-radius:2px;transition:background .2s,color .2s,border-color .2s}
 .btn--primary{background:var(--ink);color:#fff;border-color:var(--ink)}
 .btn--primary:hover{background:var(--espresso);border-color:var(--espresso);color:#fff}
@@ -168,16 +179,13 @@ body.bar-off .topbar{display:none}
   .hero-veil{background:linear-gradient(0deg,rgba(18,15,13,.94) 0%,rgba(18,15,13,.58) 40%,rgba(18,15,13,.12) 72%,rgba(18,15,13,0) 100%)}
   .hero-inner{align-items:flex-end;min-height:100vh;padding:0 24px 48px}
   .hero-text{padding:0;max-width:100%}
-  .nav-wrap{top:12px;left:14px;right:14px}
-  body:not(.bar-off) .nav-wrap{position:absolute}
-  .nav{padding:9px 12px}
+  .nav{padding:calc(11px - 2px * var(--navp)) 16px}
+  .brand{font-size:15px}
   .nav-links,.nav-phone,.nav .wa-btn{display:none}
   .burger{display:flex}
-  .brand{width:38px;height:38px}
-  .brand-mark{font-size:15px}
   /* регалии — вверху под навигацией, лицо свободно */
   .hero-inner{position:relative}
-  .regalia{position:absolute;top:92px;left:24px;right:24px;margin:0;font-size:11px;letter-spacing:.12em}
+  .regalia{position:absolute;top:calc(var(--bar-h) + 84px);left:24px;right:24px;margin:0;font-size:10.5px;letter-spacing:.1em}
   .hero-text{padding-bottom:8px}
   .about{padding:72px 0}
   .about-grid{grid-template-columns:1fr;gap:40px}
@@ -197,8 +205,8 @@ body.bar-off .topbar{display:none}
 /* Наградной знак Amazon: золото, лучистый кант, текст по дуге */
 .seal{position:absolute;top:-34px;right:-74px;width:132px;height:132px;z-index:3;overflow:visible;
   filter:drop-shadow(0 14px 26px rgba(120,88,20,.42))}
-.seal-arc{font-family:var(--sans);font-weight:700;font-size:15.5px;letter-spacing:.24em;fill:#7A5712}
-.seal-num{font-family:var(--display);font-weight:700;font-size:52px;fill:#6B4A12}
+.seal-l1{font-family:var(--sans);font-weight:800;font-size:23px;letter-spacing:.02em;fill:#6B4A12}
+.seal-l2{font-family:var(--sans);font-weight:600;font-size:17.5px;letter-spacing:.06em;fill:#7A5712}
 .book-eyebrow{color:var(--accent);margin:0 0 18px}
 .book-title{color:var(--ink);margin:0}
 .book-subtitle{font-family:var(--text);font-weight:400;font-size:19px;line-height:1.5;color:var(--ink-2);margin:12px 0 26px}
@@ -208,13 +216,11 @@ body.bar-off .topbar{display:none}
 .shops-label{font-family:var(--sans);font-weight:600;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
   color:var(--ink-3);margin:0 0 16px}
 .shops{display:flex;flex-wrap:wrap;gap:30px;align-items:center}
-.shop{display:inline-flex;align-items:center;justify-content:center;height:auto;padding:0;
-  background:transparent;
-  transition:opacity var(--d-md) var(--ease-out),transform var(--d-md) var(--ease-out)}
+.shop{display:inline-flex;align-items:center;justify-content:center;height:auto;padding:0;background:transparent}
 .shop img{height:17px;width:auto;display:block;opacity:.72;
   filter:grayscale(1) brightness(.35) contrast(1.5);
   transition:opacity var(--d-md) var(--ease-out),filter var(--d-md) var(--ease-out)}
-.shop:hover{transform:translateY(-1px)}
+
 .shop:hover img{opacity:1;filter:grayscale(1) brightness(.15) contrast(1.6)}
 @media(max-width:960px){.shops{gap:24px}.shop img{height:15px}}
 
@@ -227,15 +233,18 @@ body.bar-off .topbar{display:none}
 .about-lead{color:var(--ink-2);max-width:58ch;margin:0 0 26px}
 .proof{max-width:1200px;margin:88px auto 0;padding:56px 40px 0;border-top:1px solid var(--line)}
 /* Факты: список слева, фотография справа */
-.figs{list-style:none;margin:44px 0 0;padding:0;display:flex;flex-direction:column;gap:30px}
-.fig{display:flex;align-items:baseline;gap:22px}
-.fig-n{flex:none;min-width:1.05ch;text-align:right;font-family:var(--display);font-weight:var(--w-display);
-  font-size:clamp(58px,5.8vw,86px);line-height:.9;letter-spacing:-.03em;color:var(--ink)}
-.fig-c{font-family:var(--text);font-size:21px;line-height:1.35;color:var(--ink-2)}
+.figs{list-style:none;margin:52px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.fig{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.fig-n{font-family:var(--display);font-weight:var(--w-display);
+  font-size:clamp(44px,3.8vw,58px);line-height:.9;letter-spacing:-.03em;color:var(--ink)}
+.fig-c{font-family:var(--text);font-size:16px;line-height:1.4;color:var(--ink-2)}
 .proof-photo{aspect-ratio:1280/1920;overflow:hidden;background:var(--line)}
 .proof-photo img{width:100%;height:100%;object-fit:cover;display:block}
 @media(max-width:960px){
-  .figs{gap:24px;margin-top:34px}
+  .figs{grid-template-columns:1fr;gap:22px;margin-top:34px}
+  .fig{flex-direction:row;align-items:baseline;gap:16px}
+  .fig-n{font-size:52px}
+  .about-head{margin-bottom:32px}
   .fig-n{font-size:64px}
   .fig-c{font-size:18px}
 }
@@ -259,22 +268,22 @@ body.bar-off .topbar{display:none}
 }
 /* ---------- REVIEWS (soft blue, white text, carousel) ---------- */
 /* ---------- ОТЗЫВЫ: слайдер по одному ---------- */
-.reviews{position:relative;isolation:isolate;padding:112px 0;
-  background:url('assets/reviews-bg.jpg') center/cover no-repeat;
-}
-.reviews-head{position:relative;z-index:1;max-width:1200px;margin:0 auto 56px;padding:0 40px;text-align:center}
+.reviews{position:relative;isolation:isolate;padding:74px 0 66px;
+  background:url('assets/reviews-bg.jpg') center bottom/cover no-repeat}
+.reviews-head{position:relative;z-index:1;max-width:1200px;margin:0 auto 40px;padding:0 40px;text-align:center}
 .rv-slider{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:0 40px}
 .rv-viewport{overflow:hidden}
 .rv-track{display:flex;will-change:transform;transition:transform var(--d-xl) var(--ease-out)}
 .rv-track.no-anim{transition:none}
 .review{flex:0 0 100%;margin:0;padding:0 24px;text-align:center;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;min-height:300px}
+  justify-content:center;min-height:210px}
 .review-q{font-family:var(--text);font-style:italic;font-weight:400;
-  font-size:clamp(21px,2.4vw,30px);line-height:1.5;color:var(--ink);margin:0 0 26px;max-width:26ch}
+  font-size:clamp(19px,2vw,25px);line-height:1.5;color:var(--ink);margin:0 0 22px;max-width:40ch}
+.review-q b{font-weight:700;font-style:normal;color:var(--ink)}
 .review-q::before{content:'«'}
 .review-q::after{content:'»'}
 .review-a{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
-.rv-bar{display:flex;gap:8px;justify-content:center;margin:44px auto 0;max-width:300px}
+.rv-bar{display:flex;gap:8px;justify-content:center;margin:30px auto 0;max-width:300px}
 .rv-seg{flex:1 1 0;height:2px;padding:0;border:none;background:rgba(31,28,27,.20);cursor:pointer;
   position:relative;transition:background var(--d-lg) var(--ease-out)}
 .rv-seg::before{content:'';position:absolute;inset:-11px 0}   /* удобная зона нажатия */
@@ -295,12 +304,14 @@ body.bar-off .topbar{display:none}
 .speaking{background:var(--paper);padding:104px 0}
 .sp-wrap{max-width:1200px;margin:0 auto;padding:0 40px}
 .sp-head{margin:0 0 44px}
-.sp-showcase{margin:0 0 96px}
+.sp-showcase{display:grid;grid-template-columns:1fr .9fr;gap:64px;align-items:center;margin:56px 0 96px}
 .sp-showcase .sp-reel-main{aspect-ratio:16/9;margin:0}
-@media(max-width:960px){.sp-showcase{grid-template-columns:1fr;gap:26px;margin-bottom:56px}}
+@media(max-width:960px){.sp-showcase{grid-template-columns:1fr;gap:24px;margin:34px 0 56px}
+  .sp-sub{font-size:17px;max-width:none}}
 
-.sp-title{font-family:var(--serif);font-weight:var(--w-display);font-size:clamp(36px,5.6vw,72px);line-height:1.1;letter-spacing:-.01em;color:var(--ink);margin:16px 0 0;max-width:16ch}
-.sp-sub{font-family:var(--text);font-style:normal;font-weight:400;font-size:18px;line-height:1.4;color:var(--ink-2);margin:20px 0 0}
+.sp-title{font-family:var(--serif);font-weight:var(--w-display);font-size:clamp(30px,4vw,54px);
+  line-height:1.12;letter-spacing:-.015em;color:var(--ink);margin:16px 0 0;max-width:none}
+.sp-sub{font-family:var(--text);font-size:19px;line-height:1.65;color:var(--ink-2);margin:0;max-width:46ch}
 .sp-main{padding:4px 0 36px;margin:0 0 4px}
 .sp-main-tag{display:inline-block;font-family:var(--text);font-weight:600;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 16px}
 .sp-main-t{font-family:var(--serif);font-weight:var(--w-head);font-size:clamp(28px,3.2vw,40px);line-height:1.12;letter-spacing:-.01em;color:var(--ink);margin:0 0 16px;max-width:24ch}
@@ -336,8 +347,10 @@ body.bar-off .topbar{display:none}
 .sp-foot .btn--emerald{font-size:16px;padding:19px 40px}
 .btn--sm{font-size:13px;padding:12px 24px}
 /* ---------- «Обо мне»: текст слева, портрет справа ---------- */
-.about-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:70px;align-items:center}
-.about-copy{max-width:56ch}
+.about-head{margin:0 0 52px}
+.about-title{max-width:20ch}
+.about-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:70px;align-items:start}
+.about-copy{max-width:none}
 .about-lead+.about-lead{margin-top:20px}
 .about-photo{aspect-ratio:1280/1920;overflow:hidden;background:var(--line)}
 .about-photo img{width:100%;height:100%;object-fit:cover;display:block}
@@ -415,10 +428,10 @@ body.bar-off .topbar{display:none}
 .pc-eyebrow{color:var(--accent);margin:0 0 16px}
 .pc-title{font-family:var(--serif);font-weight:var(--w-display);font-size:clamp(36px,5.6vw,72px);line-height:1.1;letter-spacing:-.01em;color:var(--ink);margin:0 0 20px}
 .pc-intro{color:var(--ink-2);font-size:18px;line-height:1.4;margin:0 0 44px;max-width:60ch}
-.pc-rail{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 40px 24px;margin:0 -40px;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 96px),transparent 100%);mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 96px),transparent 100%)}
+.pc-rail{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 40px 24px;margin:0 -40px;scrollbar-width:none}
 .pc-rail::-webkit-scrollbar{display:none}
 .pc-card{flex:0 0 auto;width:min(360px,80vw);scroll-snap-align:start;text-decoration:none;display:flex;flex-direction:column}
-.pc-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;border-radius:2px;background:#1a1613}
+.pc-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:#1a1613}
 .pc-thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .pc-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:rgba(20,16,13,.5);backdrop-filter:blur(4px);border:1.5px solid rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;transition:background .3s ease,transform .3s ease}
 .pc-card:hover .pc-play{background:rgba(20,16,13,.7);transform:translate(-50%,-50%) scale(1.07)}
@@ -426,7 +439,7 @@ body.bar-off .topbar{display:none}
 .pc-tag{position:absolute;top:14px;left:14px;font-family:var(--text);font-weight:600;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--accent-d);padding:6px 12px;border-radius:2px}
 .pc-name{font-family:var(--serif);font-weight:var(--w-head);font-size:24px;line-height:1.3;color:var(--ink);margin:20px 0 6px}
 .pc-role{font-family:var(--text);font-size:15px;line-height:1.55;color:var(--ink-2);margin:0}
-.pc-views{font-family:var(--text);font-weight:600;font-size:12.5px;letter-spacing:.04em;color:var(--accent);margin:10px 0 0}
+.pc-views{font-family:var(--sans);font-weight:500;font-size:13px;letter-spacing:.02em;color:var(--ink-3);margin:10px 0 0}
 .pc-actions{display:flex;flex-wrap:wrap;gap:16px;margin-top:44px}
 .btn--pill{border-radius:2px;padding:18px 36px}
 /* TELEGRAM */
@@ -491,12 +504,14 @@ body.bar-off .topbar{display:none}
 .sp-topics-block{padding-top:8px;margin-top:56px}
 .sp-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:34px;align-items:stretch}
 /* Темы: аккордеон. Раскрывается по нажатию, без фотографий */
-.topics{margin-top:34px;border-top:1px solid var(--ink)}
-.topic{border-bottom:1px solid var(--line)}
-.topic-head{width:100%;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:28px;
-  background:none;border:none;cursor:pointer;text-align:left;padding:28px 6px;font:inherit;color:inherit;
-  transition:background var(--d-md) var(--ease-out)}
-.topic-head:hover{background:rgba(23,138,138,.05)}
+.topics{margin-top:38px;display:flex;flex-direction:column;gap:20px}
+.topic{position:relative;background:var(--paper);opacity:0;transform:translateY(24px);filter:blur(8px);
+  will-change:opacity,filter,transform}
+.topic.in{opacity:1;transform:none;filter:none}
+.topic::before{content:"";position:absolute;top:0;right:0;width:8px;height:8px;background:var(--ink);z-index:2}
+.topic-head{width:100%;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:26px;
+  background:none;border:none;cursor:pointer;text-align:left;padding:34px 34px 30px;font:inherit;color:inherit}
+.topic-head:hover .topic-t{color:var(--accent-d)}
 .topic-n{font-family:var(--sans);font-weight:600;font-size:12px;letter-spacing:.16em;color:var(--ink-3);
   transition:color var(--d-md) var(--ease-out)}
 .topic-t{font-family:var(--serif);font-weight:var(--w-head);font-size:clamp(22px,2.3vw,30px);line-height:1.24;
@@ -515,16 +530,16 @@ body.bar-off .topbar{display:none}
 .topic-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--d-xl) var(--ease-out)}
 .topic.open .topic-body{grid-template-rows:1fr}
 .topic-body>div{overflow:hidden}
-.topic-in{display:grid;grid-template-columns:.46fr 1fr;gap:40px;align-items:start;padding:4px 6px 36px 68px}
+.topic-in{display:grid;grid-template-columns:.42fr 1fr;gap:36px;align-items:start;padding:0 34px 34px 34px}
 .topic-in>p{grid-column:2;grid-row:1}
 .topic-ph{grid-column:1;grid-row:1}
-.topic-body p{font-family:var(--text);font-size:18px;line-height:1.62;color:var(--ink-2);margin:0;max-width:62ch}
+.topic-body p{font-family:var(--text);font-size:17.5px;line-height:1.62;color:var(--ink-2);margin:0;max-width:62ch}
 .topic-ph{aspect-ratio:4/3;overflow:hidden;background:var(--line)}
 .topic-ph img{width:100%;height:100%;object-fit:cover;display:block}
 @media(max-width:960px){
-  .topic-head{gap:16px;padding:22px 2px}
+  .topic-head{gap:14px;padding:24px 22px 20px}
   .topic-t{font-size:20px;gap:10px}
-  .topic-in{grid-template-columns:1fr;gap:20px;padding:0 0 26px 0}
+  .topic-in{grid-template-columns:1fr;gap:18px;padding:0 22px 24px}
   .topic-in>p,.topic-ph{grid-column:1;grid-row:auto}
   .topic-body p{font-size:16.5px}
 }
@@ -556,7 +571,8 @@ body.bar-off .topbar{display:none}
   .sp-foot{margin-top:40px}
 }
 /* CONSULT */
-.consult{background:transparent;padding:104px 0}
+.consult{padding:104px 0 120px;
+  background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,0) 38%,#fff 100%)}
 .consult-wrap{max-width:1120px;margin:0 auto;padding:0 40px}
 .consult-eyebrow{color:var(--accent);margin:0 0 30px}
 .consult-hook{font-family:var(--serif);font-weight:var(--w-display);font-size:clamp(34px,4.6vw,66px);line-height:1.12;letter-spacing:-.015em;color:var(--ink);margin:0 auto 76px;max-width:24ch;text-align:center}
@@ -564,16 +580,18 @@ body.bar-off .topbar{display:none}
 .consult-intro{color:var(--ink-2);max-width:60ch;margin:0 auto 64px;text-align:center;font-size:19px;line-height:1.6}
 .req2{display:grid;grid-template-columns:1fr 1.15fr;gap:64px;align-items:start;margin:0 0 88px;text-align:left}
 .req2-l{position:sticky;top:120px}
-.req2-h{font-family:var(--serif);font-weight:var(--w-head);font-size:clamp(28px,3vw,40px);line-height:1.16;letter-spacing:0;color:var(--ink);margin:0 0 26px}
+.req2-h{display:flex;align-items:baseline;gap:14px;font-family:var(--serif);font-weight:var(--w-head);
+  font-size:clamp(28px,3vw,40px);line-height:1.16;color:var(--ink);margin:0 0 30px}
+.req2-h svg{flex:none;width:20px;height:20px;color:var(--accent)}
 .req2-h em{font-style:italic;color:var(--accent)}
 .req2-rule{display:none}
-.req2-p{color:var(--ink-2);font-size:18px;line-height:1.6;margin:0;max-width:42ch}
-.req2-photo{margin:30px 0 32px;aspect-ratio:5/6;overflow:hidden;background:var(--line)}
+.req2-p{color:var(--ink-2);font-size:18px;line-height:1.6;margin:0 0 34px;max-width:42ch}
+.req2-photo{margin:0;aspect-ratio:5/6;overflow:hidden;background:var(--line)}
 .req2-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 32%;display:block}
 .req2-r{display:flex;flex-direction:column;gap:20px}
 .req{position:relative;background:#fff;border-radius:2px;padding:34px 34px 32px;opacity:0;transform:translateY(24px);filter:blur(8px);will-change:opacity,filter,transform}
 .req.in{opacity:1;transform:none;filter:none}
-.req::before{content:"";position:absolute;top:0;left:0;width:8px;height:8px;background:var(--ink)}
+.req::before{content:"";position:absolute;top:0;right:0;width:8px;height:8px;background:var(--ink)}
 .req-k{font-family:var(--sans);font-weight:600;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
 .req-t{font-family:var(--serif);font-weight:var(--w-head);font-size:clamp(26px,2.5vw,34px);line-height:1.24;color:var(--ink);margin:0 0 13px}
 .req-d{color:var(--ink-2);font-size:17.5px;line-height:1.6;margin:0}
@@ -582,9 +600,9 @@ body.bar-off .topbar{display:none}
 .consult-turn .pull{font-family:var(--serif);font-style:italic;font-weight:var(--w-head);font-size:clamp(26px,3.4vw,38px);line-height:1.3;color:var(--ink);margin:0 0 20px}
 /* CTA консультации: чистая белая плашка */
 .cta-band{background:var(--paper);padding:132px 0}
-.cta{max-width:1240px;margin:0 auto;padding:0 60px;
-  display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;text-align:left}
-.cta-media{position:relative;aspect-ratio:1/1;overflow:hidden;max-width:460px;margin:0 auto}
+.cta{max-width:1120px;margin:0 auto;padding:0 40px;
+  display:grid;grid-template-columns:1fr .9fr;gap:64px;align-items:center;text-align:left}
+.cta-media{position:relative;aspect-ratio:1/1;overflow:hidden;max-width:360px;margin:0 0 0 auto}
 .cta-media video{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;
   filter:brightness(1.026)}
 .cta-eyebrow{color:var(--accent);margin:0 0 22px}
@@ -592,8 +610,8 @@ body.bar-off .topbar{display:none}
   letter-spacing:-.02em;color:var(--ink);margin:0;max-width:15ch}
 .cta-sub{font-family:var(--text);font-size:19px;line-height:1.6;color:var(--ink-2);margin:24px 0 34px;max-width:44ch}
 .cta-actions{display:flex;flex-wrap:wrap;gap:14px}
-.cta-note{font-family:var(--sans);font-weight:500;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--ink-3);margin:30px 0 0}
+.cta-note{font-family:var(--sans);font-weight:500;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ink-3);margin:28px 0 0}
 @media(max-width:960px){
   .cta-band{padding:72px 0}
   .cta{padding:0 24px;grid-template-columns:1fr;gap:28px}
@@ -602,8 +620,13 @@ body.bar-off .topbar{display:none}
   .req2-photo{margin:22px 0 24px}
   .consult{padding:76px 0}
   .consult-wrap{padding:0 24px}
-  .req2{grid-template-columns:1fr;gap:32px;margin-bottom:56px}
-  .req2-l{position:static}
+  /* порядок на телефоне: заголовок, фото, текст, карточки */
+  .req2{display:grid;grid-template-columns:1fr;gap:0;margin-bottom:56px}
+  .req2-l,.req2-r{display:contents}
+  .req2-h{order:1;margin:0 0 24px}
+  .req2-photo{order:2;margin:0 0 26px}
+  .req2-p{order:3;margin:0 0 30px}
+  .req{order:4;margin-bottom:16px}
   .req{padding:28px 24px 26px 24px}
   .consult-turn{margin-bottom:52px}
 }
@@ -685,7 +708,7 @@ body.bar-off .topbar{display:none}
 <!-- NAV -->
 <div class="topbar" id="topbar">
   <div class="topbar-in">
-    <p class="topbar-t">Открытый эфир из&nbsp;премиального мастермайнда&nbsp;— 23&nbsp;сентября в&nbsp;19:00</p>
+    <p class="topbar-t"><span class="tb-full">Открытый эфир из&nbsp;премиального мастермайнда&nbsp;— 23&nbsp;сентября в&nbsp;19:00</span><span class="tb-short">Открытый эфир&nbsp;— 23&nbsp;сентября, 19:00</span></p>
     <a class="topbar-cta" href="https://wa.me/79851959505" target="_blank" rel="noopener">Присоединиться
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
     </a>
@@ -696,7 +719,7 @@ body.bar-off .topbar{display:none}
 </div>
 <div class="nav-wrap">
   <nav class="nav">
-    <a href="#" class="brand" aria-label="Анна Видуецкая"><span class="brand-mark">АВ</span></a>
+    <a href="#" class="brand" aria-label="Анна Видуецкая"><span class="brand-a">Анна</span> <span class="brand-b">Видуецкая</span></a>
     <div class="nav-links">
       <a href="#book">Книга</a>
       <a href="#about">Обо мне</a>
@@ -735,7 +758,7 @@ body.bar-off .topbar{display:none}
     <div class="hero-text">
       <p class="regalia t-eyebrow">Коуч ICF · Психолог · Автор книги · «Бизнес-мама года»</p>
       <h1 class="name t-display">Анна<br>Видуецкая</h1>
-      <p class="subtitle t-h3">Помогаю тем, кто устал жить в режиме «я&nbsp;сама».</p>
+      <p class="subtitle">Помогаю тем, кто устал жить в&nbsp;режиме «я&nbsp;сама»</p>
       <div class="cta-row">
         <a href="#consult" class="btn btn--emerald">Записаться на консультацию</a>
         <a href="https://wa.me/79851959505" class="btn btn--ghost" target="_blank" rel="noopener">
@@ -756,45 +779,38 @@ body.bar-off .topbar{display:none}
         <img class="book-cover" src="assets/book-cover.jpg" alt="Книга «Легче воздуха» — Анна Видуецкая">
         <svg class="seal" viewBox="0 0 200 200" role="img" aria-label="Amazon №1 в категории Self Esteem">
           <defs>
-            <linearGradient id="g-sun" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#F6D77A"/><stop offset=".5" stop-color="#D9A93B"/><stop offset="1" stop-color="#B07F1E"/>
+            <linearGradient id="s-edge" gradientUnits="userSpaceOnUse" x1="40" y1="12" x2="162" y2="190">
+              <stop offset="0" stop-color="#F3D488"/><stop offset=".34" stop-color="#E2B75C"/>
+              <stop offset=".62" stop-color="#C89A3C"/><stop offset="1" stop-color="#A9781F"/>
             </linearGradient>
-            <linearGradient id="g-ring" x1=".15" y1="0" x2=".85" y2="1">
-              <stop offset="0" stop-color="#FFF3C4"/><stop offset=".28" stop-color="#E9C766"/>
-              <stop offset=".55" stop-color="#C79A34"/><stop offset=".78" stop-color="#EBCB74"/><stop offset="1" stop-color="#A87C1F"/>
+            <linearGradient id="s-face" gradientUnits="userSpaceOnUse" x1="52" y1="28" x2="150" y2="174">
+              <stop offset="0" stop-color="#F9E6AE"/><stop offset=".45" stop-color="#EDCE7E"/>
+              <stop offset=".72" stop-color="#DFB75C"/><stop offset="1" stop-color="#C89D3C"/>
             </linearGradient>
-            <radialGradient id="g-core" cx=".36" cy=".28" r=".8">
-              <stop offset="0" stop-color="#FFF7DA"/><stop offset=".42" stop-color="#F0D284"/>
-              <stop offset=".75" stop-color="#D2A544"/><stop offset="1" stop-color="#A97C21"/>
-            </radialGradient>
-            <path id="arc-top" d="M100,100 m-68,0 a68,68 0 0,1 136,0" fill="none"/>
-            <path id="arc-bot" d="M21,100 A79,79 0 0 0 179,100" fill="none"/>
+            <linearGradient id="s-gloss" gradientUnits="userSpaceOnUse" x1="26" y1="10" x2="176" y2="192">
+              <stop offset="0" stop-color="#fff" stop-opacity=".40"/>
+              <stop offset=".34" stop-color="#fff" stop-opacity=".12"/>
+              <stop offset=".58" stop-color="#fff" stop-opacity="0"/>
+              <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+            </linearGradient>
+            <g id="s-shape"><circle cx="100" cy="100" r="86"/><circle cx="186.00" cy="100.00" r="9.5"/><circle cx="181.79" cy="126.58" r="9.5"/><circle cx="169.58" cy="150.55" r="9.5"/><circle cx="150.55" cy="169.58" r="9.5"/><circle cx="126.58" cy="181.79" r="9.5"/><circle cx="100.00" cy="186.00" r="9.5"/><circle cx="73.42" cy="181.79" r="9.5"/><circle cx="49.45" cy="169.58" r="9.5"/><circle cx="30.42" cy="150.55" r="9.5"/><circle cx="18.21" cy="126.58" r="9.5"/><circle cx="14.00" cy="100.00" r="9.5"/><circle cx="18.21" cy="73.42" r="9.5"/><circle cx="30.42" cy="49.45" r="9.5"/><circle cx="49.45" cy="30.42" r="9.5"/><circle cx="73.42" cy="18.21" r="9.5"/><circle cx="100.00" cy="14.00" r="9.5"/><circle cx="126.58" cy="18.21" r="9.5"/><circle cx="150.55" cy="30.42" r="9.5"/><circle cx="169.58" cy="49.45" r="9.5"/><circle cx="181.79" cy="73.42" r="9.5"/></g>
           </defs>
-          <polygon points="100.00,0.00 106.21,13.22 114.23,1.02 118.49,14.99 128.17,4.05 130.40,18.49 141.54,9.04 141.69,23.64 154.06,15.87 152.14,30.35 165.49,24.43 161.52,38.48 175.57,34.51 169.65,47.86 184.13,45.94 176.36,58.31 190.96,58.46 181.51,69.60 195.95,71.83 185.01,81.51 198.98,85.77 186.78,93.79 200.00,100.00 186.78,106.21 198.98,114.23 185.01,118.49 195.95,128.17 181.51,130.40 190.96,141.54 176.36,141.69 184.13,154.06 169.65,152.14 175.57,165.49 161.52,161.52 165.49,175.57 152.14,169.65 154.06,184.13 141.69,176.36 141.54,190.96 130.40,181.51 128.17,195.95 118.49,185.01 114.23,198.98 106.21,186.78 100.00,200.00 93.79,186.78 85.77,198.98 81.51,185.01 71.83,195.95 69.60,181.51 58.46,190.96 58.31,176.36 45.94,184.13 47.86,169.65 34.51,175.57 38.48,161.52 24.43,165.49 30.35,152.14 15.87,154.06 23.64,141.69 9.04,141.54 18.49,130.40 4.05,128.17 14.99,118.49 1.02,114.23 13.22,106.21 0.00,100.00 13.22,93.79 1.02,85.77 14.99,81.51 4.05,71.83 18.49,69.60 9.04,58.46 23.64,58.31 15.87,45.94 30.35,47.86 24.43,34.51 38.48,38.48 34.51,24.43 47.86,30.35 45.94,15.87 58.31,23.64 58.46,9.04 69.60,18.49 71.83,4.05 81.51,14.99 85.77,1.02 93.79,13.22" fill="url(#g-sun)"/>
-          <circle cx="100" cy="100" r="86" fill="url(#g-ring)"/>
-          <circle cx="100" cy="100" r="79" fill="none" stroke="#8E6716" stroke-opacity=".45" stroke-width="1"/>
-          <circle cx="100" cy="100" r="57" fill="url(#g-core)"/>
-          <circle cx="100" cy="100" r="57" fill="none" stroke="#8E6716" stroke-opacity=".5" stroke-width="1.2"/>
-          <text class="seal-arc" dy="2">
-            <textPath href="#arc-top" startOffset="50%" text-anchor="middle">AMAZON</textPath>
-          </text>
-          <text class="seal-arc" dy="-3">
-            <textPath href="#arc-bot" startOffset="50%" text-anchor="middle">SELF ESTEEM</textPath>
-          </text>
-          <text class="seal-num" x="100" y="100" text-anchor="middle" dominant-baseline="central">№1</text>
-          <g fill="#FBEEC0" stroke="#8E6716" stroke-width=".6" stroke-opacity=".5">
-            <path d="M28.5 100l2.1 4.3 4.7.7-3.4 3.3.8 4.7-4.2-2.2-4.2 2.2.8-4.7-3.4-3.3 4.7-.7z"/>
-            <path d="M171.5 100l2.1 4.3 4.7.7-3.4 3.3.8 4.7-4.2-2.2-4.2 2.2.8-4.7-3.4-3.3 4.7-.7z"/>
-          </g>
+          <use href="#s-shape" fill="url(#s-edge)"/>
+          <circle cx="100" cy="100" r="74" fill="url(#s-face)"/>
+          <circle cx="100" cy="100" r="68" fill="none" stroke="#B98E2E" stroke-opacity=".6" stroke-width="1.3"/>
+          <g fill="#7A5712"><polygon points="71.2,54.6 72.3,57.6 75.5,57.7 73.0,59.8 73.9,62.9 71.2,61.1 68.4,62.9 69.3,59.8 66.8,57.7 70.0,57.6"/><polygon points="80.1,49.5 81.2,52.6 84.4,52.7 81.9,54.7 82.8,57.9 80.1,56.1 77.4,57.9 78.2,54.7 75.7,52.7 78.9,52.6"/><polygon points="89.8,46.4 91.0,49.5 94.2,49.6 91.7,51.6 92.5,54.8 89.8,53.0 87.1,54.8 88.0,51.6 85.4,49.6 88.7,49.5"/><polygon points="100.0,45.4 101.1,48.4 104.4,48.6 101.8,50.6 102.7,53.7 100.0,51.9 97.3,53.7 98.2,50.6 95.6,48.6 98.9,48.4"/><polygon points="110.2,46.4 111.3,49.5 114.6,49.6 112.0,51.6 112.9,54.8 110.2,53.0 107.5,54.8 108.3,51.6 105.8,49.6 109.0,49.5"/><polygon points="119.9,49.5 121.1,52.6 124.3,52.7 121.8,54.7 122.6,57.9 119.9,56.1 117.2,57.9 118.1,54.7 115.6,52.7 118.8,52.6"/><polygon points="128.8,54.6 130.0,57.6 133.2,57.7 130.7,59.8 131.6,62.9 128.8,61.1 126.1,62.9 127.0,59.8 124.5,57.7 127.7,57.6"/><polygon points="128.8,136.2 130.0,139.3 133.2,139.4 130.7,141.4 131.6,144.6 128.8,142.8 126.1,144.6 127.0,141.4 124.5,139.4 127.7,139.3"/><polygon points="119.9,141.3 121.1,144.3 124.3,144.4 121.8,146.5 122.6,149.6 119.9,147.8 117.2,149.6 118.1,146.5 115.6,144.4 118.8,144.3"/><polygon points="110.2,144.4 111.3,147.4 114.6,147.5 112.0,149.6 112.9,152.7 110.2,150.9 107.5,152.7 108.3,149.6 105.8,147.5 109.0,147.4"/><polygon points="100.0,145.4 101.1,148.4 104.4,148.6 101.8,150.6 102.7,153.7 100.0,151.9 97.3,153.7 98.2,150.6 95.6,148.6 98.9,148.4"/><polygon points="89.8,144.4 91.0,147.4 94.2,147.5 91.7,149.6 92.5,152.7 89.8,150.9 87.1,152.7 88.0,149.6 85.4,147.5 88.7,147.4"/><polygon points="80.1,141.3 81.2,144.3 84.4,144.4 81.9,146.5 82.8,149.6 80.1,147.8 77.4,149.6 78.2,146.5 75.7,144.4 78.9,144.3"/><polygon points="71.2,136.2 72.3,139.3 75.5,139.4 73.0,141.4 73.9,144.6 71.2,142.8 68.4,144.6 69.3,141.4 66.8,139.4 70.0,139.3"/></g>
+          <text class="seal-l1" x="100" y="92" text-anchor="middle">AMAZON №1</text>
+          <text class="seal-l2" x="100" y="120" text-anchor="middle">SELF ESTEEM</text>
+          <use href="#s-shape" fill="url(#s-gloss)"/>
         </svg>
       </div>
     </div>
     <div class="book-copy">
       <p class="book-eyebrow t-eyebrow">Моя книга — №1 на Amazon в категории Self Esteem</p>
-      <h2 class="book-title t-h1">Книга «Легче&nbsp;воздуха»</h2>
-      <p class="book-subtitle">Как начать жить прямо сейчас</p>
+      <h2 class="book-title t-h1">«Легче&nbsp;воздуха»</h2>
+      <p class="book-subtitle">Книга о&nbsp;том, как начать жить прямо сейчас</p>
       <hr class="book-rule">
-      <p class="book-desc t-body">Для женщин, которые не хотят выбирать между семьёй, карьерой и своим «Я»,&nbsp;— а хотят успеха во всех сферах сразу. Сотни женщин уже добились его по авторским стратегиям из книги. Сможете и&nbsp;вы.</p>
+      <p class="book-desc t-body">Для женщин, которые не&nbsp;хотят выбирать между семьёй, карьерой и&nbsp;своим «Я». Сотни женщин уже добились успеха во&nbsp;всех сферах сразу по&nbsp;авторским стратегиям из&nbsp;книги. Сможете и&nbsp;вы!</p>
       <p class="shops-label">Купить книгу</p>
       <div class="shops">
         <a class="shop" href="https://www.litres.ru/book/anna-vidueckaya/legche-vozduha-kak-nachat-zhit-pryamo-seychas-67725804/" target="_blank" rel="noopener" aria-label="Купить на ЛитРес">
@@ -814,10 +830,12 @@ body.bar-off .topbar{display:none}
 <!-- ABOUT -->
 <section class="about" id="about">
   <div class="about-wrap">
+    <div class="about-head">
+      <p class="about-eyebrow t-eyebrow">Обо мне</p>
+      <h2 class="about-title t-h1">Коуч ICF и&nbsp;психолог, автор метода «3&nbsp;луча баланса»</h2>
+    </div>
     <div class="about-grid">
       <div class="about-copy">
-        <p class="about-eyebrow t-eyebrow">Обо мне</p>
-        <h2 class="about-title t-h1">Коуч ICF и&nbsp;психолог, автор метода «3&nbsp;луча баланса»</h2>
         <p class="about-lead t-body">Помогаю женщинам, которые всё тянут на&nbsp;себе, перестать жить в&nbsp;режиме «я&nbsp;сама». Вы&nbsp;найдёте опору в&nbsp;себе, выстроите отношения и&nbsp;баланс между собой, семьёй и&nbsp;делом&nbsp;— без жертв и&nbsp;угрызений совести.</p>
         <p class="about-lead t-body">Почти десять лет я&nbsp;работаю с&nbsp;женщинами на&nbsp;консультациях и&nbsp;мастермайндах, выступаю на&nbsp;форумах и&nbsp;написала книгу «Легче воздуха».</p>
         <button class="story-link" type="button" aria-haspopup="dialog">
@@ -843,16 +861,16 @@ body.bar-off .topbar{display:none}
 <section class="reviews" id="reviews">
   <div class="reviews-head">
     <p class="reviews-eyebrow t-eyebrow">Отзывы</p>
-    <h2 class="reviews-title t-h1">Что пишут после встречи</h2>
+    <h2 class="reviews-title t-h1">Что пишут после встреч</h2>
   </div>
   <div class="rv-slider">
     <div class="rv-viewport">
       <div class="rv-track">
         <figure class="review">
-        <blockquote class="review-q">Многое в моей семье изменилось к лучшему. Я иначе взглянула на многие вещи, и стало больше ясности в отношениях с мужем. Спасибо за вашу мудрость.</blockquote>
+        <blockquote class="review-q"><b>Многое в моей семье изменилось к лучшему.</b> Я иначе взглянула на многие вещи, и стало больше ясности в отношениях с мужем. Спасибо за вашу мудрость.</blockquote>
     </figure>
         <figure class="review">
-        <blockquote class="review-q">Спасибо вам большое. Нашла много ответов на свои вопросы и поняла, как начать их решать.</blockquote>
+        <blockquote class="review-q">Спасибо вам большое. <b>Нашла много ответов на свои вопросы</b> и поняла, как начать их решать.</blockquote>
         <figcaption class="review-a">Ирина</figcaption>
     </figure>
         <figure class="review">
@@ -860,15 +878,15 @@ body.bar-off .topbar{display:none}
         <figcaption class="review-a">Лариса</figcaption>
     </figure>
         <figure class="review">
-        <blockquote class="review-q">Я не ожидала, что вы такая красивая и очень добрая. Такая уверенная доброта от вас. Я приятно ошеломлена.</blockquote>
+        <blockquote class="review-q">Я не ожидала, что вы такая красивая и очень добрая. <b>Такая уверенная доброта</b> от вас. Я приятно ошеломлена.</blockquote>
         <figcaption class="review-a">Альфия</figcaption>
     </figure>
         <figure class="review">
-        <blockquote class="review-q">Спасибо огромное! Столько внутри поднялось, до сих пор приходят осознания. Сразу начала анализировать: „А как у меня, с мужем? У нас тандем или нет?“ И спасибо за формулу трёх „я“ — она реально работает.</blockquote>
+        <blockquote class="review-q">Спасибо огромное! <b>Столько внутри поднялось</b>, до сих пор приходят осознания. Сразу начала анализировать: „А как у меня, с мужем? У нас тандем или нет?“ И спасибо за формулу трёх „я“ — она реально работает.</blockquote>
         <figcaption class="review-a">Татьяна</figcaption>
     </figure>
         <figure class="review">
-        <blockquote class="review-q">Научилась говорить нет, больше прислушиваюсь к себе, наконец-то переезжаю в другой город, ещё больше влюблена в жизнь и учусь жить без спешки. Спасибо!</blockquote>
+        <blockquote class="review-q"><b>Научилась говорить нет</b>, больше прислушиваюсь к себе, наконец-то переезжаю в другой город, ещё больше влюблена в жизнь и учусь жить без спешки. Спасибо!</blockquote>
         <figcaption class="review-a">Ольга</figcaption>
     </figure>
       </div>
@@ -884,11 +902,13 @@ body.bar-off .topbar{display:none}
     <h2 class="consult-hook t-h1"><em>«Я так больше не хочу»</em> — фраза, с которой начинаются перемены</h2>
     <div class="req2">
       <div class="req2-l">
-        <h3 class="req2-h">С чем вы можете прийти</h3>
-        <div class="req2-photo"><img src="assets/consult-anna.jpg" alt="Анна Видуецкая"></div>
         <p class="req2-p">За каждым запросом стоит одно желание&nbsp;— изменить то, что перестало устраивать. Чаще всего мы&nbsp;работаем по&nbsp;трём направлениям.</p>
+        <div class="req2-photo"><img src="assets/consult-anna.jpg" alt="Анна Видуецкая"></div>
       </div>
       <div class="req2-r">
+        <h3 class="req2-h">С чем вы можете прийти
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </h3>
         <article class="req">
           <div class="req-tx">
             <p class="req-k">Личная жизнь</p>
@@ -912,6 +932,7 @@ body.bar-off .topbar{display:none}
         </article>
       </div>
     </div>
+    </div>
   </div>
 </section>
 
@@ -934,17 +955,17 @@ body.bar-off .topbar{display:none}
 <section class="speaking" id="speaking">
   <div class="sp-wrap">
     <div class="sp-head">
-        <p class="t-eyebrow" style="color:var(--accent)">Выступления</p>
-        <h2 class="sp-title">Выступаю на&nbsp;форумах, конференциях и&nbsp;в&nbsp;компаниях.</h2>
-        <p class="sp-sub">Говорю о&nbsp;партнёрстве, женской самореализации и&nbsp;о&nbsp;том, как оставаться собой, когда на&nbsp;тебе семья, дело и&nbsp;ответственность. Аудитория, с&nbsp;которой я&nbsp;работаю лучше всего,&nbsp;— взрослые люди 35+, предприниматели и&nbsp;руководители.</p>
+      <p class="t-eyebrow" style="color:var(--accent)">Выступления</p>
+      <h2 class="sp-title">Выступаю на&nbsp;форумах, конференциях<br>и&nbsp;в&nbsp;компаниях.</h2>
     </div>
     <div class="sp-showcase">
       <div class="sp-reel-main" id="showreel">
         <video src="assets/showreel.mp4" autoplay muted loop playsinline preload="auto"></video>
       </div>
+      <p class="sp-sub">Говорю о&nbsp;партнёрстве, женской самореализации и&nbsp;о&nbsp;том, как оставаться собой, когда на&nbsp;тебе семья, дело и&nbsp;ответственность. Аудитория, с&nbsp;которой я&nbsp;работаю лучше всего,&nbsp;— взрослые люди 35+, предприниматели и&nbsp;руководители.</p>
     </div>
     <div class="sp-topics-block">
-      <h3 class="sp-topics-h">Темы, на которые можно пригласить</h3>
+      <h3 class="sp-topics-h">Темы, с которыми можно пригласить</h3>
       <div class="topics">
         <div class="topic">
           <button class="topic-head" type="button" aria-expanded="false" aria-controls="topic0">
@@ -1014,39 +1035,53 @@ body.bar-off .topbar{display:none}
     <p class="pc-intro">На&nbsp;моём YouTube-канале выходят подкасты и&nbsp;интервью про отношения, самореализацию и&nbsp;партнёрство.</p>
     <div class="pc-rail">
       <a class="pc-card" href="https://youtu.be/e7gFyl1W5sY" target="_blank" rel="noopener">
-        <div class="pc-thumb"><img src="https://img.youtube.com/vi/e7gFyl1W5sY/hqdefault.jpg" alt="Радислав Гандапас"><span class="pc-tag">Соведущий</span><span class="pc-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+        <div class="pc-thumb"><img src="assets/yt/e7gFyl1W5sY.jpg" alt="Радислав Гандапас"><span class="pc-tag">Соведущий</span></div>
         <h3 class="pc-name">Радислав Гандапас</h3>
         <p class="pc-role">«Почему мужчины перестают любить? Как пережить кризис в браке»</p>
+      
+        <p class="pc-views" data-vid="e7gFyl1W5sY">42 тыс. просмотров</p>
       </a>
       <a class="pc-card" href="https://youtu.be/L036ORC9JM8" target="_blank" rel="noopener">
-        <div class="pc-thumb"><img src="https://img.youtube.com/vi/L036ORC9JM8/hqdefault.jpg" alt="Татьяна Мужицкая"><span class="pc-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+        <div class="pc-thumb"><img src="assets/yt/L036ORC9JM8.jpg" alt="Татьяна Мужицкая"></div>
         <h3 class="pc-name">Татьяна Мужицкая</h3>
         <p class="pc-role">Психолог, писатель, теле- и&nbsp;радиоведущая, бизнес-тренер.</p>
+      
+        <p class="pc-views" data-vid="L036ORC9JM8">239 тыс. просмотров</p>
       </a>
       <a class="pc-card" href="https://youtu.be/qLRvOSbxtz0" target="_blank" rel="noopener">
-        <div class="pc-thumb"><img src="https://img.youtube.com/vi/qLRvOSbxtz0/hqdefault.jpg" alt="Екатерина Рыбакова"><span class="pc-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+        <div class="pc-thumb"><img src="assets/yt/qLRvOSbxtz0.jpg" alt="Екатерина Рыбакова"></div>
         <h3 class="pc-name">Екатерина Рыбакова</h3>
         <p class="pc-role">Президент и&nbsp;сооснователь «Рыбаков Фонда».</p>
+      
+        <p class="pc-views" data-vid="qLRvOSbxtz0">6,7 тыс. просмотров</p>
       </a>
       <a class="pc-card" href="https://youtu.be/-vjOodAd0c8" target="_blank" rel="noopener">
-        <div class="pc-thumb"><img src="https://img.youtube.com/vi/-vjOodAd0c8/hqdefault.jpg" alt="Ана Мавричева"><span class="pc-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+        <div class="pc-thumb"><img src="assets/yt/-vjOodAd0c8.jpg" alt="Ана Мавричева"></div>
         <h3 class="pc-name">Ана Мавричева</h3>
         <p class="pc-role">Эксперт по&nbsp;личному бренду, автор книги «Код публичности».</p>
+      
+        <p class="pc-views" data-vid="-vjOodAd0c8">21 тыс. просмотров</p>
       </a>
       <a class="pc-card" href="https://youtu.be/kWB1QlY-i70" target="_blank" rel="noopener">
-        <div class="pc-thumb"><img src="https://img.youtube.com/vi/kWB1QlY-i70/hqdefault.jpg" alt="Полина Аскери"><span class="pc-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+        <div class="pc-thumb"><img src="assets/yt/kWB1QlY-i70.jpg" alt="Полина Аскери"></div>
         <h3 class="pc-name">Полина Аскери</h3>
         <p class="pc-role">Основатель галереи современного искусства Askeri Gallery.</p>
+      
+        <p class="pc-views" data-vid="kWB1QlY-i70">2,7 тыс. просмотров</p>
       </a>
       <a class="pc-card" href="https://youtu.be/_Mr0mkMmy5A" target="_blank" rel="noopener">
-        <div class="pc-thumb"><img src="https://img.youtube.com/vi/_Mr0mkMmy5A/hqdefault.jpg" alt="Ольга Мгеладзе"><span class="pc-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+        <div class="pc-thumb"><img src="assets/yt/_Mr0mkMmy5A.jpg" alt="Ольга Мгеладзе"></div>
         <h3 class="pc-name">Ольга Мгеладзе</h3>
         <p class="pc-role">Психолог и&nbsp;блогер с&nbsp;крупной аудиторией.</p>
+      
+        <p class="pc-views" data-vid="_Mr0mkMmy5A">29 тыс. просмотров</p>
       </a>
       <a class="pc-card" href="https://youtu.be/fIzYCJDIUlI" target="_blank" rel="noopener">
-        <div class="pc-thumb"><img src="https://img.youtube.com/vi/fIzYCJDIUlI/hqdefault.jpg" alt="Юлианна Винер"><span class="pc-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+        <div class="pc-thumb"><img src="assets/yt/fIzYCJDIUlI.jpg" alt="Юлианна Винер"></div>
         <h3 class="pc-name">Юлианна Винер</h3>
         <p class="pc-role">Певица, светская персона из&nbsp;семьи Винер-Усмановых.</p>
+      
+        <p class="pc-views" data-vid="fIzYCJDIUlI">18 тыс. просмотров</p>
       </a>
     </div>
     <div class="pc-actions">
@@ -1145,7 +1180,7 @@ body.bar-off .topbar{display:none}
   m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open');b.setAttribute('aria-expanded','false');});});
 })();
 (function(){
-  var els=[].slice.call(document.querySelectorAll('.req'));
+  var els=[].slice.call(document.querySelectorAll('.req,.topic'));
   if(!els.length)return;
   var ticking=false;
   function upd(){
@@ -1391,9 +1426,19 @@ body.bar-off .topbar{display:none}
   var bar=document.getElementById('topbar'); if(!bar)return;
   var x=bar.querySelector('.topbar-x');
   try{ if(localStorage.getItem('bar-off')==='1') document.body.classList.add('bar-off'); }catch(e){}
+  /* высоту строки меряем по факту — тогда навигация никогда её не перекроет,
+     сколько бы строк ни занял текст на узком экране */
+  function measure(){
+    var h = document.body.classList.contains('bar-off') ? 0 : Math.round(bar.getBoundingClientRect().height);
+    document.documentElement.style.setProperty('--bar-h', h+'px');
+  }
+  addEventListener('resize',measure,{passive:true});
+  addEventListener('load',measure);
+  measure(); setTimeout(measure,300);
   if(x) x.addEventListener('click',function(){
     document.body.classList.add('bar-off');
     try{ localStorage.setItem('bar-off','1'); }catch(e){}
+    measure();
   });
 })();
 </script>
