@@ -209,17 +209,23 @@ img{display:block}
   .sm-title{margin-bottom:26px}
 }
 .proof{max-width:1200px;margin:88px auto 0;padding:56px 40px 0;border-top:1px solid var(--line)}
-/* Плитки-факты: цифра и подпись набраны на бумаге, фотография остаётся
-   фотографией. Тип не конкурирует с лицами и наградными баннерами. */
-.stat-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:0 48px}
-.stile{display:flex;flex-direction:column}
-.stile-body{border-top:1px solid var(--ink);padding-top:22px;margin-bottom:34px}
-.stile-kicker{display:block;font-family:var(--sans);font-weight:600;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
-.stile-num{display:block;font-family:var(--display);font-weight:var(--w-display);font-size:clamp(92px,10vw,152px);line-height:.82;letter-spacing:-.03em;color:var(--ink)}
-.stile-label{display:block;font-family:var(--text);font-size:18px;line-height:1.45;color:var(--ink-2);margin:20px 0 0;max-width:19ch;min-height:2.9em}
-.stile-media{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--line)}
-.stile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform var(--d-xxl) var(--ease-out)}
+/* Плитки-факты по схеме Parloa: изображение ведёт, поверх него —
+   волосяная линия, мелкая подпись и огромная цифра. Композиция асимметричная:
+   одна крупная плитка и две малые. */
+.stat-tiles{display:grid;grid-template-columns:1.5fr 1fr;grid-template-rows:1fr 1fr;gap:18px}
+.stile{position:relative;overflow:hidden;color:#fff;background:var(--ink)}
+.stile--big{grid-row:1 / span 2;aspect-ratio:1/1.36}
+.stile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease-out)}
 .stile:hover img{transform:scale(1.045)}
+.stile::after{content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(0deg,rgba(10,9,8,.78) 0%,rgba(10,9,8,.40) 24%,rgba(10,9,8,.08) 50%,transparent 68%)}
+.stile--big::after{background:linear-gradient(0deg,rgba(10,9,8,.86) 0%,rgba(10,9,8,.50) 28%,rgba(10,9,8,.10) 54%,transparent 72%)}
+.stile-body{position:absolute;left:30px;right:30px;bottom:26px;z-index:2;border-top:1px solid rgba(255,255,255,.62);padding-top:16px}
+.stile-label{display:block;font-family:var(--sans);font-weight:500;font-size:14.5px;line-height:1.35;letter-spacing:.01em;color:rgba(255,255,255,.96);margin:0 0 6px;max-width:22ch}
+.stile-num{display:block;font-family:var(--display);font-weight:var(--w-display);font-size:96px;line-height:.88;letter-spacing:-.03em;color:#fff}
+.stile--big .stile-body{left:38px;right:38px;bottom:34px}
+.stile--big .stile-num{font-size:clamp(120px,13vw,196px)}
+.stile--big .stile-label{font-size:17px;margin-bottom:8px}
 .feature{margin-top:80px;background:var(--ink);color:#fff;display:grid;grid-template-columns:1fr 1fr;min-height:460px;border-radius:2px;overflow:hidden}
 .feature-img{position:relative;min-height:340px}
 .feature-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 24%}
@@ -551,9 +557,12 @@ img{display:block}
   .panel-cta{border-left:none;border-top:1px solid var(--line);padding:36px 30px 40px}
 }
 @media(max-width:960px){
-.stat-tiles{grid-template-columns:1fr;gap:56px 0}
-.stile-num{font-size:104px}
-.stile-label{min-height:0}
+.stat-tiles{grid-template-columns:1fr;grid-template-rows:none;gap:12px}
+.stile--big{grid-row:auto;aspect-ratio:4/3.4}
+.stile:not(.stile--big){aspect-ratio:16/10}
+.stile-body{left:22px;right:22px;bottom:20px}
+.stile--big .stile-num{font-size:118px}
+.stile-num{font-size:84px}
 }
 /* FOOTER */
 .ftr{position:relative;isolation:isolate;overflow:hidden;background:#16130F;color:#fff;padding:104px 0 40px}
@@ -715,29 +724,26 @@ img{display:block}
     </div>
     <div class="proof">
       <div class="stat-tiles">
-        <article class="stile">
+        <article class="stile stile--big">
+          <img src="assets/biz2.jpg" alt="Анна Видуецкая" style="object-position:62% 28%">
           <div class="stile-body">
-            <span class="stile-kicker">Дело</span>
-            <span class="stile-num">3</span>
             <span class="stile-label">бизнеса в&nbsp;разных сферах</span>
+            <span class="stile-num">3</span>
           </div>
-          <div class="stile-media"><img src="assets/biz2.jpg" alt="Анна Видуецкая" style="object-position:55% 26%"></div>
         </article>
         <article class="stile">
+          <img src="assets/deti.jpg" alt="Семья Анны Видуецкой" style="object-position:50% 12%">
           <div class="stile-body">
-            <span class="stile-kicker">Семья</span>
-            <span class="stile-num">4</span>
             <span class="stile-label">детей и&nbsp;шесть лет без няни</span>
+            <span class="stile-num">4</span>
           </div>
-          <div class="stile-media"><img src="assets/deti.jpg" alt="Семья Анны" style="object-position:52% 20%"></div>
         </article>
         <article class="stile">
+          <img src="assets/award-portrait.jpg" alt="Премия «Бизнес-мама года»" style="object-position:46% 34%">
           <div class="stile-body">
-            <span class="stile-kicker">Признание</span>
+            <span class="stile-label">премии «Бизнес-мама&nbsp;года»</span>
             <span class="stile-num">2</span>
-            <span class="stile-label">премии «Бизнес-мама года»</span>
           </div>
-          <div class="stile-media"><img src="assets/biz-mama-x2.png" alt="Премия «Бизнес-мама года»" style="object-position:22% 16%"></div>
         </article>
       </div>
     </div>
