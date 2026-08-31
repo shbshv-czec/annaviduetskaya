@@ -6,7 +6,7 @@
 <title>Анна Видуецкая</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..600&family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   /* — ЧЕРНИЛА: одна тёплая шкала вместо 10 случайных тёмных — */
@@ -32,6 +32,12 @@
      --head-track           : апрош. Капсу нужен положительный, строчным — отрицательный. */
   --w-display:600; --w-head:600;
   --head-case:none; --head-track:.015em;
+  /* Дисплейная гарнитура — только для самых крупных заголовков.
+     Bodoni Moda здесь невозможна: у неё нет кириллицы (подмножества latin,
+     latin-ext, math, symbols). В смешанном стеке она забирала ёлочки, тире
+     и цифры, а буквы шли из другого шрифта — две гарнитуры в одной строке.
+     Playfair Display — тот же дидон, но с кириллицей и весами 400–700. */
+  --display:'Playfair Display',Georgia,serif;
   --serif:'Cormorant','Cormorant Garamond',Georgia,serif;
   --text:'Lora',Georgia,serif;
   --sans:'Manrope','Helvetica Neue',Arial,sans-serif;
@@ -616,7 +622,8 @@ img{display:block}
    строки апроша/интерлиньяжа ниже: прописным нужен положительный апрош,
    иначе стойки слипаются, а интерлиньяж можно сжать (нет выносных элементов). */
 .t-display,.t-h1,.book-title,.about-title,.reviews-title,.consult-hook,
-.sp-title,.pc-title,.tg-title,.press-name,.ftr-name,.sm-title,.feature-title{
+.sp-title,.pc-title,.tg-title,.press-name,.ftr-name,.sm-title,.feature-title,.stile-num{
+  font-family:var(--display);
   text-transform:var(--head-case);
   /* letter-spacing:var(--head-track); */
   /* line-height:.96; */}
