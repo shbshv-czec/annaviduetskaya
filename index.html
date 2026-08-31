@@ -94,37 +94,39 @@ body.bar-off .topbar{display:none}
   .topbar-t,.topbar-cta{font-size:11px;letter-spacing:.07em}
 }
 /* Навигация: полупрозрачная плашка поверх первого экрана */
-.nav-wrap{position:fixed;top:var(--bar-h);left:0;right:0;z-index:60;
+/* Навигация ужимается непрерывно по прогрессу прокрутки --navp (0…1),
+   поэтому нет порога и нет скачка. */
+.nav-wrap{--navp:0;position:fixed;top:var(--bar-h);left:0;right:0;z-index:60;isolation:isolate;
   background:linear-gradient(180deg,rgba(16,13,11,.80) 0%,rgba(16,13,11,.46) 52%,rgba(16,13,11,0) 100%);
-  transition:background var(--d-lg) var(--ease-out),box-shadow var(--d-lg) var(--ease-out)}
-.nav{max-width:1400px;margin:0 auto;padding:18px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;
-  transition:padding var(--d-lg) var(--ease-out)}
+  box-shadow:0 12px 34px -26px rgba(0,0,0,calc(.9 * var(--navp)))}
+.nav-wrap::before{content:"";position:absolute;inset:0;z-index:0;background:#100D0B;opacity:var(--navp)}
+.nav{position:relative;z-index:1;max-width:1400px;margin:0 auto;
+  padding:calc(18px - 10px * var(--navp)) 40px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px}
 .nav a{color:#fff}
-.brand{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;
-  border:1px solid rgba(255,255,255,.55);transition:border-color var(--d-lg) var(--ease-out),background var(--d-lg) var(--ease-out)}
-.brand-mark{font-family:var(--display);font-weight:var(--w-display);font-size:17px;letter-spacing:.06em;
-  line-height:1;color:#fff;transition:color var(--d-lg) var(--ease-out)}
+.brand{display:inline-flex;align-items:center;justify-content:center;
+  width:calc(42px - 8px * var(--navp));height:calc(42px - 8px * var(--navp));
+  border:1px solid rgba(255,255,255,.55);transition:background var(--d-lg) var(--ease-out)}
+.brand-mark{font-family:var(--display);font-weight:var(--w-display);
+  font-size:calc(17px - 3px * var(--navp));letter-spacing:.06em;line-height:1;color:#fff}
 .brand:hover{background:rgba(255,255,255,.16)}
 .nav-links{display:flex;gap:6px;align-items:center}
-.nav-links a{font-family:var(--sans);text-transform:uppercase;letter-spacing:.1em;font-size:12px;font-weight:600;
-  color:rgba(255,255,255,.92);padding:9px 14px;border-radius:2px;
+.nav-links a{font-family:var(--sans);text-transform:uppercase;letter-spacing:.1em;font-weight:600;
+  font-size:calc(12px - .5px * var(--navp));color:rgba(255,255,255,.92);
+  padding:calc(9px - 2px * var(--navp)) calc(14px - 2px * var(--navp));border-radius:2px;
   transition:background var(--d-md) var(--ease-out),color var(--d-md) var(--ease-out)}
 .nav-links a:hover{background:rgba(255,255,255,.16);color:#fff}
 .nav-right{display:flex;align-items:center;gap:14px}
 .nav-phone{font-family:var(--sans);font-size:13.5px;font-weight:500;letter-spacing:.01em;color:rgba(255,255,255,.9);white-space:nowrap}
-.nav .wa-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-size:12px;font-weight:600;
-  text-transform:uppercase;letter-spacing:.08em;color:var(--ink);background:#fff;border:1px solid #fff;
-  padding:11px 16px;border-radius:2px;transition:background var(--d-md) var(--ease-out),color var(--d-md) var(--ease-out)}
+.nav .wa-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-weight:600;
+  font-size:calc(12px - .5px * var(--navp));text-transform:uppercase;letter-spacing:.08em;
+  color:var(--ink);background:#fff;border:1px solid #fff;
+  padding:calc(11px - 3px * var(--navp)) calc(16px - 2px * var(--navp));border-radius:2px;
+  transition:background var(--d-md) var(--ease-out),color var(--d-md) var(--ease-out)}
 .nav .wa-btn:hover{background:transparent;color:#fff}
 .wa-btn svg{width:15px;height:15px}
 /* когда первый экран пролистан — светлая плашка */
-/* после первого экрана — тонкая чёрная полоска */
-.nav-wrap.solid{background:#100D0B;box-shadow:0 12px 34px -26px rgba(0,0,0,.9)}
-.nav-wrap.solid .nav{padding:8px 40px}
-.nav-wrap.solid .brand{width:34px;height:34px}
-.nav-wrap.solid .brand-mark{font-size:14px}
-.nav-wrap.solid .nav-links a{padding:7px 12px;font-size:11.5px}
-.nav-wrap.solid .nav .wa-btn{padding:8px 14px;font-size:11.5px}
+
 .burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;background:none;border:none;cursor:pointer;padding:8px}
 .burger span{display:block;width:100%;height:2px;background:#fff}
 .mobile-menu{display:none;position:absolute;top:100%;left:0;right:0;overflow:hidden;
@@ -194,9 +196,7 @@ body.bar-off .topbar{display:none}
 /* Бейдж Amazon: плоский, печатный — обводка вместо глянца */
 /* Наградной знак Amazon: золото, лучистый кант, текст по дуге */
 .seal{position:absolute;top:-34px;right:-74px;width:132px;height:132px;z-index:3;overflow:visible;
-  filter:drop-shadow(0 14px 26px rgba(120,88,20,.42));animation:seal-turn 26s linear infinite}
-@keyframes seal-turn{to{transform:rotate(360deg)}}
-@media(prefers-reduced-motion:reduce){.seal{animation:none}}
+  filter:drop-shadow(0 14px 26px rgba(120,88,20,.42))}
 .seal-arc{font-family:var(--sans);font-weight:700;font-size:15.5px;letter-spacing:.24em;fill:#7A5712}
 .seal-num{font-family:var(--display);font-weight:700;font-size:52px;fill:#6B4A12}
 .book-eyebrow{color:var(--accent);margin:0 0 18px}
@@ -768,7 +768,7 @@ body.bar-off .topbar{display:none}
               <stop offset=".75" stop-color="#D2A544"/><stop offset="1" stop-color="#A97C21"/>
             </radialGradient>
             <path id="arc-top" d="M100,100 m-68,0 a68,68 0 0,1 136,0" fill="none"/>
-            <path id="arc-bot" d="M32,100 A68,68 0 0 0 168,100" fill="none"/>
+            <path id="arc-bot" d="M21,100 A79,79 0 0 0 179,100" fill="none"/>
           </defs>
           <polygon points="100.00,0.00 106.21,13.22 114.23,1.02 118.49,14.99 128.17,4.05 130.40,18.49 141.54,9.04 141.69,23.64 154.06,15.87 152.14,30.35 165.49,24.43 161.52,38.48 175.57,34.51 169.65,47.86 184.13,45.94 176.36,58.31 190.96,58.46 181.51,69.60 195.95,71.83 185.01,81.51 198.98,85.77 186.78,93.79 200.00,100.00 186.78,106.21 198.98,114.23 185.01,118.49 195.95,128.17 181.51,130.40 190.96,141.54 176.36,141.69 184.13,154.06 169.65,152.14 175.57,165.49 161.52,161.52 165.49,175.57 152.14,169.65 154.06,184.13 141.69,176.36 141.54,190.96 130.40,181.51 128.17,195.95 118.49,185.01 114.23,198.98 106.21,186.78 100.00,200.00 93.79,186.78 85.77,198.98 81.51,185.01 71.83,195.95 69.60,181.51 58.46,190.96 58.31,176.36 45.94,184.13 47.86,169.65 34.51,175.57 38.48,161.52 24.43,165.49 30.35,152.14 15.87,154.06 23.64,141.69 9.04,141.54 18.49,130.40 4.05,128.17 14.99,118.49 1.02,114.23 13.22,106.21 0.00,100.00 13.22,93.79 1.02,85.77 14.99,81.51 4.05,71.83 18.49,69.60 9.04,58.46 23.64,58.31 15.87,45.94 30.35,47.86 24.43,34.51 38.48,38.48 34.51,24.43 47.86,30.35 45.94,15.87 58.31,23.64 58.46,9.04 69.60,18.49 71.83,4.05 81.51,14.99 85.77,1.02 93.79,13.22" fill="url(#g-sun)"/>
           <circle cx="100" cy="100" r="86" fill="url(#g-ring)"/>
@@ -778,7 +778,7 @@ body.bar-off .topbar{display:none}
           <text class="seal-arc" dy="2">
             <textPath href="#arc-top" startOffset="50%" text-anchor="middle">AMAZON</textPath>
           </text>
-          <text class="seal-arc" dy="-6">
+          <text class="seal-arc" dy="-3">
             <textPath href="#arc-bot" startOffset="50%" text-anchor="middle">SELF ESTEEM</textPath>
           </text>
           <text class="seal-num" x="100" y="100" text-anchor="middle" dominant-baseline="central">№1</text>
@@ -817,7 +817,7 @@ body.bar-off .topbar{display:none}
     <div class="about-grid">
       <div class="about-copy">
         <p class="about-eyebrow t-eyebrow">Обо мне</p>
-        <h2 class="about-title t-h1">Помогаю вернуться к&nbsp;себе</h2>
+        <h2 class="about-title t-h1">Коуч ICF и&nbsp;психолог, автор метода «3&nbsp;луча баланса»</h2>
         <p class="about-lead t-body">Помогаю женщинам, которые всё тянут на&nbsp;себе, перестать жить в&nbsp;режиме «я&nbsp;сама». Вы&nbsp;найдёте опору в&nbsp;себе, выстроите отношения и&nbsp;баланс между собой, семьёй и&nbsp;делом&nbsp;— без жертв и&nbsp;угрызений совести.</p>
         <p class="about-lead t-body">Почти десять лет я&nbsp;работаю с&nbsp;женщинами на&nbsp;консультациях и&nbsp;мастермайндах, выступаю на&nbsp;форумах и&nbsp;написала книгу «Легче воздуха».</p>
         <button class="story-link" type="button" aria-haspopup="dialog">
@@ -1365,17 +1365,22 @@ body.bar-off .topbar{display:none}
   });
 })();
 
-/* ===== НАВИГАЦИЯ: светлеет после первого экрана ===== */
+/* ===== НАВИГАЦИЯ: непрерывно ужимается по прокрутке, без порога ===== */
 (function(){
   var nav=document.querySelector('.nav-wrap'), hero=document.querySelector('.hero');
   if(!nav||!hero)return;
-  var last=0;
+  var tick=false,last=0;
   function upd(){
+    tick=false;
+    var y=window.pageYOffset||document.documentElement.scrollTop;
     var h=hero.offsetHeight||1;
-    nav.classList.toggle('solid',(window.pageYOffset||document.documentElement.scrollTop) > h-90);
+    var start=Math.max(0,h-260), len=200;          /* плавный участок перед концом первого экрана */
+    var p=(y-start)/len; if(p<0)p=0; if(p>1)p=1;
+    nav.style.setProperty('--navp',p.toFixed(4));
   }
   addEventListener('scroll',function(){
-    var now=Date.now(); if(now-last>90){last=now;upd();}
+    if(!tick){tick=true;requestAnimationFrame(upd);}
+    var now=Date.now(); if(now-last>200){last=now;upd();}   /* страховка, если rAF заморожен */
   },{passive:true});
   addEventListener('resize',upd,{passive:true});
   upd();
