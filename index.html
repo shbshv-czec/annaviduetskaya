@@ -31,7 +31,7 @@
      --head-case            : uppercase (капс) или none (строчные).
      --head-track           : апрош. Капсу нужен положительный, строчным — отрицательный. */
   --w-display:600; --w-head:600;
-  --head-case:uppercase; --head-track:.015em;
+  --head-case:none; --head-track:.015em;
   --serif:'Cormorant','Cormorant Garamond',Georgia,serif;
   --text:'Lora',Georgia,serif;
   --sans:'Manrope','Helvetica Neue',Arial,sans-serif;
@@ -593,17 +593,15 @@ img{display:block}
   .hero-dim{display:none}
 }
 
-/* ===== КАПС: только короткие дисплейные и секционные заголовки.
-   Карточки и цитаты остаются в строчных — капс там убивает читаемость. ===== */
+/* Регистр заголовков. Сейчас строчные: --head-case:none.
+   Если снова понадобится капс — вернуть --head-case:uppercase И раскомментировать
+   строки апроша/интерлиньяжа ниже: прописным нужен положительный апрош,
+   иначе стойки слипаются, а интерлиньяж можно сжать (нет выносных элементов). */
 .t-display,.t-h1,.book-title,.about-title,.reviews-title,.consult-hook,
 .sp-title,.pc-title,.tg-title,.press-name,.ftr-name,.sm-title,.feature-title{
   text-transform:var(--head-case);
-  letter-spacing:var(--head-track);
-  line-height:.96}
-/* у капса нет выносных элементов — межстрочный интервал можно сжать,
-   но апрош обязан быть положительным, иначе прописные слипаются */
-.consult-hook{line-height:1.02}
-.press-name,.ftr-name{line-height:1}
+  /* letter-spacing:var(--head-track); */
+  /* line-height:.96; */}
 </style>
 </head>
 <body>
