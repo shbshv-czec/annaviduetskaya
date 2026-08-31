@@ -248,56 +248,44 @@ img{display:block}
   .seal--bl{bottom:34px;left:-18px}
 }
 /* ---------- REVIEWS (soft blue, white text, carousel) ---------- */
-.reviews{position:relative;isolation:isolate;background:var(--paper);padding:112px 0;color:var(--ink);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.reviews-head{position:relative;z-index:1;max-width:1200px;margin:0 auto 64px;padding:0 40px;text-align:center}
-.reviews-eyebrow{color:var(--accent);margin:0 0 16px}
-.reviews-title{color:var(--ink);margin:0}
-.reviews-track{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:repeat(3,1fr);gap:0}
-.review{position:relative;padding:0 40px;text-align:left}
-.review{border-left:1px solid var(--line)}
-.review:nth-child(3n+1){border-left:none}
-.review:nth-child(n+4){margin-top:56px}
-.stars{font-size:12px;letter-spacing:5px;color:var(--accent);margin-bottom:22px}
-.review-q{font-family:var(--text);font-style:italic;font-size:18px;line-height:1.62;color:var(--ink);margin:0 0 22px}
+/* ---------- ОТЗЫВЫ: слайдер по одному ---------- */
+.reviews{position:relative;isolation:isolate;padding:112px 0;
+  background:url('assets/reviews-bg.jpg') center/cover no-repeat;
+  border-top:1px solid rgba(255,255,255,.5);border-bottom:1px solid rgba(255,255,255,.5)}
+.reviews-head{position:relative;z-index:1;max-width:1200px;margin:0 auto 56px;padding:0 40px;text-align:center}
+.rv-slider{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:0 40px}
+.rv-viewport{overflow:hidden}
+.rv-track{display:flex;will-change:transform;transition:transform var(--d-xl) var(--ease-out)}
+.rv-track.no-anim{transition:none}
+.review{flex:0 0 100%;margin:0;padding:0 24px;text-align:center;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;min-height:300px}
+.stars{font-size:13px;letter-spacing:6px;color:var(--accent);margin:0 0 26px}
+.review-q{font-family:var(--text);font-style:italic;font-weight:400;
+  font-size:clamp(21px,2.4vw,30px);line-height:1.5;color:var(--ink);margin:0 0 26px;max-width:26ch}
 .review-q::before{content:'«'}
 .review-q::after{content:'»'}
-.review-a{font-family:var(--text);font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+.review-a{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
+.rv-nav{display:flex;align-items:center;justify-content:center;gap:26px;margin-top:38px}
+.rv-btn{width:52px;height:52px;border-radius:50%;border:1px solid rgba(31,28,27,.28);background:transparent;
+  color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;
+  transition:background var(--d-md) var(--ease-out),border-color var(--d-md) var(--ease-out),color var(--d-md) var(--ease-out)}
+.rv-btn svg{width:22px;height:22px}
+.rv-btn:hover{background:var(--ink);border-color:var(--ink);color:#fff}
+.rv-meter{font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:.1em;color:var(--ink);margin:0;
+  display:flex;align-items:baseline;gap:7px;min-width:74px;justify-content:center}
+.rv-sep{color:var(--ink-3);font-weight:400}
+.rv-total{color:var(--ink-3)}
+.rv-bar{position:relative;height:1px;background:rgba(31,28,27,.18);margin:26px auto 0;max-width:340px}
+.rv-bar i{position:absolute;left:0;top:-1px;height:3px;background:var(--accent);
+  transition:left var(--d-lg) var(--ease-out),width var(--d-lg) var(--ease-out)}
 @media(max-width:960px){
   .reviews{padding:76px 0}
-  .reviews-head{padding:0 24px;margin-bottom:40px}
-  .reviews-track{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:82vw;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 24px;gap:0;scrollbar-width:none}
-  .reviews-track::-webkit-scrollbar{display:none}
-  .review{scroll-snap-align:center;padding:0 22px}
+  .reviews-head{padding:0 24px;margin-bottom:38px}
+  .rv-slider{padding:0 16px}
+  .review{padding:0 8px;min-height:260px}
+  .rv-btn{width:46px;height:46px}
+  .rv-nav{gap:18px;margin-top:30px}
 }
-/* Призматический отблеск — «сияние шёлка». Чистый CSS, без внешних файлов */
-.prism{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
-.prism::before,.prism::after{content:'';position:absolute;inset:-30%;will-change:transform}
-.prism::before{
-  background:
-    radial-gradient(38% 58% at 16% 32%,rgba(96,186,255,.58),transparent 62%),
-    radial-gradient(32% 48% at 40% 66%,rgba(120,255,214,.46),transparent 64%),
-    radial-gradient(30% 44% at 64% 26%,rgba(255,214,122,.50),transparent 62%),
-    radial-gradient(34% 52% at 86% 62%,rgba(255,146,116,.44),transparent 64%),
-    radial-gradient(26% 40% at 52% 92%,rgba(186,146,255,.40),transparent 62%);
-  filter:blur(72px) saturate(1.25);opacity:.62;
-  animation:prism-drift 34s var(--ease-in-out) infinite alternate}
-.prism::after{
-  background:linear-gradient(104deg,transparent 34%,rgba(255,255,255,.55) 50%,transparent 66%);
-  background-size:260% 100%;background-repeat:no-repeat;opacity:.5;
-  animation:prism-sheen 18s var(--ease-in-out) infinite}
-@keyframes prism-drift{0%{transform:translate3d(-3%,-2%,0) scale(1)}100%{transform:translate3d(4%,3%,0) scale(1.12)}}
-@keyframes prism-sheen{0%{background-position:-120% 0}55%,100%{background-position:240% 0}}
-/* Тёмный вариант: спектр на чёрном + тёмный диск-линза */
-.prism--dark::before{
-  background:conic-gradient(from 205deg at 58% 14%,
-    rgba(255,70,60,.62),rgba(255,196,70,.58),rgba(126,255,186,.52),
-    rgba(86,176,255,.66),rgba(196,126,255,.56),rgba(255,70,60,.62));
-  filter:blur(64px) saturate(1.5);opacity:.5;mix-blend-mode:screen}
-.prism--dark::after{
-  background:radial-gradient(52% 66% at 54% 82%,#16130F 60%,transparent 62%),
-             linear-gradient(180deg,transparent 0%,rgba(22,19,15,.5) 80%);
-  filter:none;opacity:1;animation:none;mix-blend-mode:normal}
-@media(prefers-reduced-motion:reduce){.prism::before,.prism::after{animation:none}}
 /* SPEAKING */
 .speaking{background:var(--paper);padding:104px 0;border-top:1px solid var(--line)}
 .sp-wrap{max-width:1200px;margin:0 auto;padding:0 40px}
@@ -751,42 +739,50 @@ img{display:block}
 
 <!-- REVIEWS -->
 <section class="reviews" id="reviews">
-  <div class="prism" aria-hidden="true"></div>
   <div class="reviews-head">
     <p class="reviews-eyebrow t-eyebrow">Отзывы</p>
     <h2 class="reviews-title t-h1">Что пишут после встречи</h2>
   </div>
-  <div class="reviews-track">
-    <figure class="review">
-      <div class="stars">★★★★★</div>
-      <blockquote class="review-q">Многое в моей семье изменилось к лучшему. Я иначе взглянула на многие вещи, и стало больше ясности в отношениях с мужем. Спасибо за вашу мудрость.</blockquote>
-      <figcaption class="review-a">Анонимно</figcaption>
+  <div class="rv-slider">
+    <div class="rv-viewport">
+      <div class="rv-track">
+        <figure class="review">
+        <div class="stars">★★★★★</div>
+        <blockquote class="review-q">Многое в моей семье изменилось к лучшему. Я иначе взглянула на многие вещи, и стало больше ясности в отношениях с мужем. Спасибо за вашу мудрость.</blockquote>
     </figure>
-    <figure class="review">
-      <div class="stars">★★★★★</div>
-      <blockquote class="review-q">Спасибо вам большое. Нашла много ответов на свои вопросы и поняла, как начать их решать.</blockquote>
-      <figcaption class="review-a">Ирина</figcaption>
+        <figure class="review">
+        <div class="stars">★★★★★</div>
+        <blockquote class="review-q">Спасибо вам большое. Нашла много ответов на свои вопросы и поняла, как начать их решать.</blockquote>
+        <figcaption class="review-a">Ирина</figcaption>
     </figure>
-    <figure class="review">
-      <div class="stars">★★★★★</div>
-      <blockquote class="review-q">Где была эта умная красивая женщина? Почему попалась мне только сейчас. Мёд для ушей!</blockquote>
-      <figcaption class="review-a">Лариса</figcaption>
+        <figure class="review">
+        <div class="stars">★★★★★</div>
+        <blockquote class="review-q">Где была эта умная красивая женщина? Почему попалась мне только сейчас. Мёд для ушей!</blockquote>
+        <figcaption class="review-a">Лариса</figcaption>
     </figure>
-    <figure class="review">
-      <div class="stars">★★★★★</div>
-      <blockquote class="review-q">Я не ожидала, что вы такая красивая и очень добрая. Такая уверенная доброта от вас. Я приятно ошеломлена.</blockquote>
-      <figcaption class="review-a">Альфия</figcaption>
+        <figure class="review">
+        <div class="stars">★★★★★</div>
+        <blockquote class="review-q">Я не ожидала, что вы такая красивая и очень добрая. Такая уверенная доброта от вас. Я приятно ошеломлена.</blockquote>
+        <figcaption class="review-a">Альфия</figcaption>
     </figure>
-    <figure class="review">
-      <div class="stars">★★★★★</div>
-      <blockquote class="review-q">Спасибо огромное! Столько внутри поднялось, до сих пор приходят осознания. Сразу начала анализировать: „А как у меня, с мужем? У нас тандем или нет?“ И спасибо за формулу трёх „я“ — она реально работает.</blockquote>
-      <figcaption class="review-a">Татьяна</figcaption>
+        <figure class="review">
+        <div class="stars">★★★★★</div>
+        <blockquote class="review-q">Спасибо огромное! Столько внутри поднялось, до сих пор приходят осознания. Сразу начала анализировать: „А как у меня, с мужем? У нас тандем или нет?“ И спасибо за формулу трёх „я“ — она реально работает.</blockquote>
+        <figcaption class="review-a">Татьяна</figcaption>
     </figure>
-    <figure class="review">
-      <div class="stars">★★★★★</div>
-      <blockquote class="review-q">Научилась говорить нет, больше прислушиваюсь к себе, наконец-то переезжаю в другой город, ещё больше влюблена в жизнь и учусь жить без спешки. Спасибо!</blockquote>
-      <figcaption class="review-a">Ольга</figcaption>
+        <figure class="review">
+        <div class="stars">★★★★★</div>
+        <blockquote class="review-q">Научилась говорить нет, больше прислушиваюсь к себе, наконец-то переезжаю в другой город, ещё больше влюблена в жизнь и учусь жить без спешки. Спасибо!</blockquote>
+        <figcaption class="review-a">Ольга</figcaption>
     </figure>
+      </div>
+    </div>
+    <div class="rv-nav">
+      <button class="rv-btn rv-prev" type="button" aria-label="Предыдущий отзыв"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <p class="rv-meter"><span class="rv-now">1</span><span class="rv-sep">/</span><span class="rv-total">6</span></p>
+      <button class="rv-btn rv-next" type="button" aria-label="Следующий отзыв"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+    <div class="rv-bar"><i></i></div>
   </div>
 </section>
 
@@ -1140,7 +1136,7 @@ img{display:block}
   /* что вообще проявляется */
   var sel=[
     'section .t-eyebrow','section h2','section h3','.book-subtitle','.book-desc',
-    '.about-lead','.story-toggle','.stile','.feature','.review','.consult-intro','.consult-turn p',
+    '.about-lead','.story-toggle','.stile','.feature','.rv-slider','.consult-intro','.consult-turn p',
     '.req2-p','.req2-fact','.sp-sub','.sp-showcase','.sp-aside','.sp-cardp','.sp-colhead',
     '.press-portrait','.press-role','.press-short','.press-long','.press-file',
     '.pc-intro','.pc-card','.tg-text','.tg-cta','.tg-phone','.panel-cta','.panel-photo',
@@ -1149,7 +1145,7 @@ img{display:block}
   var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.hero');});
   if(reduce||!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in');});return;}
 
-  els.forEach(function(e){ if(!e.classList.contains('has-split')) e.classList.add(e.matches('.stile,.review,.sp-cardp,.pc-card,.feature,.sp-showcase,.tg-phone,.book-figure,.about-photo,.press-portrait')?'rv':'rv-up'); });
+  els.forEach(function(e){ if(!e.classList.contains('has-split')) e.classList.add(e.matches('.stile,.rv-slider,.sp-cardp,.pc-card,.feature,.sp-showcase,.tg-phone,.book-figure,.about-photo,.press-portrait')?'rv':'rv-up'); });
 
   /* каскад внутри одной группы: соседи вступают с шагом 90мс */
   /* СТРАХОВКА. Если IntersectionObserver почему-либо не сработает,
@@ -1182,6 +1178,82 @@ img{display:block}
     });
   },{rootMargin:'0px 0px -12% 0px',threshold:0.12});
   els.forEach(function(e){io.observe(e);});
+})();
+
+/* ===== ОТЗЫВЫ: по одному, зациклено, со свайпом ===== */
+(function(){
+  var track=document.querySelector('.rv-track'); if(!track)return;
+  var slides=[].slice.call(track.children), n=slides.length; if(!n)return;
+  var view=document.querySelector('.rv-viewport'),
+      now=document.querySelector('.rv-now'), total=document.querySelector('.rv-total'),
+      bar=document.querySelector('.rv-bar i'),
+      prev=document.querySelector('.rv-prev'), next=document.querySelector('.rv-next');
+  /* клоны с обоих концов — чтобы переход с последнего на первый был бесшовным */
+  var first=slides[0].cloneNode(true), last=slides[n-1].cloneNode(true);
+  first.setAttribute('aria-hidden','true'); last.setAttribute('aria-hidden','true');
+  track.appendChild(first); track.insertBefore(last, slides[0]);
+  var i=1, locked=false;
+  if(total) total.textContent=n;
+
+  function place(anim){
+    track.classList.toggle('no-anim', !anim);
+    track.style.transform='translate3d('+(-i*100)+'%,0,0)';
+    var real=((i-1)%n+n)%n;
+    if(now) now.textContent=real+1;
+    if(bar){bar.style.width=(100/n)+'%';bar.style.left=(real*100/n)+'%';}
+  }
+  function go(d){
+    if(locked)return; locked=true;
+    i+=d; place(true);
+  }
+  track.addEventListener('transitionend',function(){
+    if(i===n+1){i=1;place(false);}
+    else if(i===0){i=n;place(false);}
+    locked=false;
+  });
+  if(prev) prev.addEventListener('click',function(){go(-1);});
+  if(next) next.addEventListener('click',function(){go(1);});
+  document.addEventListener('keydown',function(e){
+    if(!view.getBoundingClientRect().height)return;
+    var r=view.getBoundingClientRect();
+    if(r.top>innerHeight||r.bottom<0)return;
+    if(e.key==='ArrowLeft')go(-1); else if(e.key==='ArrowRight')go(1);
+  });
+
+  /* свайп пальцем и мышью */
+  var x0=null,y0=null,dx=0,drag=false;
+  function down(e){
+    if(locked)return;
+    var t=e.touches?e.touches[0]:e; x0=t.clientX; y0=t.clientY; dx=0; drag=true;
+    track.classList.add('no-anim');
+  }
+  function move(e){
+    if(!drag||x0===null)return;
+    var t=e.touches?e.touches[0]:e;
+    dx=t.clientX-x0;
+    var dy=t.clientY-y0;
+    if(Math.abs(dx)<Math.abs(dy)){return;}          /* вертикальный жест — не мешаем прокрутке */
+    if(e.cancelable)e.preventDefault();
+    track.style.transform='translate3d(calc('+(-i*100)+'% + '+dx+'px),0,0)';
+  }
+  function up(){
+    if(!drag)return; drag=false;
+    track.classList.remove('no-anim');
+    var w=view.getBoundingClientRect().width||1;
+    if(Math.abs(dx)>Math.min(90,w*0.18)){ locked=true; i+= dx<0?1:-1; }
+    place(true);
+    if(!locked) locked=false;
+    x0=null;dx=0;
+  }
+  view.addEventListener('touchstart',down,{passive:true});
+  view.addEventListener('touchmove',move,{passive:false});
+  view.addEventListener('touchend',up);
+  view.addEventListener('mousedown',function(e){e.preventDefault();down(e);});
+  window.addEventListener('mousemove',move);
+  window.addEventListener('mouseup',up);
+
+  place(false);
+  requestAnimationFrame(function(){place(false);});
 })();
 </script>
 </body>
