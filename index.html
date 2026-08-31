@@ -131,16 +131,34 @@ img{display:block}
 
 /* ---------- BOOK ---------- */
 .book{background:transparent;padding:104px 0 96px}
-.book-inner{max-width:1200px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-.book-visual{position:relative;display:flex;justify-content:center;align-items:center}
+.book-inner{max-width:1200px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:.92fr 1.08fr;gap:72px;align-items:center}
+.book-visual{position:relative;display:flex;justify-content:flex-start;align-items:center}
 .book-figure{position:relative;display:inline-block}
 .book-cover{display:block;width:346px;max-width:100%;border-radius:2px;transform:rotate(-6deg);box-shadow:18px 22px 48px -18px rgba(31,28,27,.30)}
 /* Бейдж Amazon: плоский, печатный — обводка вместо глянца */
-.seal{position:absolute;top:-26px;right:-68px;width:92px;height:92px;border-radius:50%;background:var(--paper);border:1px solid var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:2px;z-index:3}
-.seal::before{content:'';position:absolute;inset:5px;border-radius:50%;border:1px solid rgba(198,162,78,.40)}
-.seal-top{font-family:var(--sans);font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-d);line-height:1}
-.seal-big{font-family:var(--serif);font-weight:400;font-size:30px;line-height:1;color:var(--ink)}
-.seal-ribbon{font-family:var(--sans);font-size:7.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--gold-d);line-height:1;background:none;padding:0}
+/* Наградной знак Amazon: тёплое золото, двойное кольцо,
+   медленный металлический отблеск по окружности */
+.seal{position:absolute;top:-30px;right:-72px;width:104px;height:104px;border-radius:50%;z-index:3;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:3px;
+  background:radial-gradient(122% 122% at 30% 20%,#FFFEF7 0%,#FCF5E1 24%,#F4E6BE 50%,#E9D296 74%,#D9BC6E 100%);
+  box-shadow:0 0 0 1px rgba(168,131,52,.55),
+             inset 0 1px 0 rgba(255,255,255,.9),
+             inset 0 -8px 16px -8px rgba(150,112,30,.35),
+             0 12px 26px -14px rgba(140,104,32,.55)}
+.seal::before{content:'';position:absolute;inset:7px;border-radius:50%;
+  border:1px solid rgba(168,131,52,.42);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.55)}
+.seal::after{content:'';position:absolute;inset:0;border-radius:50%;pointer-events:none;
+  background:conic-gradient(from 200deg,
+    rgba(255,255,255,0) 0deg,rgba(255,255,255,.85) 38deg,rgba(255,255,255,0) 92deg,
+    rgba(168,131,52,.22) 176deg,rgba(255,255,255,.7) 252deg,rgba(255,255,255,0) 318deg,rgba(255,255,255,0) 360deg);
+  mix-blend-mode:soft-light;
+  animation:seal-shine 22s linear infinite}
+@keyframes seal-shine{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.seal::after{animation:none}}
+.seal-top{position:relative;z-index:2;font-family:var(--sans);font-size:8.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#8A6A22;line-height:1}
+.seal-big{position:relative;z-index:2;font-family:var(--serif);font-weight:600;font-size:34px;line-height:1;color:#6B4E12;text-shadow:0 1px 0 rgba(255,255,255,.6)}
+.seal-ribbon{position:relative;z-index:2;font-family:var(--sans);font-size:7.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8A6A22;line-height:1;background:none;padding:0}
 .book-eyebrow{color:var(--accent);margin:0 0 18px}
 .book-title{color:var(--ink);margin:0}
 .book-subtitle{font-family:var(--text);font-weight:400;font-size:19px;line-height:1.5;color:var(--ink-2);margin:12px 0 26px}
@@ -209,8 +227,8 @@ img{display:block}
 @media(max-width:960px){
   .book{padding:72px 0}
   .book-inner{grid-template-columns:1fr;gap:48px}
-  .seal{width:76px;height:76px;top:-20px;right:-40px}
-  .seal-big{font-size:25px}
+  .seal{width:82px;height:82px;top:-22px;right:-40px}
+  .seal-big{font-size:27px}
   .seal-top{font-size:7px}
   .seal-ribbon{font-size:6.5px}
   .book-visual{min-height:auto;padding:24px 0}
