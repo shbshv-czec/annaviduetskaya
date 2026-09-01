@@ -392,7 +392,8 @@ body.bar-off .topbar{display:none}
   .about-photo{order:-1;aspect-ratio:2668/4000;transform:none!important}
 }
 /* ---------- ПРЕСС-ЦЕНТР: тёмная полоса с радужным преломлением ---------- */
-.press{position:relative;isolation:isolate;overflow:hidden;color:#fff;padding:104px 0;background:#0A0908}
+.press{position:relative;isolation:isolate;overflow:hidden;color:#fff;padding:104px 0;
+  background:#0A0908 url('assets/back-black.jpg') center/cover no-repeat}
 /* цвет живёт слева, у портрета; справа, под текстом, притемняем до читаемости */
 .press::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
   background:linear-gradient(258deg,rgba(10,9,8,.12) 0%,rgba(10,9,8,.22) 30%,
@@ -610,7 +611,8 @@ body.bar-off .topbar{display:none}
   .sp-foot{margin-top:40px}
 }
 /* Цитата отдельной полосой: чёрная подложка с радужным преломлением */
-.quote{position:relative;isolation:isolate;overflow:hidden;padding:132px 0 138px;background:#0A0908}
+.quote{position:relative;isolation:isolate;overflow:hidden;padding:132px 0 138px;
+  background:#0A0908 url('assets/back-black.jpg') center/cover no-repeat}
 /* приглушаем блик за текстом и подбираем края к соседним светлым блокам */
 .quote::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
   background:linear-gradient(180deg,rgba(10,9,8,.46) 0%,rgba(10,9,8,.26) 30%,
@@ -919,7 +921,6 @@ body.bar-off .topbar{display:none}
 
 <!-- ЦИТАТА: чёрная полоса с преломлением -->
 <section class="quote">
-  <video class="bg-vid" src="assets/back-black.mp4" poster="assets/back-black.jpg" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
   <div class="quote-wrap">
     <p class="quote-t"><em>«Я&nbsp;так больше не&nbsp;хочу»</em>&nbsp;— фраза, с&nbsp;которой начинаются перемены</p>
   </div>
@@ -1087,7 +1088,6 @@ body.bar-off .topbar{display:none}
 </section>
 
 <section class="press" id="press">
-  <video class="bg-vid" src="assets/back-black.mp4" poster="assets/back-black.jpg" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
   <div class="press-wrap">
     <div class="press-body">
       <p class="press-eyebrow t-eyebrow">Пресс-центр</p>
