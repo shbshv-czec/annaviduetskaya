@@ -282,8 +282,7 @@ body.bar-off .topbar{display:none}
 }
 /* ---------- REVIEWS (soft blue, white text, carousel) ---------- */
 /* ---------- ОТЗЫВЫ: слайдер по одному ---------- */
-.reviews{position:relative;isolation:isolate;padding:58px 0 52px;
-  background:url('assets/reviews-bg.jpg') center bottom/cover no-repeat}
+.reviews{position:relative;isolation:isolate;padding:58px 0 52px;background:#D9ECF7}
 .reviews-head{position:relative;z-index:1;max-width:1200px;margin:0 auto 30px;padding:0 40px;text-align:center}
 .rv-slider{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:0 40px}
 .rv-viewport{overflow:hidden}
@@ -315,6 +314,28 @@ body.bar-off .topbar{display:none}
   .review{padding:0 8px;min-height:260px}
   .rv-bar{margin-top:34px;max-width:240px}
 }
+/* ===== ЖИВЫЕ БЛИКИ: те же переливы, но нарисованы кодом и потому движутся ===== */
+.aur{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.aur i{position:absolute;display:block;left:var(--l);top:var(--t);width:var(--w);height:var(--h);
+  background:radial-gradient(ellipse at center,var(--c) 0%,transparent 72%);
+  animation:aur-drift var(--d) cubic-bezier(.45,.05,.55,.95) var(--dl,0s) infinite alternate}
+@keyframes aur-drift{
+  from{transform:translate3d(0,0,0) scale(1)}
+  to{transform:translate3d(var(--dx),var(--dy),0) scale(var(--sc))}}
+@media(prefers-reduced-motion:reduce){.aur i{animation:none}}
+/* светлый перелив — отзывы */
+.aur--light i:nth-child(1){--l:-24%;--t:-32%;--w:72%;--h:124%;--c:rgba(255,220,210,.62);--d:38s;--dx:9%;--dy:8%;--sc:1.22}
+.aur--light i:nth-child(2){--l:60%;--t:-20%;--w:66%;--h:114%;--c:rgba(206,246,237,.60);--d:47s;--dl:-8s;--dx:-8%;--dy:10%;--sc:1.18}
+.aur--light i:nth-child(3){--l:50%;--t:32%;--w:68%;--h:98%;--c:rgba(226,216,250,.48);--d:55s;--dl:-15s;--dx:-6%;--dy:-12%;--sc:1.26}
+.aur--light i:nth-child(4){--l:-10%;--t:44%;--w:60%;--h:92%;--c:rgba(255,242,228,.52);--d:43s;--dl:-22s;--dx:12%;--dy:-9%;--sc:1.20}
+.aur--light i:nth-child(5){--l:14%;--t:-12%;--w:74%;--h:124%;--c:rgba(228,243,252,.55);--d:51s;--dl:-11s;--dx:5%;--dy:6%;--sc:1.12}
+/* тёмный перелив — цитата, пресс-центр, футер */
+.aur--dark i{mix-blend-mode:screen}
+.aur--dark i:nth-child(1){--l:-20%;--t:-26%;--w:68%;--h:116%;--c:rgba(151,101,48,.62);--d:41s;--dx:10%;--dy:7%;--sc:1.24}
+.aur--dark i:nth-child(2){--l:56%;--t:-16%;--w:64%;--h:110%;--c:rgba(61,170,192,.46);--d:49s;--dl:-9s;--dx:-9%;--dy:9%;--sc:1.20}
+.aur--dark i:nth-child(3){--l:34%;--t:36%;--w:70%;--h:104%;--c:rgba(51,99,144,.44);--d:57s;--dl:-18s;--dx:-7%;--dy:-11%;--sc:1.28}
+.aur--dark i:nth-child(4){--l:-12%;--t:40%;--w:62%;--h:96%;--c:rgba(204,173,75,.34);--d:45s;--dl:-25s;--dx:13%;--dy:-8%;--sc:1.22}
+.aur--dark i:nth-child(5){--l:66%;--t:26%;--w:60%;--h:100%;--c:rgba(72,80,124,.58);--d:53s;--dl:-13s;--dx:-5%;--dy:8%;--sc:1.16}
 /* SPEAKING */
 .speaking{background:transparent;padding:104px 0}
 .sp-wrap{max-width:1200px;margin:0 auto;padding:0 40px}
@@ -377,11 +398,11 @@ body.bar-off .topbar{display:none}
 }
 /* ---------- ПРЕСС-ЦЕНТР: тёмная полоса с радужным преломлением ---------- */
 .press{position:relative;isolation:isolate;overflow:hidden;color:#fff;padding:104px 0;
-  background:#0F0D0C url('assets/prism-dark-2.jpg') center/cover no-repeat}
+  background:#0F0D0C}
 /* цвет живёт слева, у портрета; справа, под текстом, притемняем до читаемости */
 .press::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:linear-gradient(102deg,rgba(15,13,12,.34) 0%,rgba(15,13,12,.5) 30%,
-    rgba(15,13,12,.84) 56%,rgba(15,13,12,.9) 100%)}
+  background:linear-gradient(102deg,rgba(15,13,12,.20) 0%,rgba(15,13,12,.34) 30%,
+    rgba(15,13,12,.66) 56%,rgba(15,13,12,.74) 100%)}
 .press-wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 40px;
   display:grid;grid-template-columns:.72fr 1.28fr;gap:60px;align-items:start}
 .press-card{position:relative;margin:0;overflow:hidden;aspect-ratio:900/1300;background:#14110F}
@@ -558,15 +579,15 @@ body.bar-off .topbar{display:none}
 }
 /* Цитата отдельной полосой: чёрная подложка с радужным преломлением */
 .quote{position:relative;isolation:isolate;overflow:hidden;padding:132px 0 138px;
-  background:#0F0D0C url('assets/prism-dark-1.jpg') center/cover no-repeat}
+  background:#0F0D0C}
 /* приглушаем блик за текстом и подбираем края к соседним светлым блокам */
 .quote::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:linear-gradient(180deg,rgba(15,13,12,.88) 0%,rgba(15,13,12,.56) 30%,
-    rgba(15,13,12,.5) 50%,rgba(15,13,12,.56) 70%,rgba(15,13,12,.88) 100%)}
+  background:linear-gradient(180deg,rgba(15,13,12,.70) 0%,rgba(15,13,12,.38) 30%,
+    rgba(15,13,12,.32) 50%,rgba(15,13,12,.38) 70%,rgba(15,13,12,.70) 100%)}
 /* мягкое тёмное ядро под самой фразой — цвет остаётся по краям */
 .quote::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
   background:radial-gradient(ellipse 64% 60% at 50% 50%,
-    rgba(15,13,12,.58) 0%,rgba(15,13,12,.42) 55%,rgba(15,13,12,0) 100%)}
+    rgba(15,13,12,.40) 0%,rgba(15,13,12,.28) 55%,rgba(15,13,12,0) 100%)}
 .quote-wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 40px;text-align:center}
 .quote-t{font-family:var(--display);font-weight:var(--w-display);font-size:clamp(34px,6vw,86px);
   line-height:1.08;letter-spacing:-.03em;color:#fff;margin:0 auto;max-width:30ch;
@@ -637,9 +658,9 @@ body.bar-off .topbar{display:none}
 }
 /* FOOTER */
 .ftr{position:relative;isolation:isolate;overflow:hidden;color:#fff;padding:104px 0 40px;
-  background:#0F0D0C url('assets/prism-dark-2.jpg') center/cover no-repeat}
+  background:#0F0D0C}
 .ftr::before{content:"";position:absolute;inset:0;z-index:0;
-  background:linear-gradient(180deg,rgba(15,13,12,.52) 0%,rgba(15,13,12,.76) 58%,rgba(15,13,12,.92) 100%)}
+  background:linear-gradient(180deg,rgba(15,13,12,.62) 0%,rgba(15,13,12,.80) 58%,rgba(15,13,12,.93) 100%)}
 .ftr-wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 40px}
 .ftr-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;padding-bottom:58px}
 .ftr-name{font-family:var(--serif);font-weight:var(--w-display);font-size:clamp(40px,4.6vw,60px);line-height:1;color:#fff;margin:0 0 18px}
@@ -865,6 +886,7 @@ body.bar-off .topbar{display:none}
 
 <!-- ЦИТАТА: чёрная полоса с преломлением -->
 <section class="quote">
+  <div class="aur aur--dark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
   <div class="quote-wrap">
     <p class="quote-t"><em>«Я&nbsp;так больше не&nbsp;хочу»</em>&nbsp;— фраза, с&nbsp;которой начинаются перемены</p>
   </div>
@@ -954,6 +976,7 @@ body.bar-off .topbar{display:none}
 </section>
 
 <section class="reviews" id="reviews">
+  <div class="aur aur--light" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
   <div class="reviews-head">
     <h2 class="reviews-title t-h1">Что пишут после встреч</h2>
   </div>
@@ -1032,6 +1055,7 @@ body.bar-off .topbar{display:none}
 </section>
 
 <section class="press" id="press">
+  <div class="aur aur--dark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
   <div class="press-wrap">
     <figure class="press-card">
       <img class="press-photo" src="assets/press-anna.jpg" alt="Анна Видуецкая">
@@ -1190,6 +1214,7 @@ body.bar-off .topbar{display:none}
 </section>
 
 <footer class="ftr">
+  <div class="aur aur--dark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
   <div class="ftr-wrap">
     <div class="ftr-top">
       <div>
