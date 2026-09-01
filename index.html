@@ -543,19 +543,29 @@ body.bar-off .topbar{display:none}
   .sp-topics2{grid-template-columns:1fr;gap:28px;padding-top:26px}
   .sp-foot{margin-top:40px}
 }
-/* Цитата отдельной полосой */
-.quote{background:transparent;padding:120px 0 126px}
-.quote-wrap{max-width:1200px;margin:0 auto;padding:0 40px;text-align:center}
+/* Цитата отдельной полосой: чёрная подложка с радужным преломлением */
+.quote{position:relative;isolation:isolate;overflow:hidden;padding:132px 0 138px;
+  background:#0F0D0C url('assets/prism-dark-1.jpg') center/cover no-repeat}
+/* приглушаем блик за текстом и подбираем края к соседним светлым блокам */
+.quote::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(15,13,12,.88) 0%,rgba(15,13,12,.56) 30%,
+    rgba(15,13,12,.5) 50%,rgba(15,13,12,.56) 70%,rgba(15,13,12,.88) 100%)}
+/* мягкое тёмное ядро под самой фразой — цвет остаётся по краям */
+.quote::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 64% 60% at 50% 50%,
+    rgba(15,13,12,.58) 0%,rgba(15,13,12,.42) 55%,rgba(15,13,12,0) 100%)}
+.quote-wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 40px;text-align:center}
 .quote-t{font-family:var(--display);font-weight:var(--w-display);font-size:clamp(34px,6vw,86px);
-  line-height:1.08;letter-spacing:-.03em;color:var(--ink);margin:0 auto;max-width:30ch}
-.quote-t em{font-style:italic;color:var(--accent)}
+  line-height:1.08;letter-spacing:-.03em;color:#fff;margin:0 auto;max-width:30ch;
+  text-shadow:0 2px 40px rgba(10,8,7,.55)}
+.quote-t em{font-style:italic;color:var(--accent-l)}
 /* Заголовок консультаций — узкой колонкой, по слову в строке */
 .consult-h{font-family:var(--display);font-weight:var(--w-display);font-size:var(--h-sec);
   line-height:.98;letter-spacing:-.03em;color:var(--ink);margin:26px 0 0}
 .consult-lead{font-family:var(--text);font-size:19px;line-height:1.65;color:var(--ink-2);
   margin:34px 0 0;max-width:52ch}
 @media(max-width:960px){
-  .quote{padding:76px 0 80px}
+  .quote{padding:88px 0 92px}
   .quote-wrap{padding:0 24px}
   .quote-t{font-size:clamp(28px,7.4vw,40px);max-width:none}
   .consult-lead{font-size:17px;margin-top:26px}
@@ -835,6 +845,13 @@ body.bar-off .topbar{display:none}
   </div>
 </section>
 
+<!-- ЦИТАТА: чёрная полоса с преломлением -->
+<section class="quote">
+  <div class="quote-wrap">
+    <p class="quote-t"><em>«Я&nbsp;так больше не&nbsp;хочу»</em>&nbsp;— фраза, с&nbsp;которой начинаются перемены</p>
+  </div>
+</section>
+
 <!-- ABOUT -->
 <section class="about" id="about">
   <div class="about-wrap">
@@ -861,12 +878,6 @@ body.bar-off .topbar{display:none}
 
 
 
-
-<section class="quote">
-  <div class="quote-wrap">
-    <p class="quote-t"><em>«Я так больше не хочу»</em>&nbsp;— фраза, с&nbsp;которой начинаются перемены</p>
-  </div>
-</section>
 
 <!-- REVIEWS -->
 
@@ -939,20 +950,16 @@ body.bar-off .topbar{display:none}
         <figcaption class="review-a">Ирина</figcaption>
     </figure>
         <figure class="review">
-        <blockquote class="review-q">Где была эта умная красивая женщина? Почему попалась мне только сейчас. Мёд для ушей!</blockquote>
-        <figcaption class="review-a">Лариса</figcaption>
-    </figure>
-        <figure class="review">
-        <blockquote class="review-q">Я не ожидала, что вы такая красивая и очень добрая. Такая уверенная доброта от вас. Я приятно ошеломлена.</blockquote>
-        <figcaption class="review-a">Альфия</figcaption>
-    </figure>
-        <figure class="review">
         <blockquote class="review-q">Спасибо огромное! Столько внутри поднялось, до сих пор приходят осознания. Сразу начала анализировать: „А как у меня, с мужем? У нас тандем или нет?“ И спасибо за формулу трёх „я“ — она реально работает.</blockquote>
         <figcaption class="review-a">Татьяна</figcaption>
     </figure>
         <figure class="review">
         <blockquote class="review-q">Научилась говорить нет, больше прислушиваюсь к себе, наконец-то переезжаю в другой город, ещё больше влюблена в жизнь и учусь жить без спешки. Спасибо!</blockquote>
         <figcaption class="review-a">Ольга</figcaption>
+    </figure>
+        <figure class="review">
+        <blockquote class="review-q">Где была эта умная красивая женщина? Почему попалась мне только сейчас. Мёд для ушей!</blockquote>
+        <figcaption class="review-a">Лариса</figcaption>
     </figure>
       </div>
     </div>
@@ -1302,7 +1309,7 @@ body.bar-off .topbar{display:none}
     '.req2-p','.req2-fact','.sp-sub','.sp-showcase','.topic','.sp-topics-h',
     '.press-portrait','.press-role','.press-short','.press-long','.press-file',
     '.pc-intro','.pc-card','.tg-text','.tg-cta','.tg-phone','.cta',
-    '.ftr-col','.ftr-tag','.book-figure','.about-photo','.has-split'
+    '.ftr-col','.ftr-tag','.book-figure','.about-photo','.quote-t','.has-split'
   ].join(',');
   var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.hero');});
   if(reduce||!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in');});return;}
