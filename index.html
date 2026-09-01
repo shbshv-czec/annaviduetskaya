@@ -369,15 +369,17 @@ body.bar-off .topbar{display:none}
   .about-grid{grid-template-columns:1fr;gap:34px}
   .about-photo{order:-1;position:static}
 }
-/* ---------- ПРЕСС-ЦЕНТР: чёрная полоса с преломлением ---------- */
-.press{background:#0F0D0C;color:#fff;padding:104px 0}
-.press-wrap{max-width:1200px;margin:0 auto;padding:0 40px;
+/* ---------- ПРЕСС-ЦЕНТР: тёмная полоса с радужным преломлением ---------- */
+.press{position:relative;isolation:isolate;overflow:hidden;color:#fff;padding:104px 0;
+  background:#0F0D0C url('assets/prism-dark-2.jpg') center/cover no-repeat}
+/* цвет живёт слева, у портрета; справа, под текстом, притемняем до читаемости */
+.press::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(102deg,rgba(15,13,12,.34) 0%,rgba(15,13,12,.5) 30%,
+    rgba(15,13,12,.84) 56%,rgba(15,13,12,.9) 100%)}
+.press-wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 40px;
   display:grid;grid-template-columns:.72fr 1.28fr;gap:60px;align-items:start}
 .press-card{position:relative;margin:0;overflow:hidden;aspect-ratio:900/1300;background:#14110F}
 .press-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%}
-/* радужный блик поверх портрета — как у Parloa */
-.press-flare{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  mix-blend-mode:screen;opacity:.62;pointer-events:none}
 .press-card-n{font-family:var(--display);font-weight:var(--w-display);font-size:clamp(24px,2.4vw,32px);
   line-height:1.1;letter-spacing:-.015em;color:#fff;margin:0}
 .press-card-r{font-family:var(--sans);font-weight:600;font-size:10px;letter-spacing:.2em;text-transform:uppercase;
@@ -403,6 +405,8 @@ body.bar-off .topbar{display:none}
 .press-file:hover svg{transform:translate(2px,-2px)}
 @media(max-width:960px){
   .press{padding:72px 0}
+  .press::before{background:linear-gradient(180deg,rgba(15,13,12,.46) 0%,
+    rgba(15,13,12,.84) 32%,rgba(15,13,12,.92) 100%)}
   .press-wrap{grid-template-columns:1fr;gap:32px;padding:0 24px}
   .press-card{aspect-ratio:4/3}
   .press-short{font-size:23px}
@@ -1017,7 +1021,6 @@ body.bar-off .topbar{display:none}
   <div class="press-wrap">
     <figure class="press-card">
       <img class="press-photo" src="assets/press-anna.jpg" alt="Анна Видуецкая">
-      <img class="press-flare" src="assets/prism-dark-1.jpg" alt="" aria-hidden="true">
     </figure>
     <div class="press-body">
       <p class="press-eyebrow t-eyebrow">Пресс-центр</p>
