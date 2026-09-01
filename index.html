@@ -98,15 +98,17 @@ body.bar-off .topbar{display:none}
    поэтому нет порога и нет скачка. */
 .nav-wrap{--navp:0;position:fixed;top:0;left:0;right:0;z-index:60;isolation:isolate;
   transform:translate3d(0,var(--navy,0px),0);
-  padding-bottom:26px;
+  /* хвост градиента нужен только над фотографией; при прокрутке он гаснет
+     вместе с отступом, иначе на светлом фоне остаётся серая полоса */
+  padding-bottom:calc(26px * (1 - var(--navp)));
+  box-shadow:0 12px 34px -26px rgba(0,0,0,calc(.9 * var(--navp)))}
+.nav-wrap::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  opacity:calc(1 - var(--navp));
   background:linear-gradient(180deg,
     rgba(14,12,10,.66) 0%,rgba(14,12,10,.50) 30%,rgba(14,12,10,.28) 58%,
-    rgba(14,12,10,.10) 80%,rgba(14,12,10,0) 100%);
-  box-shadow:0 12px 34px -26px rgba(0,0,0,calc(.9 * var(--navp)))}
+    rgba(14,12,10,.10) 80%,rgba(14,12,10,0) 100%)}
 /* при прокрутке — матовое стекло, а не глухой чёрный */
 .nav-wrap::before{content:"";position:absolute;inset:0;z-index:0;opacity:var(--navp);
-  -webkit-mask-image:linear-gradient(180deg,#000 0,#000 calc(100% - 30px),transparent 100%);
-  mask-image:linear-gradient(180deg,#000 0,#000 calc(100% - 30px),transparent 100%);
   background:rgba(18,15,12,.70);backdrop-filter:blur(20px) saturate(1.2);
   -webkit-backdrop-filter:blur(18px) saturate(1.25);
 }
@@ -319,7 +321,6 @@ body.bar-off .topbar{display:none}
 
 .sp-title{font-family:var(--serif);font-weight:var(--w-display);font-size:clamp(30px,4vw,54px);
   line-height:1.12;letter-spacing:-.015em;color:var(--ink);margin:16px 0 0;max-width:none}
-.sp-sub{font-family:var(--text);font-size:19px;line-height:1.65;color:var(--ink-2);margin:0;max-width:46ch}
 .sp-main{padding:4px 0 36px;margin:0 0 4px}
 .sp-main-tag{display:inline-block;font-family:var(--text);font-weight:700;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 16px}
 .sp-main-t{font-family:var(--serif);font-weight:var(--w-head);font-size:clamp(28px,3.2vw,40px);line-height:1.12;letter-spacing:-.01em;color:var(--ink);margin:0 0 16px;max-width:24ch}
@@ -338,8 +339,6 @@ body.bar-off .topbar{display:none}
 .sp-more:hover{background:#000}
 .sp-more svg{width:15px;height:15px}
 .sp-cols{display:grid;grid-template-columns:1.12fr .88fr;gap:64px;border-top:1px solid rgba(44,42,37,.2);padding-top:46px}
-.sp-topics-h{font-family:var(--serif);font-weight:var(--w-display);font-size:clamp(30px,3.6vw,48px);line-height:1.12;
-  letter-spacing:-.01em;color:var(--ink);margin:0 0 8px}
 .sp-venue{font-family:var(--serif);font-weight:var(--w-head);font-size:21px;line-height:1.3;color:var(--ink);padding:14px 0;border-bottom:1px solid rgba(44,42,37,.12)}
 .sp-venue:first-of-type{border-top:1px solid rgba(44,42,37,.12)}
 .sp-stage{margin-top:30px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
