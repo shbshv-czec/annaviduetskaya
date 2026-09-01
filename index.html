@@ -8,10 +8,22 @@
 <link rel="icon" type="image/png" href="assets/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="assets/icon-192.png" sizes="192x192">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,600;1,600&family=Lora:ital,wght@0,400;0,700;1,400&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/cormorant-600-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/lora-400-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/manrope-600-normal.woff2" crossorigin>
 <style>
+/* Шрифты лежат у нас же и урезаны до символов, которые есть на странице:
+   никаких обращений к серверам Google — это и быстрее, и надёжнее из России. */
+@font-face{font-family:'Cormorant';font-style:italic;font-weight:600;font-display:swap;src:url('assets/fonts/cormorant-600-italic.woff2') format('woff2')}
+@font-face{font-family:'Cormorant';font-style:normal;font-weight:400;font-display:swap;src:url('assets/fonts/cormorant-400-normal.woff2') format('woff2')}
+@font-face{font-family:'Cormorant';font-style:normal;font-weight:600;font-display:swap;src:url('assets/fonts/cormorant-600-normal.woff2') format('woff2')}
+@font-face{font-family:'Lora';font-style:italic;font-weight:400;font-display:swap;src:url('assets/fonts/lora-400-italic.woff2') format('woff2')}
+@font-face{font-family:'Lora';font-style:normal;font-weight:400;font-display:swap;src:url('assets/fonts/lora-400-normal.woff2') format('woff2')}
+@font-face{font-family:'Lora';font-style:normal;font-weight:700;font-display:swap;src:url('assets/fonts/lora-700-normal.woff2') format('woff2')}
+@font-face{font-family:'Manrope';font-style:normal;font-weight:500;font-display:swap;src:url('assets/fonts/manrope-500-normal.woff2') format('woff2')}
+@font-face{font-family:'Manrope';font-style:normal;font-weight:600;font-display:swap;src:url('assets/fonts/manrope-600-normal.woff2') format('woff2')}
+@font-face{font-family:'Manrope';font-style:normal;font-weight:700;font-display:swap;src:url('assets/fonts/manrope-700-normal.woff2') format('woff2')}
+
 :root{
   /* — ЧЕРНИЛА: одна тёплая шкала вместо 10 случайных тёмных — */
   --ink:#1F1C1B; --ink-2:#2A2523; --ink-3:#8A7F78; --muted:#A69B92;
@@ -171,7 +183,16 @@ body.bar-off .topbar{display:none}
 
 /* ---------- HERO (full-bleed portrait, dark gradient, white type) ---------- */
 .hero{position:relative;min-height:100vh;background:#2a2724;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:url('assets/anna-hero.png') no-repeat;background-size:cover;background-position:right center}
+.hero-bg{position:absolute;inset:0;background:url('assets/anna-hero.jpg') no-repeat;
+  background-size:cover;background-position:right center}
+@supports (background-image:image-set(url('a.webp') type('image/webp'))){
+  .hero-bg{background-image:image-set(url('assets/anna-hero.webp') type('image/webp'),
+                                      url('assets/anna-hero.jpg') type('image/jpeg'))}}
+@media(max-width:760px){
+  .hero-bg{background-image:url('assets/anna-hero-m.jpg')}
+  @supports (background-image:image-set(url('a.webp') type('image/webp'))){
+    .hero-bg{background-image:image-set(url('assets/anna-hero-m.webp') type('image/webp'),
+                                        url('assets/anna-hero-m.jpg') type('image/jpeg'))}}}
 .hero-veil{position:absolute;inset:0;background:linear-gradient(100deg,rgba(20,17,15,.66) 0%,rgba(20,17,15,.38) 32%,rgba(20,17,15,.1) 52%,rgba(20,17,15,0) 66%)}
 .hero-inner{position:relative;z-index:5;max-width:1440px;margin:0 auto;min-height:100vh;display:flex;align-items:center;padding:0 40px}
 .hero-text{max-width:660px;padding:150px 0 72px}
@@ -867,7 +888,7 @@ body.bar-off .topbar{display:none}
   <div class="book-inner">
     <div class="book-visual">
       <div class="book-figure">
-        <img class="book-cover" src="assets/book-cover.jpg" alt="Книга «Легче воздуха» — Анна Видуецкая">
+        <img class="book-cover" src="assets/book-cover.jpg" alt="Книга «Легче воздуха» — Анна Видуецкая" loading="lazy" decoding="async">
         <svg class="seal" viewBox="0 0 200 200" role="img" aria-label="Amazon №1 в категории Self Esteem">
           <defs>
             <linearGradient id="s-edge" gradientUnits="userSpaceOnUse" x1="40" y1="12" x2="162" y2="190">
@@ -942,7 +963,7 @@ body.bar-off .topbar{display:none}
           <li class="fig"><span class="fig-n">2</span><span class="fig-c">премии<br>«Бизнес-мама&nbsp;года»</span></li>
         </ul>
       </div>
-      <div class="about-photo"><img src="assets/about-anna.jpg" alt="Анна Видуецкая"></div>
+      <div class="about-photo"><img src="assets/about-anna.jpg" alt="Анна Видуецкая" loading="lazy" decoding="async"></div>
     </div>
   </div>
 </section>
@@ -962,7 +983,7 @@ body.bar-off .topbar{display:none}
     <p class="consult-lead">За каждым запросом стоит одно желание&nbsp;— изменить то, что перестало устраивать. Чаще всего мы&nbsp;работаем по&nbsp;трём направлениям.</p>
     <div class="req2">
       <div class="req2-l">
-        <div class="req2-photo"><img src="assets/consult-anna.jpg" alt="Анна Видуецкая"></div>
+        <div class="req2-photo"><img src="assets/consult-anna.jpg" alt="Анна Видуецкая" loading="lazy" decoding="async"></div>
       </div>
       <div class="req2-r">
         <article class="req">
@@ -1001,7 +1022,7 @@ body.bar-off .topbar{display:none}
   </div>
   </div>
   <div class="cta-media" aria-hidden="true">
-  <video src="assets/door.mp4" autoplay muted loop playsinline preload="auto" disablepictureinpicture tabindex="-1"></video>
+  <video src="assets/door.mp4" poster="assets/door.jpg" muted loop playsinline preload="none" disablepictureinpicture tabindex="-1"></video>
   </div>
   </div>
 </section>
@@ -1076,7 +1097,7 @@ body.bar-off .topbar{display:none}
         </div>
       </div>
       <div class="sp-reel-main" id="showreel">
-        <video src="assets/showreel.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <video src="assets/showreel.mp4" poster="assets/showreel.jpg" muted loop playsinline preload="none"></video>
       </div>
     </div>
     <div class="sp-foot">
@@ -1208,8 +1229,8 @@ body.bar-off .topbar{display:none}
     <div class="tg-visual">
       <div class="tg-phone">
         <div class="tg-screen">
-          <img src="assets/tg-poster.jpg" alt="Канал «Женские стратегии» в Telegram">
-          <video src="assets/tg-scroll.mp4" poster="assets/tg-poster.jpg" autoplay muted loop playsinline preload="metadata"></video>
+          <img src="assets/tg-poster.jpg" alt="Канал «Женские стратегии» в Telegram" loading="lazy" decoding="async">
+          <video src="assets/tg-scroll.mp4" poster="assets/tg-poster.jpg" muted loop playsinline preload="none"></video>
         </div>
       </div>
       <a class="tg-qr" href="https://t.me/AnnaViduetskaya" target="_blank" rel="noopener">
@@ -1533,9 +1554,9 @@ body.bar-off .topbar{display:none}
   reset(); setTimeout(reset,400);
 })();
 
-/* ===== ФОНОВОЕ ВИДЕО: грузим и крутим только то, что на экране ===== */
+/* ===== ВИДЕО: грузим и крутим только то, что подъехало к экрану ===== */
 (function(){
-  var vids=[].slice.call(document.querySelectorAll('.bg-vid'));
+  var vids=[].slice.call(document.querySelectorAll('video'));
   if(!vids.length)return;
   if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;  /* останется постер */
   function on(v){ var p=v.play(); if(p&&p.catch) p.catch(function(){}); }

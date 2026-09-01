@@ -50,10 +50,11 @@ if depth: errors.append(f'скобки в CSS не сходятся: {depth}')
 # селектор, в который затесался комментарий, — признак склейки правил
 for m in re.findall(r'[^{}\n]*/\*[^*]*\*/[^{}\n]*\{', css):
     errors.append('склеены правила: ' + m.strip()[:60])
-top = re.sub(r'@(?:media|keyframes|supports)[^{]*\{(?:[^{}]|\{[^{}]*\})*\}', '', css)
+# вырезаем блоки @media/@supports/@keyframes, в том числе вложенные друг в друга
+top = re.sub(r'@(?:media|keyframes|supports)[^{]*\{(?:[^{}]|\{(?:[^{}]|\{[^{}]*\})*\})*\}', '', css)
 sel = collections.Counter(r.strip() for r in re.findall(r'([^{}]+)\{[^{}]*\}', top) if r.strip())
 for k, v in sel.items():
-    if v > 1 and k != '.btn':
+    if v > 1 and k not in ('.btn', '@font-face'):
         warns.append(f'селектор {k[:50]} объявлен {v} раза')
 
 # ---------- 4. скрипты целы ----------
