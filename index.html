@@ -365,54 +365,9 @@ body.bar-off .topbar{display:none}
 .about-photo{position:sticky;top:110px;align-self:start;
   aspect-ratio:2668/4000;overflow:hidden;background:var(--line)}
 .about-photo img{width:100%;height:100%;object-fit:cover;display:block}
-.story-link{display:inline-flex;align-items:center;gap:9px;margin:32px 0 0;padding:0 0 5px;
-  background:none;border:none;border-bottom:1px solid var(--accent);cursor:pointer;
-  font-family:var(--sans);font-weight:600;font-size:13px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--accent-d);transition:color var(--d-md) var(--ease-out),border-color var(--d-md) var(--ease-out)}
-.story-link:hover{color:var(--spark);border-color:var(--spark)}
-.story-link svg{width:14px;height:14px;transition:transform var(--d-md) var(--ease-out)}
-.story-link:hover svg{transform:translate(2px,-2px)}
-
-/* ---------- ПИСЬМО: всплывающее окно ---------- */
-.letter{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
-  padding:48px 24px;visibility:hidden;opacity:0;transition:opacity var(--d-lg) var(--ease-out),visibility var(--d-lg)}
-.letter.open{visibility:visible;opacity:1}
-.letter-bg{position:absolute;inset:0;background:rgba(18,15,12,.62);backdrop-filter:blur(4px)}
-.letter-box{position:relative;width:min(980px,100%);max-height:86vh;display:flex;flex-direction:column;
-  background:var(--linen);box-shadow:0 50px 120px -40px rgba(20,16,12,.7);
-  transform:translateY(20px) scale(.985);transition:transform var(--d-xl) var(--ease-out)}
-.letter.open .letter-box{transform:none}
-.letter-x{position:absolute;top:16px;right:16px;z-index:3;width:42px;height:42px;
-  display:flex;align-items:center;justify-content:center;background:rgba(247,244,238,.9);border:none;
-  color:var(--ink);cursor:pointer;padding:0;transition:background var(--d-md) var(--ease-out)}
-.letter-x:hover{background:var(--ink);color:#fff}
-.letter-x svg{width:18px;height:18px}
-/* лист в линейку; полосу прокрутки прячем */
-.letter-in{display:grid;grid-template-columns:.4fr 1fr;min-height:0;overflow:hidden}
-.letter-photo{position:relative;overflow:hidden;background:var(--line)}
-.letter-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
-.letter-sheet{overflow-y:auto;padding:58px 56px 56px;scrollbar-width:none;-ms-overflow-style:none;
-  background-image:repeating-linear-gradient(to bottom,transparent 0 31px,rgba(70,64,52,.15) 31px 32px);
-  background-position:0 58px;background-attachment:local}
-.letter-sheet::-webkit-scrollbar{display:none}
-.letter-sheet p{font-family:var(--text);font-size:17px;line-height:32px;color:#3A362E;margin:0 0 32px;max-width:60ch}
-.letter-sheet p:last-child{margin-bottom:0}
-.letter-sheet .letter-open{font-family:var(--display);font-weight:var(--w-display);
-  font-size:clamp(26px,3vw,42px);line-height:64px;letter-spacing:-.01em;
-  color:var(--ink);margin:0 0 32px;max-width:none}
-.letter-sheet .story-bold{font-weight:700;color:var(--ink)}
 @media(max-width:960px){
   .about-grid{grid-template-columns:1fr;gap:34px}
   .about-photo{order:-1;position:static}
-  .letter{padding:16px 12px}
-  .letter-box{max-height:92vh}
-  .letter-x{top:10px;right:10px;width:38px;height:38px}
-  .letter-box{max-height:92vh}
-  .letter-in{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr);min-height:0}
-  .letter-photo{order:-1;aspect-ratio:auto;height:30vh;min-height:170px}
-  .letter-sheet{min-height:0}
-  .letter-sheet{padding:34px 22px 36px;background-position:0 32px}
-  .letter-sheet p{font-size:16px;line-height:32px;margin-bottom:32px}
 }
 /* ---------- ПРЕСС-ЦЕНТР: чёрная полоса с преломлением ---------- */
 .press{background:#0F0D0C;color:#fff;padding:104px 0}
@@ -727,7 +682,7 @@ body.bar-off .topbar{display:none}
 /* Регистр заголовков: сейчас строчные. Для капса вернуть --head-case:uppercase
    И раскомментировать апрош — прописным он обязателен. */
 .t-display,.t-h1,.book-title,.about-title,.reviews-title,.consult-h,
-.sp-title,.pc-title,.tg-title,.press-short,.ftr-name,.letter-open,.quote-t,.cta-title,.fig-n{
+.sp-title,.pc-title,.tg-title,.press-short,.ftr-name,.quote-t,.cta-title,.fig-n{
   text-transform:var(--head-case);
   /* letter-spacing:var(--head-track); */}
 
@@ -892,9 +847,6 @@ body.bar-off .topbar{display:none}
         <p class="about-lead t-body">Я&nbsp;живу так, как учу. У&nbsp;меня четверо детей, три компании в&nbsp;разных сферах и&nbsp;работа вместе с&nbsp;мужем. Мне важно, чтобы всё было по-честному, а&nbsp;не&nbsp;как проще. Эта честность&nbsp;— прежде всего с&nbsp;собой&nbsp;— и&nbsp;дала мне возможность создать ту&nbsp;жизнь, которая у&nbsp;меня есть.</p>
         <p class="about-lead t-body">Долгое время я&nbsp;была уверена, что успех&nbsp;— это выбрать что-то одно. Оказалось, выбирать не&nbsp;нужно: женщина имеет право быть в&nbsp;любви, в&nbsp;деле и&nbsp;в&nbsp;своей жизни одновременно. Я&nbsp;прошла этот путь сама и&nbsp;почти десять лет помогаю пройти его другим&nbsp;— без надрыва и&nbsp;достигаторства.</p>
         <p class="about-lead t-body">Если вам откликается&nbsp;— начните с&nbsp;того формата, который ближе: книга, консультация или личная встреча.</p>
-        <button class="story-link" type="button" aria-haspopup="dialog">
-          <span>Моя история</span>
-        </button>
         <ul class="figs">
           <li class="fig"><span class="fig-n">3</span><span class="fig-c">бизнеса<br>в&nbsp;разных сферах</span></li>
           <li class="fig"><span class="fig-n">4</span><span class="fig-c">детей,<br>6&nbsp;лет без няни</span></li>
@@ -1249,34 +1201,6 @@ body.bar-off .topbar{display:none}
 </footer>
 
 
-<div class="letter" id="letter" aria-hidden="true">
-  <div class="letter-bg" data-close></div>
-  <div class="letter-box" role="dialog" aria-modal="true" aria-label="Моя история">
-    <button class="letter-x" type="button" data-close aria-label="Закрыть">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-    </button>
-    <div class="letter-in">
-      <div class="letter-photo"><img src="assets/about-main.png" alt="Анна Видуецкая"></div>
-      <div class="letter-sheet">
-      <p class="letter-open">«Боже… это моя жизнь?»</p>
-      <p>2015 год: у меня большой дом, известный, успешный муж, четверо детей, няня, помощники, водитель. Жизнь-мечта. А я смотрю на все это и думаю: это игра какая-то. Мне было так странно, не комфортно и забавно одновременно.</p>
-      <p>Почему они меня спрашивают и что-то мне говорят? Вот странные, они и вправду думают что я хозяйка? Ну нееет! А вдруг они меня разоблачат? Ну я же не могу быть хозяйкой всего этого. Я не соответствую. Хозяйки они другие, более взрослые, или какие-то там еще более. Достойные что ли? Точно не такие как я. И я старалась всему этому соответствовать.</p>
-      <p>Работала как не в себя, доказывая себе же что могу соответствовать мужу прекрасному. Дом становился все краше, кошки, собаки, ну чтобы все соответствовало представлению о доме. Планировала поездки всей семьей, с детьми на море — ведь так же отдыхают семьи большие.</p>
-      <p>Результат был: идеальная картинка, у мужа взлет, он — мега крут и гордится мной, дом, дети прекрасные, все вокруг восхищаются: боже, как вам это удается? Кто же у Радислава жена?</p>
-      <p>В какой-то момент у меня начались серьезные проблемы со здоровьем, я ездила по врачам, тихонечко, чтобы никого не побеспокоить. Врачи разводили руками, а мне становилось все хуже.</p>
-      <p>Я так старалась соответствовать ожиданиям всех от себя и своей собственной идеальной картинке, что оказалась в глубокой клинической депрессии.</p>
-      <p>Но я по-прежнему старалась. Ведь никто об этом ничего не узнал.</p>
-      <p>Жила ли я для себя? Нет! Наслаждалась ли я своей жизнью, любовью мужа, работой? Нет! Я соответствовала ожиданиям других, а сама пыталась дотянуться до них.</p>
-      <p>Я получала премии и награды «Мама года», «Бизнес-мама», меня стали приглашать выступать на российских и зарубежных форумах, а я не понимала, что они все во мне нашли. В чем моя заслуга? В чем ценность?</p>
-      <p>Перемены в моей жизни начались тогда, когда потихоньку, очень медленно, я начала понимать что это моя семья, мой дом, мои достижения. И тогда, в какой-то момент все изменилось — это стала моя жизнь.</p>
-      <p>И я живу ее, каждый день, живу свою жизнь. Разную, но свою. Я перестала стараться и соответствовать, перестала стесняться говорить нет. Я перестала нравиться всем людям, зато стала нравиться себе.</p>
-      <p class="story-bold">А теперь я помогаю женщинам пройти этот путь бережнее и быстрее, чем прошла его сама.</p>
-
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="cookie" id="cookie" role="dialog" aria-live="polite" aria-label="Уведомление о файлах cookie">
   <p class="cookie-t">Мы используем файлы cookie, чтобы сайт работал корректно и&nbsp;удобно.</p>
   <button class="cookie-ok" type="button" data-cookie-close>ОК</button>
@@ -1315,23 +1239,6 @@ body.bar-off .topbar{display:none}
   window.addEventListener('scroll',onScroll,{passive:true});
   window.addEventListener('resize',onScroll,{passive:true});
   upd();
-})();
-(function(){
-  var btn=document.querySelector('.story-link'), box=document.getElementById('letter');
-  if(!btn||!box)return;
-  var sheet=box.querySelector('.letter-sheet');
-  function open(){
-    box.classList.add('open'); box.setAttribute('aria-hidden','false');
-    document.body.style.overflow='hidden';
-    if(sheet) sheet.scrollTop=0;
-  }
-  function close(){
-    box.classList.remove('open'); box.setAttribute('aria-hidden','true');
-    document.body.style.overflow='';
-  }
-  btn.addEventListener('click',open);
-  box.querySelectorAll('[data-close]').forEach(function(el){el.addEventListener('click',close);});
-  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&box.classList.contains('open')) close(); });
 })();
 
 /* ===== ПЕРВЫЙ ЭКРАН: затемнение + лёгкий отъезд по прогрессу скролла ===== */

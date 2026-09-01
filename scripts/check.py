@@ -37,7 +37,7 @@ for k, v in counts.items():
     if v > 1: errors.append(f'секция .{k} встречается {v} раза')
 for tag, name in [('<header class="hero">','первый экран'), ('<footer class="ftr">','футер'),
                   ('<div class="nav-wrap">','навигация'), ('<div class="topbar"','верхняя строка'),
-                  ('<div class="letter"','письмо'), ('<div class="cookie"','уведомление')]:
+                  ('<div class="cookie"','уведомление')]:
     n = body.count(tag)
     if n != 1: errors.append(f'{name}: блоков {n}, ожидался 1')
 
