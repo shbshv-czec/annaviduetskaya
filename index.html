@@ -485,12 +485,15 @@ body.bar-off .topbar{display:none}
 .sp-body .sp-reel-main{aspect-ratio:16/9;margin:0;position:sticky;top:120px}
 .sp-topics-h{font-family:var(--display);font-weight:var(--w-display);font-size:clamp(26px,2.8vw,38px);
   line-height:1.14;letter-spacing:-.015em;color:var(--ink);margin:0 0 10px}
-.topics{margin-top:22px;border-top:1px solid var(--ink)}
-.topic{border-bottom:1px solid var(--line);opacity:0;transform:translateY(20px);filter:blur(6px);
+.topics{margin-top:22px}
+/* разделитель как в референсе: тонкая тёмная линия и квадратная засечка у левого края */
+.topic{position:relative;opacity:0;transform:translateY(20px);filter:blur(6px);
   will-change:opacity,filter,transform}
+.topic::before{content:'';position:absolute;left:0;right:0;top:4.2px;height:1.6px;background:var(--ink)}
+.topic::after{content:'';position:absolute;left:0;top:.5px;width:9px;height:9px;background:var(--ink)}
 .topic.in{opacity:1;transform:none;filter:none}
 .topic-head{width:100%;display:grid;grid-template-columns:1fr auto;align-items:start;gap:20px;
-  background:none;border:none;cursor:pointer;text-align:left;padding:22px 2px;font:inherit;color:inherit}
+  background:none;border:none;cursor:pointer;text-align:left;padding:27px 2px 28px;font:inherit;color:inherit}
 .topic-head:hover .topic-t{color:var(--accent-d)}
 .topic-t{display:flex;flex-direction:column;align-items:flex-start;gap:10px;
   font-family:var(--display);font-weight:var(--w-display);font-size:clamp(19px,1.9vw,25px);
@@ -507,16 +510,13 @@ body.bar-off .topbar{display:none}
 .topic-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--d-md) var(--ease-out)}
 .topic.open .topic-body{grid-template-rows:1fr}
 .topic-body>div{overflow:hidden}
-.topic-in{display:grid;grid-template-columns:1fr;gap:18px;padding:0 2px 24px}
+.topic-in{padding:0 2px 30px}
 .topic-body p{font-family:var(--text);font-size:16.5px;line-height:1.62;color:var(--ink-2);margin:0;max-width:56ch}
-.topic-ph{aspect-ratio:16/10;overflow:hidden;background:var(--line);max-width:340px}
-.topic-ph img{width:100%;height:100%;object-fit:cover;display:block}
 
 @media(max-width:960px){
-  .topic-head{gap:12px;padding:18px 0}
+  .topic-head{gap:12px;padding:22px 0 23px}
   .topic-t{font-size:18px;gap:8px}
-  .topic-in{gap:14px;padding:0 0 20px}
-  .topic-in>p,.topic-ph{grid-column:1;grid-row:auto}
+  .topic-in{padding:0 0 24px}
   .topic-body p{font-size:16.5px}
 }
 .sp-venues-line p{font-family:var(--serif);font-weight:var(--w-head);font-size:clamp(19px,2.1vw,25px);line-height:1.45;color:var(--ink);margin:16px 0 0;max-width:62ch}
@@ -985,21 +985,21 @@ body.bar-off .topbar{display:none}
               <span class="topic-t">«Тандем сильных: партнёрство вместо борьбы»<span class="topic-tag">Главная</span></span>
               <span class="topic-ind" aria-hidden="true"></span>
             </button>
-            <div class="topic-body" id="topic0"><div><div class="topic-in"><p>Почему сильные люди начинают бороться друг с другом и как построить союз, который выдерживает деньги, детей и кризисы. Про партнёрство и в паре, и в бизнесе — по моему опыту, здесь они почти неотличимы.</p><div class="topic-ph"><img src="assets/stage-3.jpg" alt="Анна Видуецкая выступает"></div></div></div></div>
+            <div class="topic-body" id="topic0"><div><div class="topic-in"><p>Почему сильные люди начинают бороться друг с другом и как построить союз, который выдерживает деньги, детей и кризисы. Про партнёрство и в паре, и в бизнесе — по моему опыту, здесь они почти неотличимы.</p></div></div></div>
           </div>
           <div class="topic">
             <button class="topic-head" type="button" aria-expanded="false" aria-controls="topic1">
               <span class="topic-t">«3 луча баланса»</span>
               <span class="topic-ind" aria-hidden="true"></span>
             </button>
-            <div class="topic-body" id="topic1"><div><div class="topic-in"><p>Как совмещать себя, семью и дело и перестать выбирать что-то одно. Женская самореализация без жертв и угрызений совести.</p><div class="topic-ph"><img src="assets/stage-2.webp" alt="Анна Видуецкая на конференции"></div></div></div></div>
+            <div class="topic-body" id="topic1"><div><div class="topic-in"><p>Как совмещать себя, семью и дело и перестать выбирать что-то одно. Женская самореализация без жертв и угрызений совести.</p></div></div></div>
           </div>
           <div class="topic">
             <button class="topic-head" type="button" aria-expanded="false" aria-controls="topic2">
               <span class="topic-t">«Как поддерживать мужчину в ресурсном состоянии»</span>
               <span class="topic-ind" aria-hidden="true"></span>
             </button>
-            <div class="topic-body" id="topic2"><div><div class="topic-in"><p>Про опору, тепло и силу рядом — так, чтобы поддержка не превращалась в обслуживание.</p><div class="topic-ph"><img src="assets/stage-1.jpg" alt="Анна Видуецкая и Радислав Гандапас на сцене"></div></div></div></div>
+            <div class="topic-body" id="topic2"><div><div class="topic-in"><p>Про опору, тепло и силу рядом — так, чтобы поддержка не превращалась в обслуживание.</p></div></div></div>
           </div>
         </div>
       </div>
