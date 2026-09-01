@@ -10,7 +10,7 @@
 <style>
 :root{
   /* — ЧЕРНИЛА: одна тёплая шкала вместо 10 случайных тёмных — */
-  --ink:#1F1C1B; --ink-2:#4C423D; --ink-3:#80736B; --muted:#A69B92;
+  --ink:#1F1C1B; --ink-2:#2A2523; --ink-3:#8A7F78; --muted:#A69B92;
   /* — ПОВЕРХНОСТИ: холст / лён / бумага / тёмное — */
   --canvas:#EFEBE3; --linen:#F5F4F0; --paper:#FFFFFF; --espresso:#2A2724;
   --line:#D9D6CE; --line-2:#C7C1B7;
@@ -34,6 +34,8 @@
   --head-case:none; --head-track:.015em;
   /* Заголовки — одна серифная гарнитура на весь сайт */
   --display:'Cormorant','Cormorant Garamond',Georgia,serif;
+  /* Единая шкала заголовков секций */
+  --h-sec:clamp(34px,4.6vw,64px);
   --serif:'Cormorant','Cormorant Garamond',Georgia,serif;
   --text:'Lora',Georgia,'Times New Roman',serif;
   --sans:'Manrope','Helvetica Neue',Arial,sans-serif;
@@ -49,7 +51,7 @@ a{color:inherit;text-decoration:none}
 img{display:block}
 /* ===== ТИПОГРАФИКА: Cormorant — заголовки, Lora — текст, Manrope — акценты ===== */
 .t-display{font-family:var(--serif);font-weight:var(--w-display);font-size:clamp(56px,9.4vw,140px);line-height:.94;letter-spacing:-.02em}      /* display 96 */
-.t-h1{font-family:var(--serif);font-weight:var(--w-display);font-size:clamp(36px,5.6vw,72px);line-height:1.02;letter-spacing:-.02em} /* heading 42 — секция */
+.t-h1{font-family:var(--serif);font-weight:var(--w-display);font-size:var(--h-sec);line-height:1.06;letter-spacing:-.02em}
 .t-h2{font-family:var(--serif);font-weight:var(--w-head);font-size:clamp(25px,3vw,36px);line-height:1.18;letter-spacing:-.01em} /* sub-header */
 .t-h3{font-family:var(--serif);font-weight:var(--w-head);font-size:clamp(23px,2.6vw,30px);line-height:1.24;letter-spacing:0} /* heading-sm 24 — карточка */
 .t-lead{font-family:var(--text);font-style:italic;font-weight:400;font-size:22px;line-height:1.42;letter-spacing:.01em} /* subheading 18 */
@@ -319,7 +321,7 @@ body.bar-off .topbar{display:none}
   .sp-lead{max-width:none}
   .sp-sub{font-size:17px;max-width:none}}
 
-.sp-title{font-family:var(--serif);font-weight:var(--w-display);font-size:clamp(30px,4vw,54px);
+.sp-title{font-family:var(--serif);font-weight:var(--w-display);font-size:var(--h-sec);
   line-height:1.12;letter-spacing:-.015em;color:var(--ink);margin:16px 0 0;max-width:none}
 .sp-main{padding:4px 0 36px;margin:0 0 4px}
 .sp-main-tag{display:inline-block;font-family:var(--text);font-weight:700;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 16px}
@@ -356,9 +358,12 @@ body.bar-off .topbar{display:none}
 /* ---------- «Обо мне»: текст слева, портрет справа ---------- */
 .about-head{margin:0 0 52px}
 .about-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:70px;align-items:start}
-.about-copy{max-width:none}
+.about-copy{max-width:none;padding-bottom:8px}
 .about-lead+.about-lead{margin-top:20px}
-.about-photo{aspect-ratio:1280/1920;overflow:hidden;background:var(--line)}
+/* Фото стоит на месте, пока слева прокручивается текст и карточки;
+   когда колонка заканчивается — уезжает вместе со всем блоком */
+.about-photo{position:sticky;top:110px;align-self:start;
+  aspect-ratio:2668/4000;overflow:hidden;background:var(--line)}
 .about-photo img{width:100%;height:100%;object-fit:cover;display:block}
 .story-link{display:inline-flex;align-items:center;gap:9px;margin:32px 0 0;padding:0 0 5px;
   background:none;border:none;border-bottom:1px solid var(--accent);cursor:pointer;
@@ -398,7 +403,7 @@ body.bar-off .topbar{display:none}
 .letter-sheet .story-bold{font-weight:700;color:var(--ink)}
 @media(max-width:960px){
   .about-grid{grid-template-columns:1fr;gap:34px}
-  .about-photo{order:-1}
+  .about-photo{order:-1;position:static}
   .letter{padding:16px 12px}
   .letter-box{max-height:92vh}
   .letter-x{top:10px;right:10px;width:38px;height:38px}
@@ -412,17 +417,21 @@ body.bar-off .topbar{display:none}
 /* ---------- ПРЕСС-ЦЕНТР: чёрная полоса с преломлением ---------- */
 .press{background:#0F0D0C;color:#fff;padding:104px 0}
 .press-wrap{max-width:1200px;margin:0 auto;padding:0 40px;
-  display:grid;grid-template-columns:.82fr 1.18fr;gap:64px;align-items:start}
-.press-card{position:relative;margin:0;overflow:hidden;aspect-ratio:4/3.2;background:#14110F}
-.press-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.press-card figcaption{position:absolute;left:26px;right:26px;bottom:24px;z-index:1}
+  display:grid;grid-template-columns:.72fr 1.28fr;gap:60px;align-items:start}
+.press-card{position:relative;margin:0;overflow:hidden;aspect-ratio:900/1300;background:#14110F}
+.press-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%}
+/* радужный блик поверх портрета — как у Parloa */
+.press-flare{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  mix-blend-mode:screen;opacity:.62;pointer-events:none}
 .press-card-n{font-family:var(--display);font-weight:var(--w-display);font-size:clamp(24px,2.4vw,32px);
   line-height:1.1;letter-spacing:-.015em;color:#fff;margin:0}
 .press-card-r{font-family:var(--sans);font-weight:600;font-size:10px;letter-spacing:.2em;text-transform:uppercase;
   color:rgba(255,255,255,.66);margin:10px 0 0}
-.press-eyebrow{color:var(--accent-l);margin:0 0 22px}
-.press-short{font-family:var(--display);font-weight:var(--w-display);font-size:clamp(24px,2.7vw,38px);
-  line-height:1.22;letter-spacing:-.015em;color:#fff;margin:0;max-width:26ch}
+.press-eyebrow{color:var(--accent-l);margin:0 0 20px}
+.press-name{font-family:var(--display);font-weight:var(--w-display);font-size:var(--h-sec);
+  line-height:1.08;letter-spacing:-.025em;color:#fff;margin:0 0 20px;max-width:18ch}
+.press-short{font-family:var(--text);font-size:clamp(17px,1.7vw,21px);line-height:1.55;
+  color:rgba(255,255,255,.86);margin:0;max-width:44ch}
 .press-long{margin-top:38px;padding-top:30px;border-top:1px solid rgba(255,255,255,.16)}
 .press-label{font-family:var(--sans);font-weight:600;font-size:10px;letter-spacing:.2em;text-transform:uppercase;
   color:rgba(255,255,255,.5);margin:0 0 18px}
@@ -448,7 +457,7 @@ body.bar-off .topbar{display:none}
 .podcast{background:transparent;padding:104px 0 110px}
 .pc-wrap{max-width:1200px;margin:0 auto;padding:0 40px}
 .pc-eyebrow{color:var(--accent);margin:0 0 16px}
-.pc-title{font-family:var(--serif);font-weight:var(--w-display);font-size:clamp(36px,5.6vw,72px);line-height:1.1;letter-spacing:-.01em;color:var(--ink);margin:0 0 20px}
+.pc-title{font-family:var(--serif);font-weight:var(--w-display);font-size:var(--h-sec);line-height:1.06;letter-spacing:-.02em;color:var(--ink);margin:0 0 20px}
 .pc-intro{color:var(--ink-2);font-size:18px;line-height:1.4;margin:0 0 44px;max-width:60ch}
 .pc-rail{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 40px 24px;margin:0 -40px;scrollbar-width:none}
 .pc-rail::-webkit-scrollbar{display:none}
@@ -479,8 +488,8 @@ body.bar-off .topbar{display:none}
 .tg-wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 40px;
   display:grid;grid-template-columns:1.08fr .92fr;gap:64px;align-items:center}
 .tg-eyebrow{color:var(--accent-l);margin:0 0 22px}
-.tg-title{font-family:var(--display);font-weight:var(--w-display);font-size:clamp(38px,5.4vw,76px);
-  line-height:1.04;letter-spacing:-.025em;color:#fff;margin:0}
+.tg-title{font-family:var(--display);font-weight:var(--w-display);font-size:var(--h-sec);
+  line-height:1.06;letter-spacing:-.025em;color:#fff;margin:0}
 .tg-text{font-family:var(--text);font-size:18px;line-height:1.65;color:rgba(255,255,255,.72);
   max-width:42ch;margin:24px 0 38px}
 .tg-cta{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
@@ -580,28 +589,28 @@ body.bar-off .topbar{display:none}
   .sp-foot{margin-top:40px}
 }
 /* Цитата отдельной полосой */
-.quote{background:transparent;padding:96px 0 100px}
+.quote{background:transparent;padding:120px 0 126px}
 .quote-wrap{max-width:1200px;margin:0 auto;padding:0 40px;text-align:center}
-.quote-t{font-family:var(--display);font-weight:var(--w-display);font-size:clamp(30px,4.4vw,62px);
-  line-height:1.14;letter-spacing:-.02em;color:var(--ink);margin:0 auto;max-width:20ch}
+.quote-t{font-family:var(--display);font-weight:var(--w-display);font-size:clamp(34px,6vw,86px);
+  line-height:1.08;letter-spacing:-.03em;color:var(--ink);margin:0 auto;max-width:30ch}
 .quote-t em{font-style:italic;color:var(--accent)}
 /* Заголовок консультаций — узкой колонкой, по слову в строке */
-.consult-h{font-family:var(--display);font-weight:var(--w-display);font-size:clamp(44px,6.4vw,96px);
+.consult-h{font-family:var(--display);font-weight:var(--w-display);font-size:var(--h-sec);
   line-height:.98;letter-spacing:-.03em;color:var(--ink);margin:26px 0 0}
 .consult-lead{font-family:var(--text);font-size:19px;line-height:1.65;color:var(--ink-2);
   margin:34px 0 0;max-width:52ch}
 @media(max-width:960px){
-  .quote{padding:64px 0 68px}
+  .quote{padding:76px 0 80px}
   .quote-wrap{padding:0 24px}
-  .consult-h{font-size:42px}
+  .quote-t{font-size:clamp(28px,7.4vw,40px);max-width:none}
   .consult-lead{font-size:17px;margin-top:26px}
 }
 /* CONSULT */
-.consult{padding:104px 0 120px;
+.consult{padding:100px 0 24px;
   background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,0) 38%,#fff 100%)}
 .consult-wrap{max-width:1120px;margin:0 auto;padding:0 40px}
 .consult-eyebrow{color:var(--accent);margin:0 0 8px}
-.req2{display:grid;grid-template-columns:.86fr 1.14fr;gap:60px;align-items:start;margin:56px 0 88px;text-align:left}
+.req2{display:grid;grid-template-columns:.86fr 1.14fr;gap:60px;align-items:start;margin:52px 0 0;text-align:left}
 .req2-l{position:sticky;top:120px}
 .req2-rule{display:none}
 .req2-p{color:var(--ink-2);font-size:18px;line-height:1.6;margin:0 0 34px;max-width:42ch}
@@ -618,14 +627,14 @@ body.bar-off .topbar{display:none}
 .consult-turn p{color:var(--ink-2);font-size:19px;line-height:1.65;margin:0 0 20px}
 .consult-turn .pull{font-family:var(--serif);font-style:italic;font-weight:var(--w-head);font-size:clamp(26px,3.4vw,38px);line-height:1.3;color:var(--ink);margin:0 0 20px}
 /* CTA консультации: чистая белая плашка */
-.cta-band{background:var(--paper);padding:112px 0}
+.cta-band{background:var(--paper);padding:84px 0 96px}
 .cta{max-width:1180px;margin:0 auto;padding:0 40px;
   display:grid;grid-template-columns:1.05fr .95fr;gap:72px;align-items:center;text-align:left}
 .cta-media{position:relative;aspect-ratio:1/1;overflow:hidden;max-width:420px;margin:0 0 0 auto}
 .cta-media video{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;
   filter:brightness(1.026)}
 .cta-eyebrow{color:var(--accent);margin:0 0 22px}
-.cta-title{font-family:var(--display);font-weight:var(--w-display);font-size:clamp(32px,3.8vw,54px);line-height:1.12;
+.cta-title{font-family:var(--display);font-weight:var(--w-display);font-size:var(--h-sec);line-height:1.12;
   letter-spacing:-.02em;color:var(--ink);margin:0;max-width:none}
 .cta-sub{font-family:var(--text);font-size:19px;line-height:1.6;color:var(--ink-2);margin:24px 0 34px;max-width:44ch}
 .cta-actions{display:flex;flex-wrap:wrap;gap:14px}
@@ -892,7 +901,7 @@ body.bar-off .topbar{display:none}
           <li class="fig"><span class="fig-n">2</span><span class="fig-c">премии<br>«Бизнес-мама&nbsp;года»</span></li>
         </ul>
       </div>
-      <div class="about-photo"><img src="assets/press.jpg" alt="Анна Видуецкая"></div>
+      <div class="about-photo"><img src="assets/about-anna.jpg" alt="Анна Видуецкая"></div>
     </div>
   </div>
 </section>
@@ -914,7 +923,7 @@ body.bar-off .topbar{display:none}
 <section class="consult" id="consult">
   <div class="consult-wrap">
     <p class="consult-eyebrow t-eyebrow">Консультации</p>
-    <h2 class="consult-h">С<br>чем<br>вы<br>можете<br>прийти</h2>
+    <h2 class="consult-h">С чем вы можете прийти</h2>
     <p class="consult-lead">За каждым запросом стоит одно желание&nbsp;— изменить то, что перестало устраивать. Чаще всего мы&nbsp;работаем по&nbsp;трём направлениям.</p>
     <div class="req2">
       <div class="req2-l">
@@ -1048,14 +1057,12 @@ body.bar-off .topbar{display:none}
 <section class="press" id="press">
   <div class="press-wrap">
     <figure class="press-card">
-      <img src="assets/prism-dark-1.jpg" alt="" aria-hidden="true">
-      <figcaption>
-        <p class="press-card-n">Анна Видуецкая</p>
-        <p class="press-card-r">Женский мотиватор и стратег</p>
-      </figcaption>
+      <img class="press-photo" src="assets/press-anna.jpg" alt="Анна Видуецкая">
+      <img class="press-flare" src="assets/prism-dark-1.jpg" alt="" aria-hidden="true">
     </figure>
     <div class="press-body">
       <p class="press-eyebrow t-eyebrow">Пресс-центр</p>
+      <h2 class="press-name">Анна Видуецкая&nbsp;— женский мотиватор и&nbsp;стратег</h2>
       <p class="press-short">Коуч ICF и&nbsp;психолог, автор книги «Легче воздуха»&nbsp;— №1 на&nbsp;Amazon в&nbsp;категории Self&nbsp;Esteem.</p>
       <div class="press-long">
         <p class="press-label">В формате Elevator pitch</p>
