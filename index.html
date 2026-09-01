@@ -411,11 +411,8 @@ body.bar-off .topbar{display:none}
   line-height:1.08;letter-spacing:-.025em;color:#fff;margin:0 0 20px;max-width:18ch}
 .press-short{font-family:var(--text);font-size:clamp(17px,1.7vw,21px);line-height:1.55;
   color:rgba(255,255,255,.86);margin:0;max-width:44ch}
-.press-long{position:relative;margin-top:38px;padding-top:30px}
-.press-long::before{content:'';position:absolute;left:0;right:0;top:0;height:1px;
-  background:rgba(255,255,255,.22);transform:scaleX(0);transform-origin:left center;
-  transition:transform var(--d-xxl) var(--ease-in-out)}
-.press-long.in::before{transform:scaleX(1)}
+.press-long{position:relative;margin-top:38px;padding-top:30px;
+  --rule:rgba(255,255,255,.24);--dot:#fff}
 .press-label{font-family:var(--sans);font-weight:600;font-size:10px;letter-spacing:.2em;text-transform:uppercase;
   color:rgba(255,255,255,.5);margin:0 0 18px}
 .press-long p:not(.press-label){font-family:var(--text);font-size:16.5px;line-height:1.68;
@@ -459,12 +456,7 @@ body.bar-off .topbar{display:none}
 .pc-hero .pc-views{margin-top:14px}
 .pc-list{display:flex;flex-direction:column}
 .pc-row{display:grid;grid-template-columns:112px 1fr auto;gap:20px;align-items:center;
-  padding:18px 0;text-decoration:none;position:relative}
-/* разделитель прочерчивается — тот же приём, что и в темах выступлений */
-.pc-row::before{content:'';position:absolute;left:0;right:0;top:0;height:1px;background:rgba(31,28,27,.16);
-  transform:scaleX(0);transform-origin:left center;transition:transform var(--d-xxl) var(--ease-in-out)}
-.pc-row.in::before{transform:scaleX(1)}
-.pc-row:first-child::before{display:none}
+  padding:18px 0;text-decoration:none;position:relative;--rule:rgba(31,28,27,.20)}
 .pc-row-thumb{aspect-ratio:16/9;overflow:hidden;background:#1a1613}
 .pc-row-thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .pc-row-tx{min-width:0}
@@ -544,17 +536,22 @@ body.bar-off .topbar{display:none}
 .sp-topics-h{font-family:var(--display);font-weight:var(--w-display);font-size:clamp(26px,2.8vw,38px);
   line-height:1.14;letter-spacing:-.015em;color:var(--ink);margin:0 0 10px}
 .topics{margin-top:22px}
-/* разделитель как в референсе: тонкая тёмная линия и квадратная засечка у левого края */
-.topic{position:relative;opacity:0;transform:translateY(20px);filter:blur(6px);
-  will-change:opacity,filter,transform}
-.topic::before{content:'';position:absolute;left:0;right:0;top:3px;height:1.2px;background:var(--ink);
+/* ЕДИНЫЙ РАЗДЕЛИТЕЛЬ на весь сайт: тонкая линия и квадратная засечка у левого края.
+   Линия прочерчивается, засечка всплывает следом. Цвет линии задаётся через --rule,
+   цвет засечки через --dot — поэтому где-то линия приглушена, а точка всегда в полную силу. */
+.topic::before,.pc-row::before,.press-long::before{
+  content:'';position:absolute;left:0;right:0;top:3px;height:1.2px;background:var(--rule,var(--ink));
   transform:scaleX(0);transform-origin:left center;
   transition:transform var(--d-xxl) var(--ease-in-out)}
-.topic.in::before{transform:scaleX(1)}
-.topic::after{content:'';position:absolute;left:0;top:.6px;width:6px;height:6px;background:var(--ink);
+.topic::after,.pc-row::after,.press-long::after{
+  content:'';position:absolute;left:0;top:.6px;width:6px;height:6px;background:var(--dot,var(--ink));
   transform:scale(0);transform-origin:left center;
   transition:transform var(--d-lg) var(--ease-out) 240ms}
-.topic.in::after{transform:scale(1)}
+.topic.in::before,.pc-row.in::before,.press-long.in::before{transform:scaleX(1)}
+.topic.in::after,.pc-row.in::after,.press-long.in::after{transform:scale(1)}
+.pc-row:first-child::before,.pc-row:first-child::after{display:none}
+
+.topic{position:relative;opacity:0;transform:translateY(20px);filter:blur(6px);will-change:opacity,filter,transform}
 .topic.in{opacity:1;transform:none;filter:none}
 .topic-head{width:100%;display:grid;grid-template-columns:1fr auto;align-items:start;gap:20px;
   background:none;border:none;cursor:pointer;text-align:left;padding:27px 2px 28px;font:inherit;color:inherit}
@@ -755,7 +752,8 @@ body.bar-off .topbar{display:none}
 
 @media(prefers-reduced-motion:reduce){
   .rv,.rv-up,.sp-w{opacity:1!important;transition:none!important;filter:none!important;transform:none!important}
-  .topic::before,.topic::after,.press-long::before{transform:none!important;transition:none!important}
+  .topic::before,.topic::after,.pc-row::before,.pc-row::after,
+  .press-long::before,.press-long::after{transform:none!important;transition:none!important}
   .rv-rule{transform:none!important;transition:none!important}
   .hero-dim{display:none}
 }
