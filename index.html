@@ -316,8 +316,6 @@ body.bar-off .topbar{display:none}
 .sp-wrap{max-width:1200px;margin:0 auto;padding:0 40px}
 .sp-head{margin:0 0 44px}
 @media(max-width:960px){
-  .sp-body{grid-template-columns:1fr;gap:30px;margin-top:40px}
-  .sp-body .sp-reel-main{position:static;order:-1}
   .sp-lead{max-width:none}
   .sp-sub{font-size:17px;max-width:none}}
 
@@ -486,15 +484,17 @@ body.bar-off .topbar{display:none}
 .sp-lead{max-width:62ch;margin:26px 0 0;display:flex;flex-direction:column;gap:16px}
 .sp-sub{font-family:var(--text);font-size:18px;line-height:1.65;color:var(--ink-2);margin:0}
 .sp-body{display:grid;grid-template-columns:1.12fr .88fr;gap:64px;align-items:start;margin:64px 0 0}
-.sp-body .sp-reel-main{aspect-ratio:16/9;margin:0;position:sticky;top:120px}
+.sp-body .sp-reel-main{aspect-ratio:16/9;margin:0;position:sticky;top:120px;overflow:hidden}
+/* без этого видео разворачивается в свой натуральный размер и рвёт страницу вбок */
+.sp-reel-main video{display:block;width:100%;height:100%;max-width:100%;object-fit:cover}
 .sp-topics-h{font-family:var(--display);font-weight:var(--w-display);font-size:clamp(26px,2.8vw,38px);
   line-height:1.14;letter-spacing:-.015em;color:var(--ink);margin:0 0 10px}
 .topics{margin-top:22px}
 /* разделитель как в референсе: тонкая тёмная линия и квадратная засечка у левого края */
 .topic{position:relative;opacity:0;transform:translateY(20px);filter:blur(6px);
   will-change:opacity,filter,transform}
-.topic::before{content:'';position:absolute;left:0;right:0;top:4.2px;height:1.6px;background:var(--ink)}
-.topic::after{content:'';position:absolute;left:0;top:.5px;width:9px;height:9px;background:var(--ink)}
+.topic::before{content:'';position:absolute;left:0;right:0;top:3px;height:1.2px;background:var(--ink)}
+.topic::after{content:'';position:absolute;left:0;top:.6px;width:6px;height:6px;background:var(--ink)}
 .topic.in{opacity:1;transform:none;filter:none}
 .topic-head{width:100%;display:grid;grid-template-columns:1fr auto;align-items:start;gap:20px;
   background:none;border:none;cursor:pointer;text-align:left;padding:27px 2px 28px;font:inherit;color:inherit}
@@ -529,6 +529,9 @@ body.bar-off .topbar{display:none}
 @media(max-width:960px){
   .speaking{padding:76px 0}
   .sp-wrap{padding:0 24px}
+  /* одна колонка: сначала видео, темы под ним */
+  .sp-body{grid-template-columns:1fr;gap:30px;margin-top:40px}
+  .sp-body .sp-reel-main{position:static;order:-1}
   .sp-head{grid-template-columns:1fr;gap:28px;margin-bottom:44px}
   .sp-grid{grid-template-columns:1fr;gap:44px}
   .sp-card{grid-template-columns:1fr;gap:22px}
