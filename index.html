@@ -8,6 +8,9 @@
 <link rel="icon" type="image/png" href="assets/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="assets/icon-192.png" sizes="192x192">
+<!-- фон первого экрана — в CSS, поэтому браузер узнаёт о нём поздно: подсказываем заранее -->
+<link rel="preload" as="image" type="image/webp" href="assets/anna-hero.webp" media="(min-width:761px)">
+<link rel="preload" as="image" type="image/webp" href="assets/anna-hero-m.webp" media="(max-width:760px)">
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/cormorant-600-normal.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/lora-400-normal.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/manrope-600-normal.woff2" crossorigin>
@@ -15,12 +18,10 @@
 /* Шрифты лежат у нас же и урезаны до символов, которые есть на странице:
    никаких обращений к серверам Google — это и быстрее, и надёжнее из России. */
 @font-face{font-family:'Cormorant';font-style:italic;font-weight:600;font-display:swap;src:url('assets/fonts/cormorant-600-italic.woff2') format('woff2')}
-@font-face{font-family:'Cormorant';font-style:normal;font-weight:400;font-display:swap;src:url('assets/fonts/cormorant-400-normal.woff2') format('woff2')}
 @font-face{font-family:'Cormorant';font-style:normal;font-weight:600;font-display:swap;src:url('assets/fonts/cormorant-600-normal.woff2') format('woff2')}
 @font-face{font-family:'Lora';font-style:italic;font-weight:400;font-display:swap;src:url('assets/fonts/lora-400-italic.woff2') format('woff2')}
 @font-face{font-family:'Lora';font-style:normal;font-weight:400;font-display:swap;src:url('assets/fonts/lora-400-normal.woff2') format('woff2')}
 @font-face{font-family:'Lora';font-style:normal;font-weight:700;font-display:swap;src:url('assets/fonts/lora-700-normal.woff2') format('woff2')}
-@font-face{font-family:'Manrope';font-style:normal;font-weight:500;font-display:swap;src:url('assets/fonts/manrope-500-normal.woff2') format('woff2')}
 @font-face{font-family:'Manrope';font-style:normal;font-weight:600;font-display:swap;src:url('assets/fonts/manrope-600-normal.woff2') format('woff2')}
 @font-face{font-family:'Manrope';font-style:normal;font-weight:700;font-display:swap;src:url('assets/fonts/manrope-700-normal.woff2') format('woff2')}
 
@@ -89,7 +90,7 @@ img{display:block}
 @keyframes tk{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
 .tk-seq{display:flex;flex:none}
 .tk-u{display:inline-flex;align-items:center;gap:28px;flex:none;padding-right:28px}
-.tk-t{font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+.tk-t{font-family:var(--sans);font-weight:600;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
   color:rgba(255,255,255,.88);white-space:nowrap}
 .tk-go{display:inline-flex;align-items:center;gap:7px;font-family:var(--sans);font-weight:700;font-size:11px;
   letter-spacing:.2em;text-transform:uppercase;color:#fff;white-space:nowrap;
@@ -146,7 +147,7 @@ body.bar-off .topbar{display:none}
 
 .brand:hover{opacity:.72}
 .nav-links{display:flex;gap:2px;align-items:center}
-.nav-links a{position:relative;font-family:var(--sans);text-transform:uppercase;letter-spacing:.14em;font-weight:500;
+.nav-links a{position:relative;font-family:var(--sans);text-transform:uppercase;letter-spacing:.14em;font-weight:600;
   font-size:calc(10.5px - .3px * var(--navp));color:rgba(255,255,255,.82);
   padding:calc(7px - 1px * var(--navp)) calc(11px - 1px * var(--navp));border-radius:0;
   transition:background var(--d-md) var(--ease-out),color var(--d-md) var(--ease-out)}
@@ -156,7 +157,7 @@ body.bar-off .topbar{display:none}
   transition:transform var(--d-lg) var(--ease-out)}
 .nav-links a:hover::after{transform:scaleX(1)}
 .nav-right{display:flex;align-items:center;gap:16px;margin-left:auto}
-.nav-phone{font-family:var(--sans);font-size:11.5px;font-weight:500;letter-spacing:.02em;color:rgba(255,255,255,.8);white-space:nowrap}
+.nav-phone{font-family:var(--sans);font-size:11.5px;font-weight:600;letter-spacing:.02em;color:rgba(255,255,255,.8);white-space:nowrap}
 .nav .wa-btn{display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);font-weight:600;
   font-size:calc(9.5px - .3px * var(--navp));text-transform:uppercase;letter-spacing:.12em;
   color:var(--ink);background:#fff;border:1px solid #fff;
@@ -458,7 +459,7 @@ body.bar-off .topbar{display:none}
 .pc-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:rgba(20,16,13,.5);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;transition:background var(--d-lg) var(--ease-out),transform var(--d-lg) var(--ease-out)}
 .pc-hero:hover .pc-play{background:rgba(20,16,13,.72);transform:translate(-50%,-50%) scale(1.07)}
 .pc-play svg{width:22px;height:22px;fill:#fff;margin-left:3px}
-.pc-views{font-family:var(--sans);font-weight:500;font-size:13px;letter-spacing:.02em;color:var(--ink-3);margin:10px 0 0}
+.pc-views{font-family:var(--sans);font-weight:600;font-size:13px;letter-spacing:.02em;color:var(--ink-3);margin:10px 0 0}
 @media(max-width:960px){
   .pc-body{grid-template-columns:1fr;gap:34px}
   .pc-row{grid-template-columns:88px 1fr;gap:14px;padding:16px 0}
