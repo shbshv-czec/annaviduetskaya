@@ -197,13 +197,16 @@ body.bar-off .topbar{display:none}
 .hero-inner{position:relative;z-index:5;max-width:1440px;margin:0 auto;min-height:100vh;display:flex;align-items:center;padding:0 40px}
 .hero-text{max-width:660px;padding:150px 0 72px}
 /* Первый экран: надзаголовок — имя — подзаголовок, пропорции 1 : 6 : 2 */
-.regalia{color:rgba(255,255,255,.62);margin:0 0 26px;max-width:640px;font-size:10.5px;letter-spacing:.24em}
+/* Пропорции первого экрана сняты с референса: надзаголовок, имя и подпись
+   держат друг к другу те же отношения, что у Tony Robbins, но в нашей типографике. */
+.regalia{color:rgba(255,255,255,.72);margin:0 0 28px;width:max-content;max-width:min(790px,58vw);
+  font-size:clamp(10px,1.25vw,18px);letter-spacing:.14em}
 .hero-text .name{font-family:var(--serif);font-weight:600;
-  font-size:clamp(56px,9.4vw,142px);line-height:.9;letter-spacing:-.035em;color:#fff;margin:0}
+  font-size:clamp(56px,9.4vw,142px);line-height:.9;letter-spacing:-.05em;color:#fff;margin:0}
 .role{color:#fff;margin:20px 0 0}
-.subtitle{font-family:var(--text);font-weight:400;font-size:clamp(16px,1.35vw,19px);line-height:1.55;
-  letter-spacing:.005em;color:rgba(255,255,255,.86);margin:30px 0 0;max-width:none}
-.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:44px}
+.subtitle{font-family:var(--text);font-weight:400;font-size:clamp(19px,2.43vw,35px);line-height:1.5;
+  letter-spacing:.005em;color:rgba(255,255,255,.9);margin:36px 0 0;max-width:none}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
 .btn{display:inline-flex;align-items:center;justify-content:center;text-align:center;gap:9px;font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:.02em;padding:15px 28px;cursor:pointer;border:1px solid transparent;border-radius:2px;transition:background .2s,color .2s,border-color .2s}
 .btn--primary{background:var(--ink);color:#fff;border-color:var(--ink)}
 .btn--primary:hover{background:var(--espresso);border-color:var(--espresso);color:#fff}
@@ -228,7 +231,7 @@ body.bar-off .topbar{display:none}
   .burger{display:flex}
   /* регалии — вверху под навигацией, лицо свободно */
   .hero-inner{position:relative}
-  .regalia{position:absolute;top:92px;left:24px;right:24px;margin:0;font-size:10.5px;letter-spacing:.1em}
+  .regalia{position:absolute;top:92px;left:24px;right:24px;margin:0;font-size:11px;letter-spacing:.1em}
   .hero-text{padding-bottom:8px}
   .about{padding:72px 0}
   .about-grid{grid-template-columns:1fr;gap:40px}
@@ -827,7 +830,6 @@ body.bar-off .topbar{display:none}
       <a href="#about">Обо мне</a>
       <a href="#consult">Консультации</a>
       <a href="#speaking">Выступления</a>
-      <a href="#telegram">Телеграм</a>
     </div>
     <div class="nav-right">
       <a href="tel:+79851959505" class="nav-phone">+7 985 195-95-05</a>
@@ -843,7 +845,6 @@ body.bar-off .topbar{display:none}
     <a href="#about">Обо мне</a>
     <a href="#consult">Консультации</a>
     <a href="#speaking">Выступления</a>
-    <a href="#telegram">Телеграм</a>
     <div class="mm-contact">
       <a href="tel:+79851959505">+7 985 195-95-05</a>
       <a href="https://wa.me/79851959505" target="_blank" rel="noopener">WhatsApp</a>
@@ -1212,6 +1213,7 @@ body.bar-off .topbar{display:none}
 
 
 
+<!-- ТЕЛЕГРАМ-БЛОК СКРЫТ. Чтобы вернуть — убрать эту обёртку из комментария.
 <section class="tg" id="telegram">
   <video class="bg-vid" src="assets/back-blue.mp4" poster="assets/back-blue.jpg" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
   <div class="tg-wrap">
@@ -1220,7 +1222,7 @@ body.bar-off .topbar{display:none}
       <h2 class="tg-title">«Женские стратегии с&nbsp;Анной Видуецкой»</h2>
       <p class="tg-text">Канал для думающих женщин, которые хотят большего. Про отношения с&nbsp;собой и&nbsp;окружающим миром.</p>
       <div class="tg-cta">
-        <a class="btn btn--primary" href="https://t.me/AnnaViduetskaya" target="_blank" rel="noopener">Подписаться на&nbsp;канал
+        <a class="btn btn––primary" href="https://t.me/AnnaViduetskaya" target="_blank" rel="noopener">Подписаться на&nbsp;канал
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
         </a>
         <a class="tg-handle" href="https://t.me/AnnaViduetskaya" target="_blank" rel="noopener">@AnnaViduetskaya</a>
@@ -1240,6 +1242,7 @@ body.bar-off .topbar{display:none}
     </div>
   </div>
 </section>
+-->
 
 <footer class="ftr">
   <div class="ftr-wrap">
