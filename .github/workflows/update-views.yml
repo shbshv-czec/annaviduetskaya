@@ -1,8 +1,12 @@
 name: Обновление просмотров
+# Автообновление выключено: цифры просмотров зафиксированы на текущий момент.
+# Включим, когда сайт переедет на свой домен — для этого раскомментировать
+# блок schedule ниже и в Settings → Actions → General поставить
+# Workflow permissions: Read and write.
 on:
-  schedule:
-    - cron: '17 4 * * *'      # каждый день в 04:17 UTC
-  workflow_dispatch:
+  # schedule:
+  #   - cron: '17 4 * * *'    # каждый день в 04:17 UTC
+  workflow_dispatch:          # пока запускается только вручную, по кнопке
 permissions:
   contents: write
 jobs:
