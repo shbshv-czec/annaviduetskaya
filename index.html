@@ -62,6 +62,9 @@
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
+/* У картинок проставлены атрибуты width/height — чтобы вёрстка не дёргалась при загрузке.
+   Но высоту всегда считаем по пропорции: иначе атрибут становится CSS-высотой и растягивает кадр. */
+img{height:auto}
 /* якорь не должен уезжать под закреплённое меню */
 section[id],header[id]{scroll-margin-top:68px}
 @media(max-width:960px){:root{--sec:72px;--sec-sm:64px}}
@@ -526,11 +529,11 @@ body.bar-off .topbar{display:none}
    Линия прочерчивается, засечка всплывает следом. Цвет линии задаётся через --rule,
    цвет засечки через --dot — поэтому где-то линия приглушена, а точка всегда в полную силу. */
 .topic::before,.pc-row::before,.press-long::before{
-  content:'';position:absolute;left:0;right:0;top:3px;height:1.2px;background:var(--rule,var(--ink));
+  content:'';position:absolute;left:0;right:0;top:3px;height:1px;background:var(--rule,var(--ink));
   transform:scaleX(0);transform-origin:left center;
   transition:transform var(--d-xxl) var(--ease-in-out)}
 .topic::after,.pc-row::after,.press-long::after{
-  content:'';position:absolute;left:0;top:.6px;width:6px;height:6px;background:var(--dot,var(--ink));
+  content:'';position:absolute;left:0;top:1px;width:5px;height:5px;background:var(--dot,var(--ink));
   transform:scale(0);transform-origin:left center;
   transition:transform var(--d-lg) var(--ease-out) 240ms}
 .topic.in::before,.pc-row.in::before,.press-long.in::before{transform:scaleX(1)}
@@ -642,9 +645,7 @@ body.bar-off .topbar{display:none}
 }
 /* FOOTER */
 .ftr{position:relative;isolation:isolate;overflow:hidden;color:#fff;padding:var(--sec) 0 40px;
-  background:#0A0908 url('assets/flare-footer.jpg') center/cover no-repeat}
-.ftr::before{content:"";position:absolute;inset:0;z-index:0;
-  background:linear-gradient(180deg,rgba(10,9,8,.40) 0%,rgba(10,9,8,.58) 58%,rgba(10,9,8,.72) 100%)}
+  background:#0A0908}
 .ftr-wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 40px}
 .ftr-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;padding-bottom:58px}
 .ftr-name{font-family:var(--serif);font-weight:var(--w-display);font-size:clamp(40px,4.6vw,60px);line-height:1;color:#fff;margin:0 0 18px}
@@ -1485,7 +1486,8 @@ body.bar-off .topbar{display:none}
   var vids=[].slice.call(document.querySelectorAll('video'));
   if(!vids.length)return;
   if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;  /* останется постер */
-  function on(v){ var p=v.play(); if(p&&p.catch) p.catch(function(){}); }
+  /* на 15% медленнее — иначе лучи пробегают слишком быстро и их не видно */
+  function on(v){ v.playbackRate=0.85; var p=v.play(); if(p&&p.catch) p.catch(function(){}); }
   if(!('IntersectionObserver' in window)){ vids.forEach(on); return; }
   var io=new IntersectionObserver(function(es){
     es.forEach(function(e){ if(e.isIntersecting) on(e.target); else e.target.pause(); });
