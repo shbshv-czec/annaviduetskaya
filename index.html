@@ -245,11 +245,12 @@ body.bar-off .topbar{display:none}
 .book{background:transparent;padding:var(--sec) 0}
 .book-inner{max-width:1200px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
 .book-visual{position:relative;display:flex;justify-content:center;align-items:center}
-.book-figure{position:relative;display:inline-block}
-.book-cover{display:block;width:min(396px,100%);max-width:100%;border-radius:0;transform:rotate(-6deg);box-shadow:18px 22px 48px -18px rgba(31,28,27,.30)}
+.book-figure{position:relative;display:block;width:min(396px,100%);transform:rotate(-6deg)}
+.book-cover{display:block;width:100%;box-shadow:18px 22px 48px -18px rgba(31,28,27,.30)}
 /* Бейдж Amazon: плоский, печатный — обводка вместо глянца */
 /* Наградной знак Amazon: золото, лучистый кант, текст по дуге */
-.seal{position:absolute;top:-26px;right:-34px;width:124px;height:124px;z-index:3;overflow:visible;
+.seal{position:absolute;top:-40px;right:-38px;width:124px;height:124px;z-index:3;overflow:visible;
+  transform:rotate(6deg);   /* обратный поворот — шильдик стоит прямо на наклонённой обложке */
   filter:drop-shadow(0 14px 26px rgba(120,88,20,.42))}
 .seal-l1{font-family:var(--sans);font-weight:700;font-size:19px;letter-spacing:.01em;fill:#6B4A12}
 .seal-l2{font-family:var(--sans);font-weight:600;font-size:15px;letter-spacing:.05em;fill:#7A5712}
@@ -298,15 +299,15 @@ body.bar-off .topbar{display:none}
 @media(max-width:960px){
 
   .book-inner{grid-template-columns:1fr;gap:48px}
-  .seal{width:96px;height:96px;top:-24px;right:-42px}
+  .seal{width:88px;height:88px;top:-32px;right:-30px}
   .book-visual{min-height:auto;padding:24px 0}
-  .book-cover{width:260px}
+  .book-figure{width:min(268px,74vw)}
 }
 /* ПЛАНШЕТ. Колонки уже сложились в одну, но ширины ещё много:
    не даём картинкам жаться к левому краю и не распускаем строки. */
 @media(min-width:721px) and (max-width:960px){
   .book-visual{display:flex;justify-content:center}
-  .book-cover{width:340px}
+  .book-figure{width:340px}
   .book-copy,.about-copy,.sp-lead,.press-body,.consult-lead,.pc-intro{max-width:64ch}
   .about-photo,.req2-photo,.press-card,.cta-media,.sp-reel-main,.pc-hero{
     max-width:540px;margin-left:auto;margin-right:auto}
