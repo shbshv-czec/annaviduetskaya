@@ -200,6 +200,7 @@ body.bar-off .topbar{display:none}
 /* Первый экран: надзаголовок — имя — подзаголовок, пропорции 1 : 6 : 2 */
 /* Пропорции первого экрана сняты с референса: надзаголовок, имя и подпись
    держат друг к другу те же отношения, что у Tony Robbins, но в нашей типографике. */
+.nb{white-space:nowrap}
 .regalia{color:rgba(255,255,255,.72);margin:0 0 28px;width:max-content;max-width:min(790px,58vw);
   font-size:clamp(10px,1.25vw,18px);letter-spacing:.14em}
 .hero-text .name{font-family:var(--serif);font-weight:600;
@@ -222,9 +223,11 @@ body.bar-off .topbar{display:none}
   .hero{min-height:100vh;background:#26231f}
   .hero-bg{background-position:64% 12%}
   .hero-veil{background:
-    linear-gradient(0deg,rgba(18,15,13,.95) 0%,rgba(18,15,13,.90) 30%,rgba(18,15,13,.72) 50%,
-      rgba(18,15,13,.28) 74%,rgba(18,15,13,0) 100%),
-    linear-gradient(180deg,rgba(18,15,13,.62) 0%,rgba(18,15,13,.22) 12%,rgba(18,15,13,0) 24%)}
+    linear-gradient(0deg,rgba(18,15,13,.95) 0%,rgba(18,15,13,.90) 30%,rgba(18,15,13,.70) 50%,
+      rgba(18,15,13,.26) 74%,rgba(18,15,13,0) 100%),
+    /* верхняя вуаль дотянута до строки регалий, чтобы она читалась поверх светлых волос */
+    linear-gradient(180deg,rgba(18,15,13,.60) 0%,rgba(18,15,13,.48) 12%,rgba(18,15,13,.34) 21%,
+      rgba(18,15,13,.12) 30%,rgba(18,15,13,0) 40%)}
   .hero-inner{align-items:flex-end;min-height:100vh;padding:0 24px 48px}
   .hero-text{padding:0;max-width:100%}
   .nav{padding:calc(9px - 2px * var(--navp)) 16px;gap:16px}
@@ -234,7 +237,9 @@ body.bar-off .topbar{display:none}
   .burger{display:flex}
   /* регалии — вверху под навигацией, лицо свободно */
   .hero-inner{position:relative}
-  .regalia{position:static;margin:0 0 18px;width:auto;max-width:none;font-size:11px;letter-spacing:.12em}
+  /* регалии — высоко, по причёске: по лицу писать нельзя */
+  .regalia{position:absolute;top:104px;left:24px;right:24px;margin:0;
+    width:auto;max-width:none;font-size:11px;letter-spacing:.12em;line-height:1.7}
   .hero-text{padding-bottom:8px}
   .about{padding:var(--sec) 0 0}
   .about-grid{grid-template-columns:1fr;gap:40px}
@@ -785,7 +790,7 @@ body.bar-off .topbar{display:none}
   <div class="hero-dim"></div>
   <div class="hero-inner">
     <div class="hero-text">
-      <p class="regalia t-eyebrow">Коуч ICF · Психолог · Автор книги · «Бизнес-мама года»</p>
+      <p class="regalia t-eyebrow">Коуч ICF · Психолог · Автор книги · <span class="nb">«Бизнес-мама года»</span></p>
       <h1 class="name t-display">Анна<br>Видуецкая</h1>
       <p class="subtitle">Помогаю тем, кто устал<br>жить в&nbsp;режиме «я&nbsp;сама»</p>
       <div class="cta-row">
