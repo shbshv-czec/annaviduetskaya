@@ -432,6 +432,14 @@ body.bar-off .topbar{display:none}
   opacity:.68;filter:grayscale(1);
   transition:opacity var(--d-lg) var(--ease-out),filter var(--d-lg) var(--ease-out)}
 .mp-item:hover img{opacity:1;filter:grayscale(0)}
+.media-mail{font-family:var(--text);font-size:16px;line-height:1.5;color:var(--ink-3);
+  text-align:center;margin:52px 0 0}
+.media-mail a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--accent);
+  text-decoration-thickness:1px;text-underline-offset:4px;
+  transition:text-decoration-color var(--d-md) var(--ease-out)}
+.media-mail a:hover{text-decoration-color:var(--ink)}
+/* на десктопе — ровно 4 в строке, чтобы вторая строка не выглядела обрезком */
+@media(min-width:961px){.mp-item{flex:0 0 calc((100% - 168px) / 4)}}
 @media(max-width:960px){
   .media-wrap{padding:0 24px}
   .media-eyebrow{margin-bottom:26px}
@@ -439,6 +447,7 @@ body.bar-off .topbar{display:none}
   .mp-item{min-width:112px}
   .mp-item{min-height:52px}
   .mp-item img{max-height:calc(var(--h,30px) * .84)}
+  .media-mail{margin-top:34px;font-size:15px}
 }
 
 /* ================= ФОРМА В МОДАЛЬНОМ ОКНЕ =================
@@ -542,33 +551,30 @@ body.bar-off .topbar{display:none}
   .fm-x{top:6px;right:6px;width:32px;height:32px}
 }
 @media(prefers-reduced-motion:reduce){.fm,.fm-card{transition:none}}
-/* ---------- ПРЕСС-ЦЕНТР: тёмная полоса с радужным преломлением ---------- */
+/* ---------- ПРЕСС-ЦЕНТР: чёрное поле, призма уходит в правый нижний угол ---------- */
 .press{position:relative;isolation:isolate;overflow:hidden;color:#fff;padding:var(--sec) 0;
-  background:#0A0908 url('assets/flare-press.jpg') center/cover no-repeat}
-/* цвет живёт слева, у портрета; справа, под текстом, притемняем до читаемости */
-.press::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:linear-gradient(258deg,rgba(10,9,8,.12) 0%,rgba(10,9,8,.22) 30%,
-    rgba(10,9,8,.40) 56%,rgba(10,9,8,.46) 100%)}
+  background:#0A0908}
+/* отблеск лежит там, где нет ни текста, ни фото; screen гасит чёрный фон снимка */
+.press::before{content:"";position:absolute;right:0;bottom:0;z-index:0;pointer-events:none;
+  width:min(54%,760px);aspect-ratio:1280/880;
+  background:url('assets/prism-corner.jpg') right bottom/cover no-repeat;
+  mix-blend-mode:screen;opacity:.72}
 .press-wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 40px;
   display:grid;grid-template-columns:1.12fr .88fr;gap:56px;align-items:start}
-.press-card{position:relative;margin:0;overflow:hidden;aspect-ratio:1/1;background:#14110F}
-.press-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:66% 24%}
+.press-card{position:relative;margin:0;overflow:hidden;aspect-ratio:926/1059;background:#14110F}
+.press-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%}
 .press-eyebrow{color:var(--accent-on-dark);margin:0 0 20px}
 .press-name{font-family:var(--display);font-weight:var(--w-display);font-size:var(--h-sec);
   line-height:1.08;letter-spacing:-.025em;color:#fff;margin:0 0 20px;max-width:18ch}
-.press-short{font-family:var(--text);font-size:clamp(17px,1.7vw,21px);line-height:1.55;
-  color:rgba(255,255,255,.86);margin:0;max-width:44ch}
-.press-long{position:relative;margin-top:38px;padding-top:30px;
-  --rule:rgba(255,255,255,.24);--dot:#fff}
 .press-label{font-family:var(--sans);font-weight:600;font-size:10px;letter-spacing:.2em;text-transform:uppercase;
-  color:rgba(255,255,255,.5);margin:0 0 18px}
-.press-long p:not(.press-label){font-family:var(--text);font-size:16.5px;line-height:1.68;
-  color:rgba(255,255,255,.74);margin:0;max-width:62ch}
-.press-long p+p{margin-top:16px}
-.press-long+.press-long{margin-top:30px}
-.press-regalia{list-style:none;margin:0;padding:0;max-width:62ch}
-.press-regalia li{position:relative;font-family:var(--text);font-size:16.5px;line-height:1.62;
-  color:rgba(255,255,255,.78);padding:0 0 0 20px}
+  color:rgba(255,255,255,.5);margin:0 0 14px}
+.press-pitch{margin-top:34px}
+.press-pitch p:not(.press-label){font-family:var(--text);font-size:15px;line-height:1.66;
+  color:rgba(255,255,255,.62);margin:0;max-width:60ch}
+.press-pitch p+p{margin-top:14px}
+.press-regalia{list-style:none;margin:28px 0 0;padding:0;max-width:62ch}
+.press-regalia li{position:relative;font-family:var(--text);font-size:17px;line-height:1.6;
+  color:rgba(255,255,255,.84);padding:0 0 0 20px}
 .press-regalia li+li{margin-top:10px}
 .press-regalia li::before{content:"";position:absolute;left:0;top:.66em;width:5px;height:5px;
   background:var(--accent-on-dark)}
@@ -577,23 +583,15 @@ body.bar-off .topbar{display:none}
   border:1px solid rgba(255,255,255,.28);
   transition:background var(--d-md) var(--ease-out),border-color var(--d-md) var(--ease-out)}
 .press-file-t{font-family:var(--sans);font-weight:600;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#fff}
-.press-mail{font-family:var(--text);font-size:16px;line-height:1.5;color:rgba(255,255,255,.7);margin:26px 0 0}
-.press-mail a{color:#fff;text-decoration:underline;text-decoration-color:var(--accent-on-dark);
-  text-decoration-thickness:1px;text-underline-offset:4px;
-  transition:text-decoration-color var(--d-md) var(--ease-out)}
-.press-mail a:hover{text-decoration-color:#fff}
 .press-file svg{width:13px;height:13px;color:rgba(255,255,255,.6);transition:transform var(--d-md) var(--ease-out)}
 .press-file:hover{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.5)}
 .press-file:hover svg{transform:translate(2px,-2px)}
 @media(max-width:960px){
 
-  .press::before{background:linear-gradient(180deg,rgba(15,13,12,.46) 0%,
-    rgba(15,13,12,.84) 32%,rgba(15,13,12,.92) 100%)}
   .press-wrap{grid-template-columns:1fr;gap:32px;padding:0 24px}
-  .press-card{aspect-ratio:4/3}
-  .press-photo{object-position:64% 26%}
-  .press-short{font-size:23px}
-  .press-long{margin-top:30px}
+  .press-card{aspect-ratio:4/5}
+  .press-photo{object-position:50% 14%}
+  .press::before{width:150%;opacity:.5}
 }
 /* PODCAST */
 .podcast{background:transparent;padding:var(--sec) 0}
@@ -717,16 +715,16 @@ body.bar-off .topbar{display:none}
 /* ЕДИНЫЙ РАЗДЕЛИТЕЛЬ на весь сайт: тонкая линия и квадратная засечка у левого края.
    Линия прочерчивается, засечка всплывает следом. Цвет линии задаётся через --rule,
    цвет засечки через --dot — поэтому где-то линия приглушена, а точка всегда в полную силу. */
-.topic::before,.pc-row::before,.press-long::before{
+.topic::before,.pc-row::before{
   content:'';position:absolute;left:0;right:0;top:3px;height:1px;background:var(--rule,var(--ink));
   transform:scaleX(0);transform-origin:left center;
   transition:transform var(--d-xxl) var(--ease-in-out)}
-.topic::after,.pc-row::after,.press-long::after{
+.topic::after,.pc-row::after{
   content:'';position:absolute;left:0;top:1px;width:5px;height:5px;background:var(--dot,var(--ink));
   transform:scale(0);transform-origin:left center;
   transition:transform var(--d-lg) var(--ease-out) 240ms}
-.topic.in::before,.pc-row.in::before,.press-long.in::before{transform:scaleX(1)}
-.topic.in::after,.pc-row.in::after,.press-long.in::after{transform:scale(1)}
+.topic.in::before,.pc-row.in::before{transform:scaleX(1)}
+.topic.in::after,.pc-row.in::after{transform:scale(1)}
 .pc-row:first-child::before,.pc-row:first-child::after{display:none}
 
 .topic{position:relative}
@@ -902,7 +900,6 @@ body.bar-off .topbar{display:none}
 @media(prefers-reduced-motion:reduce){
   .rv,.rv-up,.sp-w{opacity:1!important;transition:none!important;filter:none!important;transform:none!important}
   .topic::before,.topic::after,.pc-row::before,.pc-row::after,
-  .press-long::before,.press-long::after{transform:none!important;transition:none!important}
   .hero-dim{display:none}
 }
 
@@ -913,7 +910,7 @@ body.bar-off .topbar{display:none}
 /* Регистр заголовков: сейчас строчные. Для капса вернуть --head-case:uppercase
    И раскомментировать апрош — прописным он обязателен. */
 .t-display,.t-h1,.book-title,.about-title,.reviews-title,.consult-h,
-.sp-title,.pc-title,.tg-title,.press-short,.ftr-name,.quote-t,.cta-title,.fig-n{
+.sp-title,.pc-title,.tg-title,.ftr-name,.quote-t,.cta-title,.fig-n{
   text-transform:var(--head-case);
   /* letter-spacing:var(--head-track); */}
 
@@ -1347,19 +1344,16 @@ body.bar-off .topbar{display:none}
     <div class="press-body">
       <p class="press-eyebrow t-eyebrow">Пресс-центр</p>
       <h2 class="press-name">Анна Видуецкая&nbsp;— женский мотиватор и&nbsp;стратег</h2>
-      <p class="press-short">Анна Видуецкая&nbsp;— предприниматель, спикер и&nbsp;эксперт по&nbsp;женскому лидерству и&nbsp;партнёрским стратегиям.</p>
-      <div class="press-long">
-        <p class="press-label">Регалии</p>
-        <ul class="press-regalia">
-          <li>Вице-президент Ассоциации спикеров СНГ</li>
-          <li>Более 15&nbsp;лет в&nbsp;бизнесе: в&nbsp;прошлом топ-менеджер крупной международной компании, сегодня&nbsp;— основатель и&nbsp;генеральный директор двух успешно работающих компаний</li>
-          <li>С&nbsp;2018 года спикер крупных международных и&nbsp;российских форумов</li>
-          <li>Психолог, сертифицированный Coach&nbsp;ICF</li>
-          <li>Автор книги «Легче воздуха»</li>
-          <li>Аудитория в&nbsp;социальных сетях&nbsp;— более 250&nbsp;000 подписчиков</li>
-        </ul>
-      </div>
-      <div class="press-long">
+      <ul class="press-regalia">
+        <li>Предприниматель, спикер и&nbsp;эксперт по&nbsp;женскому лидерству и&nbsp;партнёрским стратегиям</li>
+        <li>Вице-президент Ассоциации спикеров СНГ</li>
+        <li>Более 15&nbsp;лет в&nbsp;бизнесе: в&nbsp;прошлом топ-менеджер крупной международной компании, сегодня&nbsp;— основатель и&nbsp;генеральный директор двух успешно работающих компаний</li>
+        <li>С&nbsp;2018 года спикер крупных международных и&nbsp;российских форумов</li>
+        <li>Психолог, сертифицированный Coach&nbsp;ICF</li>
+        <li>Автор книги «Легче воздуха»</li>
+        <li>Аудитория в&nbsp;социальных сетях&nbsp;— более 250&nbsp;000 подписчиков</li>
+      </ul>
+      <div class="press-pitch">
         <p class="press-label">В формате Elevator pitch</p>
         <p>Анна Видуецкая&nbsp;— предприниматель, спикер и&nbsp;эксперт по&nbsp;женскому лидерству и&nbsp;партнёрским стратегиям. Более 15&nbsp;лет в&nbsp;бизнесе: в&nbsp;прошлом топ-менеджер крупной международной компании, сегодня&nbsp;— основатель и&nbsp;генеральный директор двух успешно работающих компаний.</p>
         <p>Вице-президент Ассоциации спикеров СНГ, с&nbsp;2018 года выступает на&nbsp;крупных международных и&nbsp;российских форумах. Психолог, сертифицированный Coach&nbsp;ICF, автор книги «Легче воздуха». Аудитория в&nbsp;социальных сетях&nbsp;— более 250&nbsp;000 подписчиков.</p>
@@ -1374,10 +1368,9 @@ body.bar-off .topbar{display:none}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
         </a>
       </div>
-      <p class="press-mail">Запросы для прессы&nbsp;— <a href="mailto:mail@annaviduetskaya.com">mail@annaviduetskaya.com</a></p>
     </div>
     <figure class="press-card">
-      <img class="press-photo" src="assets/stage-4.jpg" alt="Анна Видуецкая на съёмке подкаста" loading="lazy" width="856" height="768">
+      <img class="press-photo" src="assets/press-stage.jpg" alt="Анна Видуецкая на выступлении" loading="lazy" width="926" height="1059">
     </figure>
   </div>
 </section>
@@ -1409,6 +1402,7 @@ body.bar-off .topbar{display:none}
         <img src="assets/media/bss.png" alt="Бизнес со смыслом" width="256" height="96" loading="lazy" decoding="async">
       </li>
     </ul>
+    <p class="media-mail">Запросы для прессы&nbsp;— <a href="mailto:mail@annaviduetskaya.com">mail@annaviduetskaya.com</a></p>
   </div>
 </section>
 
@@ -1691,11 +1685,11 @@ body.bar-off .topbar{display:none}
     '.sp-audience',
     '.topic',
     '.sp-topics-h',
-    '.press-short',
     '.press-regalia',
-    '.press-long',
+    '.press-pitch',
     '.press-file',
     '.mp-item',
+    '.media-mail',
     '.pc-intro',
     '.pc-hero',
     '.pc-row',
