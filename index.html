@@ -779,7 +779,7 @@ body.bar-off .topbar{display:none}
 /* Темы: строки с волосяными линиями, раскрываются по нажатию */
 .sp-lead{max-width:62ch;margin:26px 0 0;display:flex;flex-direction:column;gap:16px}
 .sp-sub{font-family:var(--text);font-size:var(--t-lg);line-height:var(--lh-lg);color:var(--ink-2);margin:0}
-.sp-body{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;margin:54px 0 0}
+.sp-body{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;margin:var(--sec-sm) 0 0}
 .sp-body .sp-reel-main{aspect-ratio:16/9;margin:0;position:sticky;top:120px;overflow:hidden}
 /* без этого видео разворачивается в свой натуральный размер и рвёт страницу вбок */
 .sp-reel-main video{display:block;width:100%;height:100%;max-width:100%;object-fit:cover}
@@ -792,9 +792,10 @@ body.bar-off .topbar{display:none}
 /* Про аудиторию — цитатой по центру, в размер подзаголовков */
 .sp-audience{font-family:var(--display);font-weight:var(--w-display);font-size:var(--h-2);
   line-height:var(--lh-h2);letter-spacing:-.015em;color:var(--ink);
-  max-width:32ch;margin:64px auto 0;text-align:center}
+  max-width:32ch;margin:var(--sec-sm) auto 0;text-align:center}
 /* Заголовок тем стоит над обеими колонками, поэтому видео встаёт вровень с первой темой */
-.sp-topics-title{margin:64px 0 var(--gap-h)}
+/* заголовок тем стоит в левой колонке, поэтому видео начинается на его уровне */
+.sp-topics-title{margin:0 0 var(--gap-h)}
 /* под заголовком тем черты быть не должно */
 .topic:first-child::before,.topic:first-child::after{display:none}
 /* ЕДИНЫЙ РАЗДЕЛИТЕЛЬ на весь сайт: тонкая линия и квадратная засечка у левого края.
@@ -847,14 +848,13 @@ body.bar-off .topbar{display:none}
   .topic-in{padding:0 0 28px}
   .fmts{grid-template-columns:1fr;gap:16px}
   .sp-formats{margin-top:40px}
-  .sp-audience{margin-top:40px;max-width:none}
-  .sp-topics-title{margin-top:44px}
+  .sp-audience{max-width:none}
 }
 @media(max-width:960px){
 
   .sp-wrap{padding:0 24px}
   /* одна колонка: сначала видео, темы под ним */
-  .sp-body{grid-template-columns:1fr;gap:30px;margin-top:40px}
+  .sp-body{grid-template-columns:1fr;gap:30px}
   .sp-body .sp-reel-main{position:static;order:-1}
   .sp-head{grid-template-columns:1fr;gap:28px;margin-bottom:44px}
   .sp-foot{margin-top:40px}
@@ -1304,9 +1304,9 @@ body.bar-off .topbar{display:none}
         </div>
         <p class="sp-audience">Аудитория, с&nbsp;которой я&nbsp;работаю лучше всего&nbsp;— взрослые люди 35+, предприниматели и&nbsp;руководители.</p>
       </div>
-    <h3 class="sp-topics-h sp-topics-title">Темы, с которыми можно пригласить</h3>
     <div class="sp-body">
       <div class="sp-topics-block">
+        <h3 class="sp-topics-h sp-topics-title">Темы, с которыми можно пригласить</h3>
         <div class="topics">
           <div class="topic">
             <button class="topic-head" type="button" aria-expanded="false" aria-controls="topic0">
