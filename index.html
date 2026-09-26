@@ -522,22 +522,23 @@ body.bar-off .topbar{display:none}
   .fm-f--wide textarea{min-height:72px}   /* в одну колонку высокое поле съедает весь запас */
   .fm-submit{width:100%}
 }
-/* Низкое окно (маленький ноутбук): ужимаем, чтобы прокрутки не появлялось */
+/* Низкое окно (ноутбук, телефон в руке): ужимаем, чтобы прокрутки не появлялось.
+   Жертвуем надзаголовком — он украшение, поясняющая строка несёт смысл. */
 @media(max-height:700px){
-  .fm-lead{display:none}
+  .fm-eyebrow{display:none}
   .fm-title{font-size:clamp(20px,2.2vw,24px)}
-  .fm-eyebrow{margin-bottom:8px}
-  .fm-f--wide textarea{min-height:56px}
+  .fm-lead{font-size:14px;line-height:1.4;margin-top:6px}
+  .fm-f--wide textarea{min-height:52px}
   .fm-check-t{font-size:14px;line-height:1.35}
 }
 /* две колонки только там, где они реально помещаются по ширине */
-@media(max-height:700px) and (min-width:641px){.fm-fields{grid-template-columns:1fr 1fr}}
+@media(max-height:700px) and (min-width:481px){.fm-fields{grid-template-columns:1fr 1fr}}
 /* Совсем низкое (телефон боком): ужимаем до предела */
 @media(max-height:470px){
+  .fm-lead{display:none}
   .fm-card{padding-top:16px;padding-bottom:18px}
   .fm-fields{margin-top:12px;gap:8px 16px}
   .fm-f{gap:3px}
-  .fm-eyebrow{display:none}
   .fm-title{font-size:19px}
   .fm-f label{font-size:13px}
   .fm-f input,.fm-f textarea{font-size:15px;padding:8px 12px}
@@ -550,12 +551,24 @@ body.bar-off .topbar{display:none}
   .fm-submit{margin-top:12px;padding:10px 30px;font-size:14px}
   .fm-x{top:6px;right:6px;width:32px;height:32px}
 }
+/* Телефон боком: высоты нет совсем — раскладываем карточку в две колонки,
+   поля слева, галочки и кнопка справа. Так прокрутка не появляется и здесь. */
+@media(max-height:470px) and (min-width:560px){
+  .fm-card{width:min(860px,100%)}
+  .fm-form{display:grid;grid-template-columns:1fr 1fr;column-gap:34px;align-items:start}
+  /* строки задаём явно: иначе сетка уводит каждый блок на свою строку и экономии нет */
+  .fm-title{grid-column:1/-1;grid-row:1}
+  .fm-fields{grid-column:1;grid-row:2/5;grid-template-columns:1fr}
+  .fm-checks{grid-column:2;grid-row:2}
+  .fm-err{grid-column:2;grid-row:3}
+  .fm-submit{grid-column:2;grid-row:4;justify-self:start}
+}
 @media(prefers-reduced-motion:reduce){.fm,.fm-card{transition:none}}
 /* ---------- ПРЕСС-ЦЕНТР: чёрное поле, призма уходит в правый нижний угол ---------- */
 .press{position:relative;isolation:isolate;overflow:hidden;color:#fff;padding:var(--sec) 0;
   background:#0A0908}
 /* отблеск лежит там, где нет ни текста, ни фото; screen гасит чёрный фон снимка */
-.press::before{content:"";position:absolute;right:0;bottom:0;z-index:0;pointer-events:none;
+.press::before{content:"";position:absolute;right:0;bottom:8%;z-index:0;pointer-events:none;
   width:min(54%,760px);aspect-ratio:1280/880;
   background:url('assets/prism-corner.jpg') right bottom/cover no-repeat;
   mix-blend-mode:screen;opacity:.72}
@@ -566,12 +579,6 @@ body.bar-off .topbar{display:none}
 .press-eyebrow{color:var(--accent-on-dark);margin:0 0 20px}
 .press-name{font-family:var(--display);font-weight:var(--w-display);font-size:var(--h-sec);
   line-height:1.08;letter-spacing:-.025em;color:#fff;margin:0 0 20px;max-width:18ch}
-.press-label{font-family:var(--sans);font-weight:600;font-size:10px;letter-spacing:.2em;text-transform:uppercase;
-  color:rgba(255,255,255,.5);margin:0 0 14px}
-.press-pitch{margin-top:34px}
-.press-pitch p:not(.press-label){font-family:var(--text);font-size:15px;line-height:1.66;
-  color:rgba(255,255,255,.62);margin:0;max-width:60ch}
-.press-pitch p+p{margin-top:14px}
 .press-regalia{list-style:none;margin:28px 0 0;padding:0;max-width:62ch}
 .press-regalia li{position:relative;font-family:var(--text);font-size:17px;line-height:1.6;
   color:rgba(255,255,255,.84);padding:0 0 0 20px}
@@ -591,7 +598,7 @@ body.bar-off .topbar{display:none}
   .press-wrap{grid-template-columns:1fr;gap:32px;padding:0 24px}
   .press-card{aspect-ratio:4/5}
   .press-photo{object-position:50% 14%}
-  .press::before{width:150%;opacity:.5}
+  .press::before{width:150%;bottom:0;opacity:.5}
 }
 /* PODCAST */
 .podcast{background:transparent;padding:var(--sec) 0}
@@ -1353,11 +1360,6 @@ body.bar-off .topbar{display:none}
         <li>Автор книги «Легче воздуха»</li>
         <li>Аудитория в&nbsp;социальных сетях&nbsp;— более 250&nbsp;000 подписчиков</li>
       </ul>
-      <div class="press-pitch">
-        <p class="press-label">В формате Elevator pitch</p>
-        <p>Анна Видуецкая&nbsp;— предприниматель, спикер и&nbsp;эксперт по&nbsp;женскому лидерству и&nbsp;партнёрским стратегиям. Более 15&nbsp;лет в&nbsp;бизнесе: в&nbsp;прошлом топ-менеджер крупной международной компании, сегодня&nbsp;— основатель и&nbsp;генеральный директор двух успешно работающих компаний.</p>
-        <p>Вице-президент Ассоциации спикеров СНГ, с&nbsp;2018 года выступает на&nbsp;крупных международных и&nbsp;российских форумах. Психолог, сертифицированный Coach&nbsp;ICF, автор книги «Легче воздуха». Аудитория в&nbsp;социальных сетях&nbsp;— более 250&nbsp;000 подписчиков.</p>
-      </div>
       <div class="press-kit">
         <a class="press-file" href="[[ФАЙЛ: резюме PDF]]">
           <span class="press-file-t">Резюме</span>
@@ -1686,7 +1688,6 @@ body.bar-off .topbar{display:none}
     '.topic',
     '.sp-topics-h',
     '.press-regalia',
-    '.press-pitch',
     '.press-file',
     '.mp-item',
     '.media-mail',
@@ -1895,11 +1896,11 @@ body.bar-off .topbar{display:none}
     note:  {label:'Комментарий', type:'area', req:false, wide:true}
   };
   var FORMS = {
-    call:    {kicker:'Заявка',        title:'Заказать звонок',        lead:'Оставьте номер — мы перезвоним.',                       f:['name','phone']},
-    consult: {kicker:'Консультация',  title:'Записаться на консультацию', lead:'Полтора-два часа один на один, конфиденциально.',      f:['name','phone','email']},
-    speak:   {kicker:'Выступления',   title:'Пригласить выступить',   lead:'Расскажите о мероприятии — мы ответим на все вопросы.',          f:['name','contact','event']},
-    book:    {kicker:'Книга',         title:'Заказать книгу',         lead:'Оставьте контакты — мы свяжемся и всё оформим.',          f:['name','phone','email']},
-    podcast: {kicker:'Подкаст',       title:'Стать героем подкаста',  lead:'Пара слов о себе — и мы свяжемся с вами.',              f:['name','contact','note']}
+    call:    {kicker:'Заявка',        title:'Заказать звонок',        lead:'Оставьте имя и телефон — перезвоним в рабочее время по Москве.',               f:['name','phone']},
+    consult: {kicker:'Консультация',  title:'Записаться на консультацию', lead:'Оставьте контакты — свяжемся с вами, чтобы обсудить запрос и подобрать удобное время.', f:['name','phone','email']},
+    speak:   {kicker:'Выступления',   title:'Пригласить выступить',   lead:'Расскажите о вашем мероприятии — свяжемся и обсудим формат, тему и условия.', f:['name','contact','event']},
+    book:    {kicker:'Книга',         title:'Заказать книгу',         lead:'Оставьте контакты — свяжемся с вами, чтобы обсудить оплату и доставку.',       f:['name','phone','email']},
+    podcast: {kicker:'Подкаст',       title:'Стать героем подкаста',  lead:'Расскажите о себе коротко — свяжемся и обсудим участие.',                      f:['name','contact','note']}
   };
 
   var box=document.getElementById('fm'); if(!box)return;
