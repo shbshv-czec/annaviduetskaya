@@ -68,7 +68,7 @@
   /* вертикальный ритм: одна величина на все секции, узкая — для компактных полос */
   --sec:104px; --sec-sm:88px;
   /* ступени заголовков: очень крупный --h-sec, крупный --h-sub, средний --h-item */
-  --h-sub:clamp(26px,2.6vw,34px); --h-item:clamp(19px,1.72vw,23px);
+  --h-mid:clamp(30px,3.3vw,46px); --h-sub:clamp(26px,2.6vw,34px); --h-item:clamp(19px,1.72vw,23px);
   /* ===== РУЧКИ ЗАГОЛОВКОВ (меняются здесь, применяются везде) =====
      --w-display / --w-head : насыщенность. 300 — шёпот Parloa, 600 — жирно.
      --head-case            : uppercase (капс) или none (строчные).
@@ -616,7 +616,7 @@ body.bar-off .topbar{display:none}
   line-height:1.24;letter-spacing:-.015em;color:var(--ink);
   max-width:32ch;margin:64px auto 0;text-align:center}
 /* Заголовок тем стоит над обеими колонками, поэтому видео встаёт вровень с первой темой */
-.sp-topics-title{margin:64px 0 0}
+.sp-topics-title{font-size:var(--h-mid);margin:64px 0 0}
 /* под заголовком тем черты быть не должно */
 .topic:first-child::before,.topic:first-child::after{display:none}
 /* ЕДИНЫЙ РАЗДЕЛИТЕЛЬ на весь сайт: тонкая линия и квадратная засечка у левого края.
