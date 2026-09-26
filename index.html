@@ -302,16 +302,8 @@ body.bar-off .topbar{display:none}
 .book-rule{display:none}
 .book-desc{color:var(--ink-2);max-width:46ch;margin:36px 0 44px}
 /* Магазины: волосяные плашки вместо чужих логотипов */
-.shops-label{font-family:var(--sans);font-weight:600;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--ink-3);margin:0 0 18px}
-.shops{display:flex;flex-wrap:wrap;gap:30px;align-items:center}
-.shop{display:inline-flex;align-items:center;justify-content:center;height:auto;padding:0;background:transparent}
-.shop img{height:17px;width:auto;display:block;opacity:.72;
-  filter:grayscale(1) brightness(.35) contrast(1.5);
-  transition:opacity var(--d-md) var(--ease-out),filter var(--d-md) var(--ease-out)}
-
-.shop:hover img{opacity:1;filter:grayscale(1) brightness(.15) contrast(1.6)}
-@media(max-width:960px){.shops{gap:24px}.shop img{height:15px}}
+.book-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px}
+.book-actions .btn{font-size:15px;padding:17px 34px}
 
 /* ---------- ABOUT ---------- */
 .about{background:transparent;padding:var(--sec) 0 0}
@@ -963,17 +955,9 @@ body.bar-off .topbar{display:none}
       <p class="book-subtitle">Книга о&nbsp;том, как начать жить прямо сейчас</p>
       <hr class="book-rule">
       <p class="book-desc t-body">Для женщин, которые не&nbsp;хотят выбирать между семьёй, карьерой и&nbsp;своим «Я». Сотни женщин уже добились успеха во&nbsp;всех сферах сразу по&nbsp;авторским стратегиям из&nbsp;книги. Сможете и&nbsp;вы!</p>
-      <p class="shops-label">Купить книгу</p>
-      <div class="shops">
-        <a class="shop" href="https://www.litres.ru/book/anna-vidueckaya/legche-vozduha-kak-nachat-zhit-pryamo-seychas-67725804/" target="_blank" rel="noopener" aria-label="Купить на ЛитРес">
-          <img src="assets/logo-litres.png" alt="ЛитРес" loading="lazy" width="600" height="98">
-        </a>
-        <a class="shop" href="https://www.labirint.ru/books/858323/" target="_blank" rel="noopener" aria-label="Купить в Лабиринте">
-          <img src="assets/logo-labirint.png" alt="Лабиринт" loading="lazy" width="600" height="120">
-        </a>
-        <a class="shop" href="https://www.ozon.ru/category/anna-viduetskaya-kniga/" target="_blank" rel="noopener" aria-label="Купить на Ozon">
-          <img src="assets/logo-ozon.svg" alt="Ozon" loading="lazy">
-        </a>
+      <div class="book-actions">
+        <a class="btn btn--emerald" href="https://wa.me/79852559505" target="_blank" rel="noopener">Заказать книгу</a>
+        <a class="btn btn--line" href="[[ФАЙЛ: фрагмент книги]]">Читать фрагмент</a>
       </div>
     </div>
   </div>
@@ -1551,6 +1535,7 @@ body.bar-off .topbar{display:none}
     'section h3',
     '.book-subtitle',
     '.book-desc',
+    '.book-actions',
     '.about-lead',
     '.fig',
     '.req',
