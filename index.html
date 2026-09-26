@@ -194,7 +194,8 @@ body.bar-off .topbar{display:none}
   color:#fff;white-space:nowrap;margin-left:2px;transition:color var(--d-md) var(--ease-out)}
 .nav-phone:hover{color:var(--accent-on-dark)}
 .nav-callback{font-family:var(--sans);font-size:11.5px;font-weight:500;letter-spacing:.04em;
-  color:rgba(255,255,255,.66);white-space:nowrap;transition:color var(--d-md) var(--ease-out)}
+  color:rgba(255,255,255,.66);white-space:nowrap;transition:color var(--d-md) var(--ease-out);
+  background:none;border:none;padding:0;cursor:pointer;text-align:right}
 .nav-callback:hover{color:#fff}
 /* когда первый экран пролистан — светлая плашка */
 
@@ -439,6 +440,78 @@ body.bar-off .topbar{display:none}
   .mp-item{min-height:52px}
   .mp-item img{max-height:calc(var(--h,30px) * .84)}
 }
+
+/* ================= ФОРМА В МОДАЛЬНОМ ОКНЕ =================
+   Одно окно на все сценарии. Подложка статичная голубая — чтобы окно
+   открывалось мгновенно даже на плохом мобильном интернете.         */
+.fm{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
+  padding:32px 20px;visibility:hidden;opacity:0;
+  transition:opacity var(--d-lg) var(--ease-out),visibility var(--d-lg)}
+.fm.open{visibility:visible;opacity:1}
+.fm-bg{position:absolute;inset:0;background:
+  radial-gradient(120% 90% at 20% 15%,rgba(207,228,242,.96) 0%,rgba(207,228,242,.88) 45%,rgba(180,208,228,.92) 100%),
+  rgba(18,32,42,.55);
+  backdrop-filter:blur(3px)}
+.fm-card{position:relative;width:min(640px,100%);max-height:88vh;overflow-y:auto;
+  background:var(--linen);padding:44px 48px 46px;
+  box-shadow:0 50px 110px -40px rgba(16,34,46,.6);
+  transform:translateY(18px) scale(.99);transition:transform var(--d-xl) var(--ease-out);
+  scrollbar-width:thin}
+.fm.open .fm-card{transform:none}
+.fm-card::before{content:"";position:absolute;top:0;left:0;width:9px;height:9px;background:var(--ink)}
+.fm-x{position:absolute;top:14px;right:14px;width:40px;height:40px;display:flex;align-items:center;
+  justify-content:center;background:none;border:none;color:var(--ink-3);cursor:pointer;padding:0;
+  transition:color var(--d-md) var(--ease-out)}
+.fm-x:hover{color:var(--ink)}
+.fm-x svg{width:19px;height:19px}
+.fm-eyebrow{color:var(--accent-d);margin:0 0 14px}
+.fm-title{font-family:var(--display);font-weight:var(--w-display);font-size:clamp(26px,3vw,34px);
+  line-height:1.12;letter-spacing:-.02em;color:var(--ink);margin:0}
+.fm-lead{font-family:var(--text);font-size:16.5px;line-height:1.55;color:var(--ink-2);margin:12px 0 0}
+.fm-lead:empty{display:none}
+
+.fm-fields{display:grid;grid-template-columns:1fr 1fr;gap:18px 20px;margin:30px 0 0}
+.fm-f{display:flex;flex-direction:column;gap:8px}
+.fm-f--wide{grid-column:1/-1}
+.fm-f label{font-family:var(--text);font-size:15.5px;color:var(--ink-2)}
+.fm-f label i{color:var(--spark);font-style:normal;margin-left:2px}
+.fm-f input,.fm-f textarea{font-family:var(--text);font-size:16.5px;color:var(--ink);
+  background:var(--paper);border:1px solid transparent;border-radius:0;padding:14px 16px;width:100%;
+  transition:border-color var(--d-md) var(--ease-out)}
+.fm-f textarea{min-height:104px;resize:vertical;line-height:1.5}
+.fm-f input:focus,.fm-f textarea:focus{outline:none;border-color:var(--accent)}
+.fm-f.bad input,.fm-f.bad textarea{border-color:var(--spark)}
+
+.fm-checks{display:flex;flex-direction:column;gap:14px;margin:26px 0 0}
+.fm-check{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;cursor:pointer}
+.fm-check input{position:absolute;opacity:0;width:0;height:0}
+.fm-box{width:19px;height:19px;margin-top:2px;flex:none;background:var(--paper);
+  box-shadow:inset 0 0 0 1px rgba(31,28,27,.3);position:relative;
+  transition:box-shadow var(--d-md) var(--ease-out),background var(--d-md) var(--ease-out)}
+.fm-box::after{content:"";position:absolute;left:5.5px;top:2px;width:5px;height:10px;
+  border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg) scale(0);
+  transition:transform var(--d-md) var(--ease-out)}
+.fm-check input:checked~.fm-box{background:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.fm-check input:checked~.fm-box::after{transform:rotate(45deg) scale(1)}
+.fm-check input:focus-visible~.fm-box{box-shadow:inset 0 0 0 1px var(--accent),0 0 0 3px rgba(23,138,138,.25)}
+.fm-check.bad .fm-box{box-shadow:inset 0 0 0 1.5px var(--spark)}
+.fm-check-t{font-family:var(--text);font-size:15px;line-height:1.5;color:var(--ink-2)}
+.fm-check-t a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--accent);
+  text-underline-offset:3px}
+
+.fm-err{font-family:var(--text);font-size:15px;color:var(--spark);margin:18px 0 0}
+.fm-submit{margin-top:26px;font-size:15px;padding:17px 40px}
+.fm-submit[disabled]{opacity:.6;pointer-events:none}
+.fm-done{text-align:center;padding:34px 0 10px}
+.fm-done-t{font-family:var(--display);font-weight:var(--w-display);font-size:28px;color:var(--ink);margin:0}
+.fm-done-d{font-family:var(--text);font-size:16.5px;line-height:1.55;color:var(--ink-2);margin:12px 0 26px}
+@media(max-width:640px){
+  .fm{padding:16px 12px}
+  .fm-card{padding:34px 22px 32px;max-height:92vh}
+  .fm-fields{grid-template-columns:1fr;gap:16px}
+  .fm-submit{width:100%}
+}
+@media(prefers-reduced-motion:reduce){.fm,.fm-card{transition:none}}
 /* ---------- ПРЕСС-ЦЕНТР: тёмная полоса с радужным преломлением ---------- */
 .press{position:relative;isolation:isolate;overflow:hidden;color:#fff;padding:var(--sec) 0;
   background:#0A0908 url('assets/flare-press.jpg') center/cover no-repeat}
@@ -860,7 +933,7 @@ body.bar-off .topbar{display:none}
           <a class="nav-ic" href="[[ССЫЛКА MAX]]" aria-label="Написать в MAX" title="MAX"><svg viewBox="-9.88 -9.78 119.76 119.76" fill="currentColor" aria-hidden="true"><path d="M50.7571 0.261719C78.2929 0.261719 99.8857 22.5974 99.8857 50.1474C99.8857 77.6974 77.6071 99.4903 51.0214 99.4903C41.5857 99.4903 37.0143 98.1617 29.65 92.9474C29.1429 92.5903 28.45 92.6831 28.0214 93.1403C22.3571 99.1831 7.85 103.426 7.18571 95.176C7.18571 80.7903 0 71.4474 0 49.876C0 21.5546 23.2214 0.261719 50.7571 0.261719ZM51.5286 24.8117C38.4643 24.126 28.2643 33.1974 26.0143 47.3831C24.15 59.1332 27.45 73.4546 30.2786 74.176C31.4786 74.4832 34.3571 72.276 36.4571 70.2974C36.85 69.926 37.45 69.8617 37.9071 70.1474C41.1786 72.1474 44.8786 73.6474 48.9571 73.8617C62.3714 74.5617 74.2571 64.0617 74.9643 50.6474C75.6643 37.2331 64.9429 25.5046 51.5286 24.8046V24.8117Z"/></svg></a>
           <a class="nav-phone" href="tel:+79852559505">+7 985 255-95-05</a>
         </div>
-        <a class="nav-callback" href="https://wa.me/79852559505" target="_blank" rel="noopener">Заказать звонок</a>
+        <button class="nav-callback" type="button" data-form="call">Заказать звонок</button>
       </div>
       <button class="burger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
@@ -878,7 +951,7 @@ body.bar-off .topbar{display:none}
           <a class="nav-ic" href="[[ССЫЛКА MAX]]" aria-label="Написать в MAX" title="MAX"><svg viewBox="-9.88 -9.78 119.76 119.76" fill="currentColor" aria-hidden="true"><path d="M50.7571 0.261719C78.2929 0.261719 99.8857 22.5974 99.8857 50.1474C99.8857 77.6974 77.6071 99.4903 51.0214 99.4903C41.5857 99.4903 37.0143 98.1617 29.65 92.9474C29.1429 92.5903 28.45 92.6831 28.0214 93.1403C22.3571 99.1831 7.85 103.426 7.18571 95.176C7.18571 80.7903 0 71.4474 0 49.876C0 21.5546 23.2214 0.261719 50.7571 0.261719ZM51.5286 24.8117C38.4643 24.126 28.2643 33.1974 26.0143 47.3831C24.15 59.1332 27.45 73.4546 30.2786 74.176C31.4786 74.4832 34.3571 72.276 36.4571 70.2974C36.85 69.926 37.45 69.8617 37.9071 70.1474C41.1786 72.1474 44.8786 73.6474 48.9571 73.8617C62.3714 74.5617 74.2571 64.0617 74.9643 50.6474C75.6643 37.2331 64.9429 25.5046 51.5286 24.8046V24.8117Z"/></svg></a>
           <a class="nav-phone" href="tel:+79852559505">+7 985 255-95-05</a>
         </div>
-        <a class="nav-callback" href="https://wa.me/79852559505" target="_blank" rel="noopener">Заказать звонок</a>
+        <button class="nav-callback" type="button" data-form="call">Заказать звонок</button>
       </div>
     </div>
   </div>
@@ -895,7 +968,7 @@ body.bar-off .topbar{display:none}
       <h1 class="name t-display">Анна<br>Видуецкая</h1>
       <p class="subtitle">Помогаю тем, кто устал<br>жить в&nbsp;режиме «я&nbsp;сама»</p>
       <div class="cta-row">
-        <a href="#consult" class="btn btn--emerald">Записаться на консультацию</a>
+        <button class="btn btn--emerald" type="button" data-form="consult">Записаться на консультацию</button>
         <a href="https://wa.me/79852559505" class="btn btn--ghost" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m0 18.15h-.01c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.24 8.24 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23m4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.48c-.16 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29"/></svg>
           Написать в WhatsApp
@@ -956,7 +1029,7 @@ body.bar-off .topbar{display:none}
       <hr class="book-rule">
       <p class="book-desc t-body">Для женщин, которые не&nbsp;хотят выбирать между семьёй, карьерой и&nbsp;своим «Я». Сотни женщин уже добились успеха во&nbsp;всех сферах сразу по&nbsp;авторским стратегиям из&nbsp;книги. Сможете и&nbsp;вы!</p>
       <div class="book-actions">
-        <a class="btn btn--emerald" href="https://wa.me/79852559505" target="_blank" rel="noopener">Заказать книгу</a>
+        <button class="btn btn--emerald" type="button" data-form="book">Заказать книгу</button>
         <a class="btn btn--line" href="[[ФАЙЛ: фрагмент книги]]">Читать фрагмент</a>
       </div>
     </div>
@@ -1043,7 +1116,7 @@ body.bar-off .topbar{display:none}
   <h3 class="cta-title">Чувствуете, что пришло время перемен? Жду&nbsp;вас.</h3>
   <p class="cta-sub">Полтора-два часа один на один, конфиденциально. Вы&nbsp;уходите с&nbsp;честным разбором ситуации и&nbsp;конкретным планом действий.</p>
   <div class="cta-actions">
-  <a href="https://wa.me/79852559505" class="btn btn--emerald" target="_blank" rel="noopener">Записаться на консультацию</a>
+  <button class="btn btn--emerald" type="button" data-form="consult">Записаться на консультацию</button>
   </div>
   </div>
   <div class="cta-media" aria-hidden="true">
@@ -1234,7 +1307,7 @@ body.bar-off .topbar{display:none}
       </div>
     </div>
     <div class="sp-foot">
-      <a class="btn btn--emerald" href="[[ССЫЛКА на форму запроса]]">Пригласить выступить</a>
+      <button class="btn btn--emerald" type="button" data-form="speak">Пригласить выступить</button>
     </div>
   </div>
 </section>
@@ -1379,7 +1452,7 @@ body.bar-off .topbar{display:none}
       </div>
     </div>
     <div class="pc-actions">
-      <a class="btn btn--red btn--pill" href="https://wa.me/79852559505" target="_blank" rel="noopener">Стать героем подкаста</a>
+      <button class="btn btn--red btn--pill" type="button" data-form="podcast">Стать героем подкаста</button>
       <a class="btn btn--line btn--pill" href="https://www.youtube.com/@AnnaViduetskaya" target="_blank" rel="noopener">Смотреть все выпуски</a>
     </div>
   </div>
@@ -1453,6 +1526,50 @@ body.bar-off .topbar{display:none}
   </div>
 </footer>
 
+
+<!-- ФОРМА: одно окно на все сценарии, поля подставляются по data-form -->
+<div class="fm" id="fm" aria-hidden="true">
+  <div class="fm-bg" data-fm-close></div>
+  <div class="fm-card" role="dialog" aria-modal="true" aria-labelledby="fm-title">
+    <button class="fm-x" type="button" data-fm-close aria-label="Закрыть">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <form class="fm-form" novalidate>
+      <p class="fm-eyebrow t-eyebrow" id="fm-kicker">Заявка</p>
+      <h2 class="fm-title" id="fm-title">Заказать звонок</h2>
+      <p class="fm-lead" id="fm-lead"></p>
+
+      <div class="fm-fields" id="fm-fields"></div>
+
+      <div class="fm-checks">
+        <label class="fm-check">
+          <input type="checkbox" name="consent" data-required>
+          <span class="fm-box" aria-hidden="true"></span>
+          <span class="fm-check-t">Даю согласие на&nbsp;обработку <a href="[[ССЫЛКА: согласие на обработку персональных данных]]" target="_blank" rel="noopener">персональных данных</a></span>
+        </label>
+        <label class="fm-check">
+          <input type="checkbox" name="privacy" data-required>
+          <span class="fm-box" aria-hidden="true"></span>
+          <span class="fm-check-t">Принимаю <a href="[[ССЫЛКА: политика обработки персональных данных]]" target="_blank" rel="noopener">политику конфиденциальности</a></span>
+        </label>
+        <label class="fm-check">
+          <input type="checkbox" name="news">
+          <span class="fm-box" aria-hidden="true"></span>
+          <span class="fm-check-t">Хочу получать новости и&nbsp;полезные материалы</span>
+        </label>
+      </div>
+
+      <p class="fm-err" id="fm-err" role="alert" hidden></p>
+      <button class="btn btn--emerald fm-submit" type="submit">Отправить</button>
+    </form>
+
+    <div class="fm-done" id="fm-done" hidden>
+      <p class="fm-done-t">Спасибо, заявка отправлена</p>
+      <p class="fm-done-d">Анна свяжется с&nbsp;вами в&nbsp;ближайшее время.</p>
+      <button class="btn btn--line" type="button" data-fm-close>Закрыть</button>
+    </div>
+  </div>
+</div>
 
 <div class="cookie" id="cookie" role="dialog" aria-live="polite" aria-label="Уведомление о файлах cookie">
   <p class="cookie-t">Мы используем файлы cookie, чтобы сайт работал корректно и&nbsp;удобно.</p>
@@ -1734,6 +1851,123 @@ body.bar-off .topbar{display:none}
   addEventListener('load',reset);
   if(document.fonts&&document.fonts.ready) document.fonts.ready.then(reset);
   reset(); setTimeout(reset,400);
+})();
+
+/* ===== ФОРМЫ: одно окно, поля подставляются по data-form =====
+   КУДА УХОДЯТ ЗАЯВКИ: пока адрес приёмника не задан, форма собирает данные
+   и открывает WhatsApp с готовым текстом — так ни одна заявка не теряется.
+   Когда появится сервис приёма форм, достаточно вписать его адрес в FORM_ENDPOINT. */
+(function(){
+  var FORM_ENDPOINT = '';                  // ← сюда адрес приёмника заявок
+  var WA = '79852559505';                  // запасной путь, пока приёмника нет
+
+  var FIELDS = {
+    name:  {label:'Имя',      type:'text',  ac:'name',       req:true},
+    phone: {label:'Телефон',  type:'tel',   ac:'tel',        req:true},
+    email: {label:'Почта',    type:'email', ac:'email',      req:true},
+    contact:{label:'Телефон или почта', type:'text', ac:'tel', req:true},
+    event: {label:'Мероприятие или комментарий', type:'area', req:false, wide:true},
+    note:  {label:'Комментарий', type:'area', req:false, wide:true}
+  };
+  var FORMS = {
+    call:    {kicker:'Заявка',        title:'Заказать звонок',        lead:'Оставьте номер — Анна перезвонит.',                       f:['name','phone']},
+    consult: {kicker:'Консультация',  title:'Записаться на консультацию', lead:'Полтора-два часа один на один, конфиденциально.',      f:['name','phone','email']},
+    speak:   {kicker:'Выступления',   title:'Пригласить выступить',   lead:'Расскажите о мероприятии — Анна ответит лично.',          f:['name','contact','event']},
+    book:    {kicker:'Книга',         title:'Заказать книгу',         lead:'Оставьте контакты — мы свяжемся и всё оформим.',          f:['name','phone','email']},
+    podcast: {kicker:'Подкаст',       title:'Стать героем подкаста',  lead:'Пара слов о себе — и Анна свяжется с вами.',              f:['name','contact','note']}
+  };
+
+  var box=document.getElementById('fm'); if(!box)return;
+  var form=box.querySelector('.fm-form'), done=document.getElementById('fm-done');
+  var wrap=document.getElementById('fm-fields'), err=document.getElementById('fm-err');
+  var last=null, current='call';
+
+  function build(key){
+    var cfg=FORMS[key]||FORMS.call; current=key;
+    document.getElementById('fm-kicker').textContent=cfg.kicker;
+    document.getElementById('fm-title').textContent=cfg.title;
+    document.getElementById('fm-lead').textContent=cfg.lead||'';
+    wrap.innerHTML='';
+    cfg.f.forEach(function(n){
+      var f=FIELDS[n]; if(!f)return;
+      var d=document.createElement('div');
+      d.className='fm-f'+((f.wide||f.type==='area')?' fm-f--wide':'');
+      var id='fm-'+n;
+      var input = f.type==='area'
+        ? '<textarea id="'+id+'" name="'+n+'"'+(f.req?' data-required':'')+'></textarea>'
+        : '<input id="'+id+'" name="'+n+'" type="'+f.type+'"'+(f.ac?' autocomplete="'+f.ac+'"':'')+(f.req?' data-required':'')+'>';
+      d.innerHTML='<label for="'+id+'">'+f.label+(f.req?'<i>*</i>':'')+'</label>'+input;
+      wrap.appendChild(d);
+    });
+    form.querySelectorAll('.fm-check').forEach(function(l){ l.classList.remove('bad'); });
+    form.querySelectorAll('input[type=checkbox]').forEach(function(c){ c.checked=false; });
+    err.hidden=true; form.hidden=false; done.hidden=true;
+  }
+
+  function open(key,src){
+    last=src||null; build(key);
+    box.classList.add('open'); box.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+    var first=wrap.querySelector('input,textarea'); if(first) setTimeout(function(){first.focus();},120);
+  }
+  function close(){
+    box.classList.remove('open'); box.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+    if(last&&last.focus) last.focus();
+  }
+
+  document.addEventListener('click',function(e){
+    var t=e.target.closest('[data-form]');
+    if(t){ e.preventDefault(); open(t.getAttribute('data-form'), t); return; }
+    if(e.target.closest('[data-fm-close]')) close();
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&box.classList.contains('open')) close();
+  });
+
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var bad=false;
+    form.querySelectorAll('.fm-f').forEach(function(d){
+      var i=d.querySelector('[data-required]');
+      d.classList.remove('bad');
+      if(i && !i.value.trim()){ d.classList.add('bad'); bad=true; }
+    });
+    form.querySelectorAll('.fm-check').forEach(function(l){
+      var c=l.querySelector('input[data-required]');
+      l.classList.remove('bad');
+      if(c && !c.checked){ l.classList.add('bad'); bad=true; }
+    });
+    if(bad){
+      err.textContent='Заполните обязательные поля и отметьте согласие на обработку данных и политику конфиденциальности.';
+      err.hidden=false;
+      var f=form.querySelector('.fm-f.bad input,.fm-f.bad textarea'); if(f)f.focus();
+      return;
+    }
+    err.hidden=true;
+
+    var data={}, cfg=FORMS[current];
+    form.querySelectorAll('[name]').forEach(function(i){
+      data[i.name] = i.type==='checkbox' ? (i.checked?'да':'нет') : i.value.trim();
+    });
+    data.form=cfg.title;
+
+    function ok(){ form.hidden=true; done.hidden=false; }
+
+    if(FORM_ENDPOINT){
+      var b=form.querySelector('.fm-submit'); b.disabled=true;
+      fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+        .then(ok).catch(function(){ err.textContent='Не удалось отправить. Попробуйте ещё раз или напишите в WhatsApp.'; err.hidden=false; })
+        .then(function(){ b.disabled=false; });
+    } else {
+      /* приёмника ещё нет — уводим в WhatsApp с уже заполненным текстом */
+      var lines=[cfg.title];
+      cfg.f.forEach(function(n){ if(data[n]) lines.push(FIELDS[n].label+': '+data[n]); });
+      if(data.news==='да') lines.push('Согласен получать новости');
+      window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(lines.join('\n')),'_blank','noopener');
+      ok();
+    }
+  });
 })();
 
 /* ===== ВИДЕО: грузим и крутим только то, что подъехало к экрану ===== */
