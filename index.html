@@ -416,6 +416,28 @@ body.bar-off .topbar{display:none}
   .about-grid{grid-template-columns:1fr;gap:34px}
   .about-photo{order:-1;aspect-ratio:2668/4000;transform:none!important}
 }
+/* ПУБЛИКАЦИИ В СМИ: стена логотипов в одной краске, высота подобрана на глаз по оптике */
+.media{background:transparent;padding:var(--sec-sm) 0}
+.media-wrap{max-width:1200px;margin:0 auto;padding:0 40px}
+.media-eyebrow{color:var(--accent);margin:0 0 42px;text-align:center}
+/* гибкий ряд, а не жёсткая сетка: последняя строка встаёт по центру, а не с дырой справа */
+.mp-grid{list-style:none;margin:0 auto;padding:0;max-width:1060px;
+  display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:48px 56px}
+.mp-item{display:flex;align-items:center;justify-content:center;flex:0 0 auto;
+  min-width:130px;min-height:64px}
+/* обесцвечиваем, но не давим яркостью: иначе логотипы «светлое на тёмном» превращаются в пятна */
+.mp-item img{max-width:100%;max-height:var(--h,30px);width:auto;height:auto;object-fit:contain;
+  opacity:.68;filter:grayscale(1);
+  transition:opacity var(--d-lg) var(--ease-out),filter var(--d-lg) var(--ease-out)}
+.mp-item:hover img{opacity:1;filter:grayscale(0)}
+@media(max-width:960px){
+  .media-wrap{padding:0 24px}
+  .media-eyebrow{margin-bottom:26px}
+  .mp-grid{gap:32px 34px}
+  .mp-item{min-width:112px}
+  .mp-item{min-height:52px}
+  .mp-item img{max-height:calc(var(--h,30px) * .84)}
+}
 /* ---------- ПРЕСС-ЦЕНТР: тёмная полоса с радужным преломлением ---------- */
 .press{position:relative;isolation:isolate;overflow:hidden;color:#fff;padding:var(--sec) 0;
   background:#0A0908 url('assets/flare-press.jpg') center/cover no-repeat}
@@ -1238,6 +1260,36 @@ body.bar-off .topbar{display:none}
   </div>
 </section>
 
+<!-- ПУБЛИКАЦИИ В СМИ -->
+<section class="media" id="media">
+  <div class="media-wrap">
+    <p class="media-eyebrow t-eyebrow">Публикации в СМИ</p>
+    <ul class="mp-grid">
+      <li class="mp-item" style="--h:46px">
+        <img src="assets/media/forbes.png" alt="Forbes Women" width="96" height="96" loading="lazy" decoding="async">
+      </li>
+      <li class="mp-item" style="--h:44px">
+        <img src="assets/media/sputnik.png" alt="Sputnik" width="102" height="96" loading="lazy" decoding="async">
+      </li>
+      <li class="mp-item" style="--h:34px">
+        <img src="assets/media/ochag.png" alt="Домашний Очаг" width="435" height="96" loading="lazy" decoding="async">
+      </li>
+      <li class="mp-item" style="--h:24px">
+        <img src="assets/media/synergy.png" alt="Synergy.Online" width="1142" height="96" loading="lazy" decoding="async">
+      </li>
+      <li class="mp-item" style="--h:46px">
+        <img src="assets/media/womenaround.png" alt="Women Around" width="236" height="96" loading="lazy" decoding="async">
+      </li>
+      <li class="mp-item" style="--h:32px">
+        <img src="assets/media/hrbazaar.png" alt="HR Bazaar" width="370" height="96" loading="lazy" decoding="async">
+      </li>
+      <li class="mp-item" style="--h:40px">
+        <img src="assets/media/bss.png" alt="Бизнес со смыслом" width="256" height="96" loading="lazy" decoding="async">
+      </li>
+    </ul>
+  </div>
+</section>
+
 <section class="podcast" id="youtube">
   <div class="pc-wrap">
     <p class="pc-eyebrow t-eyebrow">YouTube-канал</p>
@@ -1475,6 +1527,7 @@ body.bar-off .topbar{display:none}
     '.press-regalia',
     '.press-long',
     '.press-file',
+    '.mp-item',
     '.pc-intro',
     '.pc-hero',
     '.pc-row',

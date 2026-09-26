@@ -416,6 +416,28 @@ body.bar-off .topbar{display:none}
   .about-grid{grid-template-columns:1fr;gap:34px}
   .about-photo{order:-1;aspect-ratio:2668/4000;transform:none!important}
 }
+/* ПУБЛИКАЦИИ В СМИ: стена логотипов в одной краске, высота подобрана на глаз по оптике */
+.media{background:transparent;padding:var(--sec-sm) 0}
+.media-wrap{max-width:1200px;margin:0 auto;padding:0 40px}
+.media-eyebrow{color:var(--accent);margin:0 0 42px;text-align:center}
+/* гибкий ряд, а не жёсткая сетка: последняя строка встаёт по центру, а не с дырой справа */
+.mp-grid{list-style:none;margin:0 auto;padding:0;max-width:1060px;
+  display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:48px 56px}
+.mp-item{display:flex;align-items:center;justify-content:center;flex:0 0 auto;
+  min-width:130px;min-height:64px}
+/* обесцвечиваем, но не давим яркостью: иначе логотипы «светлое на тёмном» превращаются в пятна */
+.mp-item img{max-width:100%;max-height:var(--h,30px);width:auto;height:auto;object-fit:contain;
+  opacity:.68;filter:grayscale(1);
+  transition:opacity var(--d-lg) var(--ease-out),filter var(--d-lg) var(--ease-out)}
+.mp-item:hover img{opacity:1;filter:grayscale(0)}
+@media(max-width:960px){
+  .media-wrap{padding:0 24px}
+  .media-eyebrow{margin-bottom:26px}
+  .mp-grid{gap:32px 34px}
+  .mp-item{min-width:112px}
+  .mp-item{min-height:52px}
+  .mp-item img{max-height:calc(var(--h,30px) * .84)}
+}
 /* ---------- ПРЕСС-ЦЕНТР: тёмная полоса с радужным преломлением ---------- */
 .press{position:relative;isolation:isolate;overflow:hidden;color:#fff;padding:var(--sec) 0;
   background:#0A0908 url('assets/flare-press.jpg') center/cover no-repeat}
@@ -439,6 +461,13 @@ body.bar-off .topbar{display:none}
 .press-long p:not(.press-label){font-family:var(--text);font-size:16.5px;line-height:1.68;
   color:rgba(255,255,255,.74);margin:0;max-width:62ch}
 .press-long p+p{margin-top:16px}
+.press-long+.press-long{margin-top:30px}
+.press-regalia{list-style:none;margin:0;padding:0;max-width:62ch}
+.press-regalia li{position:relative;font-family:var(--text);font-size:16.5px;line-height:1.62;
+  color:rgba(255,255,255,.78);padding:0 0 0 20px}
+.press-regalia li+li{margin-top:10px}
+.press-regalia li::before{content:"";position:absolute;left:0;top:.66em;width:5px;height:5px;
+  background:var(--accent-on-dark)}
 .press-kit{margin-top:38px;display:flex;flex-wrap:wrap;gap:14px}
 .press-file{display:inline-flex;align-items:center;gap:10px;padding:13px 20px;
   border:1px solid rgba(255,255,255,.28);
@@ -799,13 +828,7 @@ body.bar-off .topbar{display:none}
   body.cookie-on .hero-inner{padding-bottom:106px}
 }
 </style>
-<style>
-.hero{display:none!important}.topbar{display:none!important}.cookie{display:none!important}
-.topic-body{grid-template-rows:1fr!important}
-.rv,.rv-up,.sp-w{opacity:1!important;filter:none!important;transform:none!important}
-.topic::before,.fmt::before,.pc-row::before{transform:scaleX(1)!important}
-.topic::after,.fmt::after,.pc-row::after{transform:scale(1)!important}
-</style>
+<style>.hero{display:none!important}.topbar{display:none!important}.cookie{display:none!important}.rv,.rv-up,.sp-w{opacity:1!important;filter:none!important;transform:none!important}</style>
 </head>
 <body>
 
@@ -946,11 +969,11 @@ body.bar-off .topbar{display:none}
     </div>
     <div class="about-grid">
       <div class="about-copy">
-        <p class="about-lead t-body">Я&nbsp;живу так, как учу. У&nbsp;меня четверо детей, три компании в&nbsp;разных сферах и&nbsp;работа вместе с&nbsp;мужем. Мне важно, чтобы всё было по-честному, а&nbsp;не&nbsp;как проще. Эта честность&nbsp;— прежде всего с&nbsp;собой&nbsp;— и&nbsp;дала мне возможность создать ту&nbsp;жизнь, которая у&nbsp;меня есть.</p>
+        <p class="about-lead t-body">Я&nbsp;живу так, как учу. У&nbsp;меня четверо детей, две компании и&nbsp;работа вместе с&nbsp;мужем. Мне важно, чтобы всё было по-честному, а&nbsp;не&nbsp;как проще. Эта честность&nbsp;— прежде всего с&nbsp;собой&nbsp;— и&nbsp;дала мне возможность создать ту&nbsp;жизнь, которая у&nbsp;меня есть.</p>
         <p class="about-lead t-body">Долгое время я&nbsp;была уверена, что успех&nbsp;— это выбрать что-то одно. Оказалось, выбирать не&nbsp;нужно: женщина имеет право быть в&nbsp;любви, в&nbsp;деле и&nbsp;в&nbsp;своей жизни одновременно. Я&nbsp;прошла этот путь сама и&nbsp;почти десять лет помогаю пройти его другим&nbsp;— без надрыва и&nbsp;достигаторства.</p>
         <p class="about-lead t-body">Если вам откликается&nbsp;— начните с&nbsp;того формата, который ближе: <a href="#book">книга</a>, <a href="#consult">консультация</a> или <a href="https://wa.me/79852559505" target="_blank" rel="noopener">личная встреча</a>.</p>
         <ul class="figs">
-          <li class="fig"><span class="fig-n">3</span><span class="fig-c">бизнеса<br>в&nbsp;разных сферах</span></li>
+          <li class="fig"><span class="fig-n">2</span><span class="fig-c">компании</span></li>
           <li class="fig"><span class="fig-n">4</span><span class="fig-c">детей,<br>6&nbsp;лет без няни</span></li>
           <li class="fig"><span class="fig-n">2</span><span class="fig-c">премии<br>«Бизнес-мама&nbsp;года»</span></li>
         </ul>
@@ -1203,11 +1226,22 @@ body.bar-off .topbar{display:none}
     <div class="press-body">
       <p class="press-eyebrow t-eyebrow">Пресс-центр</p>
       <h2 class="press-name">Анна Видуецкая&nbsp;— женский мотиватор и&nbsp;стратег</h2>
-      <p class="press-short">Коуч ICF и&nbsp;психолог, автор книги «Легче воздуха»&nbsp;— №1 на&nbsp;Amazon в&nbsp;категории Self&nbsp;Esteem.</p>
+      <p class="press-short">Анна Видуецкая&nbsp;— предприниматель, спикер и&nbsp;эксперт по&nbsp;женскому лидерству и&nbsp;партнёрским стратегиям.</p>
+      <div class="press-long">
+        <p class="press-label">Регалии</p>
+        <ul class="press-regalia">
+          <li>Вице-президент Ассоциации спикеров СНГ</li>
+          <li>Более 15&nbsp;лет в&nbsp;бизнесе: в&nbsp;прошлом топ-менеджер крупной международной компании, сегодня&nbsp;— основатель и&nbsp;генеральный директор двух успешно работающих компаний</li>
+          <li>С&nbsp;2018 года спикер крупных международных и&nbsp;российских форумов</li>
+          <li>Психолог, сертифицированный Coach&nbsp;ICF</li>
+          <li>Автор книги «Легче воздуха»</li>
+          <li>Аудитория в&nbsp;социальных сетях&nbsp;— более 250&nbsp;000 подписчиков</li>
+        </ul>
+      </div>
       <div class="press-long">
         <p class="press-label">В формате Elevator pitch</p>
-        <p>Анна Видуецкая&nbsp;— коуч ICF и&nbsp;психолог, автор книги «Легче воздуха» и&nbsp;метода «3&nbsp;луча баланса». Основатель трёх бизнесов в&nbsp;разных сферах, мама четверых детей, дважды лауреат премии «Бизнес-мама года».</p>
-        <p>Выступает на&nbsp;форумах и&nbsp;конференциях, ведёт YouTube-канал и&nbsp;телеграм-канал «Женские стратегии». Говорит о&nbsp;партнёрстве, женской самореализации и&nbsp;о&nbsp;том, как оставаться собой, когда на&nbsp;тебе семья, дело и&nbsp;ответственность.</p>
+        <p>Анна Видуецкая&nbsp;— предприниматель, спикер и&nbsp;эксперт по&nbsp;женскому лидерству и&nbsp;партнёрским стратегиям. Более 15&nbsp;лет в&nbsp;бизнесе: в&nbsp;прошлом топ-менеджер крупной международной компании, сегодня&nbsp;— основатель и&nbsp;генеральный директор двух успешно работающих компаний.</p>
+        <p>Вице-президент Ассоциации спикеров СНГ, с&nbsp;2018 года выступает на&nbsp;крупных международных и&nbsp;российских форумах. Психолог, сертифицированный Coach&nbsp;ICF, автор книги «Легче воздуха». Аудитория в&nbsp;социальных сетях&nbsp;— более 250&nbsp;000 подписчиков.</p>
       </div>
       <div class="press-kit">
         <a class="press-file" href="[[ФАЙЛ: резюме PDF]]">
@@ -1224,6 +1258,36 @@ body.bar-off .topbar{display:none}
     <figure class="press-card">
       <img class="press-photo" src="assets/stage-4.jpg" alt="Анна Видуецкая на съёмке подкаста" loading="lazy" width="856" height="768">
     </figure>
+  </div>
+</section>
+
+<!-- ПУБЛИКАЦИИ В СМИ -->
+<section class="media" id="media">
+  <div class="media-wrap">
+    <p class="media-eyebrow t-eyebrow">Публикации в СМИ</p>
+    <ul class="mp-grid">
+      <li class="mp-item" style="--h:46px">
+        <img src="assets/media/forbes.png" alt="Forbes Women" width="96" height="96" loading="lazy" decoding="async">
+      </li>
+      <li class="mp-item" style="--h:44px">
+        <img src="assets/media/sputnik.png" alt="Sputnik" width="102" height="96" loading="lazy" decoding="async">
+      </li>
+      <li class="mp-item" style="--h:34px">
+        <img src="assets/media/ochag.png" alt="Домашний Очаг" width="435" height="96" loading="lazy" decoding="async">
+      </li>
+      <li class="mp-item" style="--h:24px">
+        <img src="assets/media/synergy.png" alt="Synergy.Online" width="1142" height="96" loading="lazy" decoding="async">
+      </li>
+      <li class="mp-item" style="--h:46px">
+        <img src="assets/media/womenaround.png" alt="Women Around" width="236" height="96" loading="lazy" decoding="async">
+      </li>
+      <li class="mp-item" style="--h:32px">
+        <img src="assets/media/hrbazaar.png" alt="HR Bazaar" width="370" height="96" loading="lazy" decoding="async">
+      </li>
+      <li class="mp-item" style="--h:40px">
+        <img src="assets/media/bss.png" alt="Бизнес со смыслом" width="256" height="96" loading="lazy" decoding="async">
+      </li>
+    </ul>
   </div>
 </section>
 
@@ -1461,8 +1525,10 @@ body.bar-off .topbar{display:none}
     '.topic',
     '.sp-topics-h',
     '.press-short',
+    '.press-regalia',
     '.press-long',
     '.press-file',
+    '.mp-item',
     '.pc-intro',
     '.pc-hero',
     '.pc-row',
