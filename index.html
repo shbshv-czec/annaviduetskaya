@@ -1595,7 +1595,7 @@ body.bar-off .topbar{display:none}
 
     <div class="fm-done" id="fm-done" hidden>
       <p class="fm-done-t">Спасибо, заявка отправлена</p>
-      <p class="fm-done-d">Анна свяжется с&nbsp;вами в&nbsp;ближайшее время.</p>
+      <p class="fm-done-d">Мы свяжемся с&nbsp;вами в&nbsp;ближайшее время.</p>
       <button class="btn btn--line" type="button" data-fm-close>Закрыть</button>
     </div>
   </div>
@@ -1886,7 +1886,8 @@ body.bar-off .topbar{display:none}
 /* ===== ФОРМЫ: одно окно, поля подставляются по data-form =====
    КУДА УХОДЯТ ЗАЯВКИ: пока адрес приёмника не задан, форма собирает данные
    и открывает WhatsApp с готовым текстом — так ни одна заявка не теряется.
-   Когда появится сервис приёма форм, достаточно вписать его адрес в FORM_ENDPOINT. */
+   Когда появится свой приёмник, вписать его адрес в FORM_ENDPOINT — форма
+   пошлёт туда POST с JSON вида {form, name, phone, email, contact, note, consent, privacy, news}. */
 (function(){
   var FORM_ENDPOINT = '';                  // ← сюда адрес приёмника заявок
   var WA = '79852559505';                  // запасной путь, пока приёмника нет
@@ -1900,11 +1901,11 @@ body.bar-off .topbar{display:none}
     note:  {label:'Комментарий', type:'area', req:false, wide:true}
   };
   var FORMS = {
-    call:    {kicker:'Заявка',        title:'Заказать звонок',        lead:'Оставьте номер — Анна перезвонит.',                       f:['name','phone']},
+    call:    {kicker:'Заявка',        title:'Заказать звонок',        lead:'Оставьте номер — мы перезвоним.',                       f:['name','phone']},
     consult: {kicker:'Консультация',  title:'Записаться на консультацию', lead:'Полтора-два часа один на один, конфиденциально.',      f:['name','phone','email']},
-    speak:   {kicker:'Выступления',   title:'Пригласить выступить',   lead:'Расскажите о мероприятии — Анна ответит лично.',          f:['name','contact','event']},
+    speak:   {kicker:'Выступления',   title:'Пригласить выступить',   lead:'Расскажите о мероприятии — мы ответим на все вопросы.',          f:['name','contact','event']},
     book:    {kicker:'Книга',         title:'Заказать книгу',         lead:'Оставьте контакты — мы свяжемся и всё оформим.',          f:['name','phone','email']},
-    podcast: {kicker:'Подкаст',       title:'Стать героем подкаста',  lead:'Пара слов о себе — и Анна свяжется с вами.',              f:['name','contact','note']}
+    podcast: {kicker:'Подкаст',       title:'Стать героем подкаста',  lead:'Пара слов о себе — и мы свяжемся с вами.',              f:['name','contact','note']}
   };
 
   var box=document.getElementById('fm'); if(!box)return;
