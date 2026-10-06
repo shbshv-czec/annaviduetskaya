@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Анна Видуецкая</title>
+<meta name="theme-color" content="#1F1C1B">
 <meta name="description" content="Коуч ICF и психолог, автор книги «Легче воздуха» — №1 на Amazon в категории Self Esteem. Помогаю тем, кто устал жить в режиме «я сама».">
 
 <!-- Карточка для соцсетей и мессенджеров.
@@ -343,9 +344,9 @@ body.bar-off .topbar{display:none}
 
 /* ---------- BOOK ---------- */
 .book{background:transparent;padding:var(--sec) 0;
-  /* повёрнутая обложка с шильдиком давала 13px болтанки вбок на узких экранах:
-     clip убирает её, не трогая вертикаль и не обрезая сам шильдик */
-  overflow-x:clip}
+  /* повёрнутая обложка с шильдиком давала 13px болтанки вбок на узких экранах.
+     hidden — запасной вариант для браузеров без clip (Safari до 16). */
+  overflow-x:hidden;overflow-x:clip}
 .book-inner{max-width:1200px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
 .book-visual{position:relative;display:flex;justify-content:center;align-items:center}
 .book-figure{position:relative;display:block;width:min(396px,100%);transform:rotate(-6deg)}
