@@ -695,7 +695,9 @@ body.bar-off .topbar{display:none}
 .pc-intro{color:var(--ink-2);font-size:var(--t-lg);line-height:var(--lh-lg);margin:0 0 44px;max-width:60ch}
 /* Слева — крупный выпуск, справа — остальные списком */
 .pc-body{display:grid;grid-template-columns:.95fr 1.05fr;gap:52px;align-items:start}
-.pc-hero{display:block;text-decoration:none}
+/* выпуск слева держится на месте, пока справа листается список,
+   и уходит вверх вместе со всеми, когда низ списка поравняется с его подписью */
+.pc-hero{display:block;text-decoration:none;position:sticky;top:120px}
 .pc-hero-thumb{position:relative;display:block;aspect-ratio:16/9;overflow:hidden;background:#1a1613}
 .pc-hero-thumb img{width:100%;height:100%;object-fit:cover;display:block;
   transition:transform var(--d-xl) var(--ease-out)}
@@ -727,11 +729,12 @@ body.bar-off .topbar{display:none}
 .pc-views{font-family:var(--sans);font-weight:600;font-size:13px;letter-spacing:.02em;color:var(--ink-3);margin:10px 0 0}
 @media(max-width:960px){
   .pc-body{grid-template-columns:1fr;gap:34px}
+  .pc-hero{position:static}
   .pc-row{grid-template-columns:88px 1fr;gap:14px;padding:16px 0}
   .pc-row-go{display:none}
   .pc-play{width:52px;height:52px}
 }
-.pc-actions{display:flex;flex-wrap:wrap;gap:16px;margin-top:44px}
+.pc-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:44px}
 .btn--pill{border-radius:0;padding:18px 36px}
 /* ---------- TELEGRAM ----------
    Композиция зеркалит блок книги: слева текст, справа картинка, обе колонки по центру.
@@ -1088,7 +1091,6 @@ body.bar-off .topbar{display:none}
   </div>
 </header>
 
-
 <!-- BOOK -->
 <div class="topbar" id="topbar">
   <a class="tk-link" href="https://wa.me/79852559505" target="_blank" rel="noopener"
@@ -1178,10 +1180,7 @@ body.bar-off .topbar{display:none}
 
 
 
-
-
 <!-- REVIEWS -->
-
 
 <!-- CONSULT -->
 <section class="consult" id="consult">
@@ -1267,6 +1266,37 @@ body.bar-off .topbar{display:none}
     <div class="rv-bar" role="tablist" aria-label="Отзывы"></div>
   </div>
 </section>
+
+<!-- ПУБЛИКАЦИИ В СМИ -->
+<section class="media" id="media">
+  <div class="media-wrap">
+    <p class="media-eyebrow t-eyebrow">Публикации в СМИ</p>
+    <ul class="mp-grid">
+      <li class="mp-item" style="--h:46px">
+        <img src="assets/media/forbes.png" alt="Forbes Women" width="96" height="96" loading="lazy" decoding="async">
+      </li>
+      <li class="mp-item" style="--h:44px">
+        <img src="assets/media/sputnik.png" alt="Sputnik" width="102" height="96" loading="lazy" decoding="async">
+      </li>
+      <li class="mp-item" style="--h:34px">
+        <img src="assets/media/ochag.png" alt="Домашний Очаг" width="435" height="96" loading="lazy" decoding="async">
+      </li>
+      <li class="mp-item" style="--h:24px">
+        <img src="assets/media/synergy.png" alt="Synergy.Online" width="1142" height="96" loading="lazy" decoding="async">
+      </li>
+      <li class="mp-item" style="--h:46px">
+        <img src="assets/media/womenaround.png" alt="Women Around" width="236" height="96" loading="lazy" decoding="async">
+      </li>
+      <li class="mp-item" style="--h:32px">
+        <img src="assets/media/hrbazaar.png" alt="HR Bazaar" width="370" height="96" loading="lazy" decoding="async">
+      </li>
+      <li class="mp-item" style="--h:40px">
+        <img src="assets/media/bss.png" alt="Бизнес со смыслом" width="256" height="96" loading="lazy" decoding="async">
+      </li>
+    </ul>
+  </div>
+</section>
+
 <section class="speaking" id="speaking">
   <div class="sp-wrap">
     <div class="sp-head">
@@ -1453,35 +1483,6 @@ body.bar-off .topbar{display:none}
   </div>
 </section>
 
-<!-- ПУБЛИКАЦИИ В СМИ -->
-<section class="media" id="media">
-  <div class="media-wrap">
-    <p class="media-eyebrow t-eyebrow">Публикации в СМИ</p>
-    <ul class="mp-grid">
-      <li class="mp-item" style="--h:46px">
-        <img src="assets/media/forbes.png" alt="Forbes Women" width="96" height="96" loading="lazy" decoding="async">
-      </li>
-      <li class="mp-item" style="--h:44px">
-        <img src="assets/media/sputnik.png" alt="Sputnik" width="102" height="96" loading="lazy" decoding="async">
-      </li>
-      <li class="mp-item" style="--h:34px">
-        <img src="assets/media/ochag.png" alt="Домашний Очаг" width="435" height="96" loading="lazy" decoding="async">
-      </li>
-      <li class="mp-item" style="--h:24px">
-        <img src="assets/media/synergy.png" alt="Synergy.Online" width="1142" height="96" loading="lazy" decoding="async">
-      </li>
-      <li class="mp-item" style="--h:46px">
-        <img src="assets/media/womenaround.png" alt="Women Around" width="236" height="96" loading="lazy" decoding="async">
-      </li>
-      <li class="mp-item" style="--h:32px">
-        <img src="assets/media/hrbazaar.png" alt="HR Bazaar" width="370" height="96" loading="lazy" decoding="async">
-      </li>
-      <li class="mp-item" style="--h:40px">
-        <img src="assets/media/bss.png" alt="Бизнес со смыслом" width="256" height="96" loading="lazy" decoding="async">
-      </li>
-    </ul>
-  </div>
-</section>
 
 <section class="podcast" id="youtube">
   <div class="pc-wrap">
@@ -1561,7 +1562,6 @@ body.bar-off .topbar{display:none}
 
 
 
-
 <!-- ТЕЛЕГРАМ -->
 <section class="tg" id="telegram">
   <video class="bg-vid" src="assets/back-blue.mp4" poster="assets/back-blue.jpg" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
@@ -1624,7 +1624,6 @@ body.bar-off .topbar{display:none}
   </div>
 </footer>
 
-
 <!-- ФОРМА: одно окно на все сценарии, поля подставляются по data-form -->
 <div class="fm" id="fm" aria-hidden="true">
   <div class="fm-bg" data-fm-close></div>
@@ -1676,8 +1675,6 @@ body.bar-off .topbar{display:none}
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
   </button>
 </div>
-
-
 
 
 
@@ -1877,7 +1874,6 @@ body.bar-off .topbar{display:none}
   place(false);
   requestAnimationFrame(function(){place(false);});
 })();
-
 
 
 /* ===== ТЕМЫ: аккордеон ===== */
