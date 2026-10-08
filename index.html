@@ -862,9 +862,11 @@ body.bar-off .topbar{display:none}
   .sp-head{grid-template-columns:1fr;gap:28px;margin-bottom:44px}
   .sp-foot{margin-top:40px}
 }
-/* Цитата отдельной полосой: чёрная подложка с радужным преломлением */
+/* Цитата отдельной полосой: живое свечение на тёмном.
+   Первый кадр видео совпадает с картинкой-подложкой, поэтому фон виден сразу,
+   а видео потом незаметно её подменяет. Петля бесшовная — собрана заранее. */
 .quote{position:relative;isolation:isolate;overflow:hidden;padding:calc(var(--sec) + 20px) 0;
-  background:#0A0908 url('assets/flare-quote.jpg') center/cover no-repeat}
+  background:#272121 url('assets/quote-glow.jpg') center/cover no-repeat}
 /* приглушаем блик за текстом и подбираем края к соседним светлым блокам */
 .quote::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
   background:linear-gradient(180deg,rgba(10,9,8,.46) 0%,rgba(10,9,8,.26) 30%,
@@ -1150,6 +1152,10 @@ body.bar-off .topbar{display:none}
 
 <!-- ЦИТАТА: чёрная полоса с преломлением -->
 <section class="quote">
+  <video class="bg-vid" poster="assets/quote-glow.jpg" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1">
+    <source src="assets/quote-glow.webm" type="video/webm">
+    <source src="assets/quote-glow.mp4" type="video/mp4">
+  </video>
   <div class="quote-wrap">
     <p class="quote-t"><em>«Я&nbsp;так больше не&nbsp;хочу»</em>&nbsp;— фраза, с&nbsp;которой начинаются перемены</p>
   </div>

@@ -215,7 +215,8 @@ POST с JSON: `{form, name, phone, email, contact, note, consent, privacy, news}
 
 | Мастер (вне репо) | Что из него собрано |
 |---|---|
-| `back_black.jpeg` | `assets/prism-corner.jpg`, `assets/flare-quote.jpg` |
+| `back_black.jpeg` | `assets/prism-corner.jpg` |
+| `glow.webm`, `glow.mp4`, `glow-poster.jpg` | `assets/quote-glow.*` — фон цитаты |
 | `anna_door.mp4` | `assets/door.mp4` |
 | `ScreenRecording_08-30-2026 10-39-35_1.mp4` | `assets/tg-scroll.mp4` |
 | `logos/` | `assets/media/*.png` |
@@ -231,6 +232,13 @@ POST с JSON: `{form, name, phone, email, contact, note, consent, privacy, news}
   нижний угол кадра. Левый, верхний и нижний края растушёваны; правый край
   оставлен резким — он совпадает с краем секции. Накладывается через
   `mix-blend-mode:screen`, поэтому чёрный фон снимка исчезает сам.
+- **`quote-glow.*`** — свечение за цитатой, собрано заранее и подключено
+  как есть. Два файла: WebM для Chrome, Firefox и Android, MP4 для Safari
+  и iPhone; браузер сам берёт первый, который умеет играть. Петля
+  бесшовная: последний кадр стоит за один шаг до первого — если сделать их
+  одинаковыми, на стыке будет двойной кадр. Высота 588, а не 587, как
+  у фото: MP4 не принимает нечётную высоту. Первый кадр совпадает
+  с `quote-glow.jpg`, поэтому эта же картинка стоит фоном секции.
 - **`door.mp4`** — камера в исходнике непрерывно наезжает (+1,4% за клип),
   из-за чего петля дёргалась. Компенсация покадровая, коэффициент
   K = 0.001713 на секунду, выведен эмпирически из двух пробных кодировок.
